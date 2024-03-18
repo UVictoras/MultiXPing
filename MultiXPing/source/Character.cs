@@ -12,18 +12,19 @@ namespace MultiXPing
         -------------------------------------------------------- */
         #region Field
 
-        public int _maximumHealth;
-        public int _health;
-        public int _damage;
-        public int _defense;
-        public int _speed;
-        public int _precision;
-        public int _maximumMana;
-        public int _mana;
-        public int _experience;
-        public int _level;
+        public int      _maximumHealth;     // Maximum amount of health a character can have
+        public int      _health;            // Current amount of health of the character
+        public int      _damage;            // Amount of damage inflicted by the character
+        public int      _defense;           // Resistance of the character to damages
+        public int      _speed;             // Attacking speed of the character
+        public int      _precision;         // Precision of the character's attack
+        public int      _maximumMana;       // Maximum amount of mana a character can have
+        public int      _mana;              // Current amount of mana of the character
+        public int      _experience;        // Current experience obtained by the character
+        public int      _level;             // Current level of progression of the character
+        public Attack[] _attacks;           // List of the possible attacks
 
-        public string _name;
+        public string   _name;              // Name of the character
 
         #endregion Field
 
@@ -92,6 +93,12 @@ namespace MultiXPing
         {
             get => _level;
             set => _level = value;
+        }
+
+        public Attack[] Attacks
+        {
+            get => _attacks;
+            set => _attacks = value;
         }
 
         public string Name
