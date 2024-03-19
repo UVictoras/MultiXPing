@@ -9,7 +9,7 @@ namespace MultiXPing
             InitializeConsole();
 
             Character character = new Character();
-            character.Name = "Romain";
+            character.InitializeCharacter("Romain");
             Console.WriteLine(character.Name);
             Console.ReadLine();
         }

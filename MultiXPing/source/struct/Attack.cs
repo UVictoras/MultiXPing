@@ -2,29 +2,29 @@ namespace MultiXPing
 {
 	public struct Attack
 	{
-		/* --------------------------------------------------------
-		|                                                         |
-		|                          Field                          |
-		|                                                         |
-		-------------------------------------------------------- */
-		#region Field
+        /* ----------------------------------------------------- *\
+        |                                                         |
+        |                          Field                          |
+        |                                                         | 
+        \* ----------------------------------------------------- */
+        #region Field
 
-		public string	 _type;				// Defines the specificity of the attack
-		public float	 _precision;        // Precision of the attack
-		public float	 _criticalRate;     // Critical rate of the attack
-		public int		 _damage;           // Amount of damage inflicted by the attack
-		public bool		 _isMagic;			// Whether the attack has a magical type or not
+        string _type;				// Defines the specificity of the attack
+		float	 _precision;        // Precision of the attack
+		float	 _criticalRate;     // Critical rate of the attack
+		int		 _damage;           // Amount of damage inflicted by the attack
+		bool	 _isMagic;          // Whether the attack has a magical type or not
 
-		#endregion Field
+        #endregion Field
 
-		/* --------------------------------------------------------
+        /* ----------------------------------------------------- *\
         |                                                         |
         |                        Property                         |
         |                                                         |
-        -------------------------------------------------------- */
-		#region Property
+        \* ----------------------------------------------------- */
+        #region Property
 
-		public string Type
+        public string Type
 		{
 			get => _type; 
 			set => _type = value;
@@ -54,24 +54,24 @@ namespace MultiXPing
 			set => _isMagic = value;
 		}
 
-		#endregion Property
+        #endregion Property
 
-		/* --------------------------------------------------------
+        /* ----------------------------------------------------- *\
         |                                                         |
         |                          Event                          |
         |                                                         |
-        -------------------------------------------------------- */
-		#region Event
+        \* ----------------------------------------------------- */
+        #region Event
 
-		#endregion Event
+        #endregion Event
 
-		/* --------------------------------------------------------
+        /* ----------------------------------------------------- *\
         |                                                         |
         |                         Methods                         |
         |                                                         |
-        -------------------------------------------------------- */
-		#region Methods
+        \* ----------------------------------------------------- */
+        #region Methods
 
-		#endregion Methods
-	}
+        #endregion Methods
+    }
 }
