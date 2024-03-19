@@ -12,19 +12,19 @@ namespace MultiXPing
         \* ----------------------------------------------------- */
         #region Field
 
-        int      _maximumHealth;     // Maximum amount of health a character can have
-        int      _health;            // Current amount of health of the character
-        int      _damage;            // Amount of damage inflicted by the character
-        int      _defense;           // Resistance of the character to damages
-        int      _speed;             // Attacking speed of the character
-        int      _precision;         // Precision of the character's attack
-        int      _maximumMana;       // Maximum amount of mana a character can have
-        int      _mana;              // Current amount of mana of the character
-        int      _experience;        // Current experience obtained by the character
-        int      _level;             // Current level of progression of the character
-        Attack[] _attacks;           // List of the possible attacks
+        int         _maximumHealth;     // Maximum amount of health a character can have
+        int         _health;            // Current amount of health of the character
+        int         _damage;            // Amount of damage inflicted by the character
+        int         _defense;           // Resistance of the character to damages
+        int         _speed;             // Attacking speed of the character
+        int         _precision;         // Precision of the character's attack
+        int         _maximumMana;       // Maximum amount of mana a character can have
+        int         _mana;              // Current amount of mana of the character
+        int         _level;             // Current level of progression of the character
+        Attack[]    _attacks;           // List of the possible attacks
 
-        string   _name;              // Name of the character
+        string      _name;              // Name of the character
+        string      _element;           // Element of the character
 
         #endregion Field
 
@@ -44,7 +44,7 @@ namespace MultiXPing
         public int Health
         {
             get => _health;
-            private set => _health = value;
+            set => _health = value;
         }
 
         public int Damage
@@ -83,12 +83,6 @@ namespace MultiXPing
             private set => _mana = value;
         }
 
-        public int Experience
-        {
-            get => _experience;
-            private set => _experience = value;
-        }
-
         public int Level
         {
             get => _level;
@@ -107,6 +101,12 @@ namespace MultiXPing
             private set => _name = value;
         }
 
+        public string Element
+        {
+            get => _element;
+            private set => _element = value;
+        }
+
         #endregion Property
 
         /* ----------------------------------------------------- *\
@@ -117,6 +117,7 @@ namespace MultiXPing
         #region Event
 
         public event Action OnDamage;
+        public event Action onDeath;
 
         #endregion Event
 
@@ -133,7 +134,12 @@ namespace MultiXPing
 
         public void InitializeCharacter(string name)
         {
-            this.Name = name;
+            Name = name;
+        }
+
+        public virtual void Death()
+        {
+
         }
 
         #endregion Methods

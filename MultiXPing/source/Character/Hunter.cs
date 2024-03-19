@@ -1,19 +1,18 @@
+using System.Security.Cryptography.X509Certificates;
+
 namespace MultiXPing
 {
-	public struct Attack
-	{
+    class Hunter : Character
+    {
         /* ----------------------------------------------------- *\
         |                                                         |
         |                          Field                          |
-        |                                                         | 
+        |                                                         |
         \* ----------------------------------------------------- */
         #region Field
 
-        string   _element;		    // Defines the specificity of the attack
-		float	 _precision;        // Precision of the attack
-		float	 _criticalRate;     // Critical rate of the attack
-		int		 _damage;           // Amount of damage inflicted by the attack
-		bool	 _isMagic;          // Whether the attack has a magical type or not
+        int     _experience;                // Amount of experience the hunter has
+        int     _experienceRequired;        // Amount of experience required to level up
 
         #endregion Field
 
@@ -24,35 +23,17 @@ namespace MultiXPing
         \* ----------------------------------------------------- */
         #region Property
 
-        public string Element
-		{
-			get => _element; 
-			set => _element = value;
-		}
+        public int Experience
+        {
+            get => _experience;
+            private set => _experience = value;
+        }
 
-		public float Precision
-		{
-			get => _precision;
-			set => _precision = value;
-		}
-
-		public float CriticalRate
-		{
-			get => _criticalRate;
-			set => _criticalRate = value;
-		}
-
-		public int Damage
-		{
-			get => _damage; 
-			set => _damage = value;
-		}
-
-		public bool IsMagic
-		{
-			get => _isMagic; 
-			set => _isMagic = value;
-		}
+        public int ExperienceRequired
+        {
+            get => _experienceRequired;
+            private set => _experienceRequired = value;
+        }
 
         #endregion Property
 
@@ -71,6 +52,11 @@ namespace MultiXPing
         |                                                         |
         \* ----------------------------------------------------- */
         #region Methods
+
+        public override void Death()
+        {
+            base.Death();
+        }
 
         #endregion Methods
     }

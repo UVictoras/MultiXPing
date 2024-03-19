@@ -1,19 +1,30 @@
+public struct GameItem { }
+public struct Player 
+{ 
+    List<GameItem> _inventory = new(); 
+
+    public List<GameItem> Inventory
+    {
+        get => _inventory;
+        set => _inventory = value;
+    }
+    public Player() { } 
+}
+
+
 namespace MultiXPing
 {
-	public struct Attack
-	{
+    class Enemy : Character
+    {
         /* ----------------------------------------------------- *\
         |                                                         |
         |                          Field                          |
-        |                                                         | 
+        |                                                         |
         \* ----------------------------------------------------- */
         #region Field
 
-        string   _element;		    // Defines the specificity of the attack
-		float	 _precision;        // Precision of the attack
-		float	 _criticalRate;     // Critical rate of the attack
-		int		 _damage;           // Amount of damage inflicted by the attack
-		bool	 _isMagic;          // Whether the attack has a magical type or not
+        List<GameItem>        _loot = new ();              // Item dropped by the enemy
+        int                   _droppedExperience;          // Amount of experience the enemy gives
 
         #endregion Field
 
@@ -24,35 +35,17 @@ namespace MultiXPing
         \* ----------------------------------------------------- */
         #region Property
 
-        public string Element
-		{
-			get => _element; 
-			set => _element = value;
-		}
+        public List<GameItem> Loot
+        {
+            get => _loot;
+            private set => _loot = value;
+        }
 
-		public float Precision
-		{
-			get => _precision;
-			set => _precision = value;
-		}
-
-		public float CriticalRate
-		{
-			get => _criticalRate;
-			set => _criticalRate = value;
-		}
-
-		public int Damage
-		{
-			get => _damage; 
-			set => _damage = value;
-		}
-
-		public bool IsMagic
-		{
-			get => _isMagic; 
-			set => _isMagic = value;
-		}
+        public int DroppedExperience
+        {
+            get => _droppedExperience;
+            private set => _droppedExperience = value;
+        }
 
         #endregion Property
 
@@ -71,6 +64,23 @@ namespace MultiXPing
         |                                                         |
         \* ----------------------------------------------------- */
         #region Methods
+        public Enemy() 
+        {
+            
+        }
+
+        public void DropItems(ref Player player)
+        {
+            for (int i = 0; i < _loot.Count; i++)
+            {
+                player.Inventory.Add(_loot[i]);
+            }
+        }
+
+        public override void Death()
+        {
+            
+        }
 
         #endregion Methods
     }

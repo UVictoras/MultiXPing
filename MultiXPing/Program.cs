@@ -10,6 +10,7 @@ namespace MultiXPing
 
             Character character = new Character();
             character.InitializeCharacter("Romain");
+
             Console.WriteLine(character.Name);
             Console.ReadLine();
         }
