@@ -38,7 +38,7 @@ namespace MultiXPing.source.Item
         |                                                         |
         \* ----------------------------------------------------- */
         #region Methods
-        public abstract void Use(ref Character character);
+        public abstract void Use(ref Hunter hunter);
         #endregion Methods
     }
 }

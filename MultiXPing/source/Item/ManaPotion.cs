@@ -43,14 +43,14 @@ namespace MultiXPing.source.Item
         #region Methods
         public ManaPotion()
         {
-            Id = 0;
-            Description = "Cette potion soigne 20 PV";
+            Id = 1;
+            Description = "Cette potion vous rend 20 PM";
             Mana = 20;
             NumberUse = 1;
         }
-        public override void Use(ref Character character)
+        public override void Use(ref Hunter hunter)
         {
-            character.ManaRegeneration(Mana);
+            hunter.ManaRegeneration(Mana);
             NumberUse -= 1;
         }
         #endregion Methods

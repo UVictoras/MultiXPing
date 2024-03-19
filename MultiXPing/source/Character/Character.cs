@@ -17,7 +17,7 @@ namespace MultiXPing.source.Character
         int _damage;            // Amount of damage inflicted by the character
         int _defense;           // Resistance of the character to damages
         int _speed;             // Attacking speed of the character
-        int _precision;         // Precision of the character's attack
+        int _accuracy;         // Precision of the character's attack
         int _maximumMana;       // Maximum amount of mana a character can have
         int _mana;              // Current amount of mana of the character
         int _experience;        // Current experience obtained by the character
@@ -64,11 +64,9 @@ namespace MultiXPing.source.Character
             get => _speed;
             private set => _speed = value;
         }
-
-        public int Precision
-        {
-            get => _precision;
-            private set => _precision = value;
+        public int Accuracy {
+            get => _accuracy;
+            private set => _accuracy = value;
         }
 
         public int MaximumMana
@@ -139,10 +137,22 @@ namespace MultiXPing.source.Character
         public void Healing(int heal)
         {
             Health += heal;
+            if (Health > MaximumHealth)
+            {
+                MaximumHealth = Health;
+            }
         }
         public void ManaRegeneration(int mana)
         {
             Mana += mana;
+            if (Mana > MaximumMana)
+            {
+                Mana = MaximumMana;
+            }
+        }
+        public virtual void Death()
+        {
+
         }
 
         #endregion Methods
