@@ -133,7 +133,16 @@ namespace MultiXPing
 
         public void InitializeCharacter(string name)
         {
-            this.Name = name;
+            Name = name;
+        }
+
+        public void Healing(int heal)
+        {
+            Health += heal;
+        }
+        public void ManaRegeneration(int mana)
+        {
+            Mana += mana;
         }
 
         #endregion Methods
