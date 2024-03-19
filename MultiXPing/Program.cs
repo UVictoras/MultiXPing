@@ -2,6 +2,16 @@
 
 namespace MultiXPing
 {
+
+    static class Constants
+    {
+        public const string PROJECTPATH = "..\\..\\..\\..\\";
+        public const int WIDTH = 240;
+        public const int HEIGHT = 64;
+
+
+    }
+    
     class Program
     {
         static void Main(string[] args)
@@ -21,8 +31,12 @@ namespace MultiXPing
         
         public static void InitializeConsole()
         {
-            Console.ForegroundColor = ConsoleColor.Red;
+
+            Console.ForegroundColor = ConsoleColor.White;
             Console.Title = "MultiXPing";
+
+            Console.SetWindowSize(Constants.WIDTH, Constants.HEIGHT);
+            Console.SetBufferSize(Constants.WIDTH, Constants.HEIGHT);
         }
     }
 }
