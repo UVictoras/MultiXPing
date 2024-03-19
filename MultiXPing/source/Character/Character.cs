@@ -1,7 +1,7 @@
 using System;
 using System.Runtime.CompilerServices;
 
-namespace MultiXPing
+namespace MultiXPing.source.Character
 {
     public class Character
     {
@@ -12,19 +12,19 @@ namespace MultiXPing
         \* ----------------------------------------------------- */
         #region Field
 
-        int      _maximumHealth;     // Maximum amount of health a character can have
-        int      _health;            // Current amount of health of the character
-        int      _damage;            // Amount of damage inflicted by the character
-        int      _defense;           // Resistance of the character to damages
-        int      _speed;             // Attacking speed of the character
-        int      _precision;         // Precision of the character's attack
-        int      _maximumMana;       // Maximum amount of mana a character can have
-        int      _mana;              // Current amount of mana of the character
-        int      _experience;        // Current experience obtained by the character
-        int      _level;             // Current level of progression of the character
+        int _maximumHealth;     // Maximum amount of health a character can have
+        int _health;            // Current amount of health of the character
+        int _damage;            // Amount of damage inflicted by the character
+        int _defense;           // Resistance of the character to damages
+        int _speed;             // Attacking speed of the character
+        int _precision;         // Precision of the character's attack
+        int _maximumMana;       // Maximum amount of mana a character can have
+        int _mana;              // Current amount of mana of the character
+        int _experience;        // Current experience obtained by the character
+        int _level;             // Current level of progression of the character
         Attack[] _attacks;           // List of the possible attacks
 
-        string   _name;              // Name of the character
+        string _name;              // Name of the character
 
         #endregion Field
 
