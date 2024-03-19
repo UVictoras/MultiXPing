@@ -17,12 +17,14 @@ namespace MultiXPing.source.Character
         int _damage;            // Amount of damage inflicted by the character
         int _defense;           // Resistance of the character to damages
         int _speed;             // Attacking speed of the character
-        int _accuracy;         // Precision of the character's attack
+        int _accuracy;          // Precision of the character's attack
         int _maximumMana;       // Maximum amount of mana a character can have
         int _mana;              // Current amount of mana of the character
         int _experience;        // Current experience obtained by the character
         int _level;             // Current level of progression of the character
-        Attack[] _attacks;           // List of the possible attacks
+        bool _isAlive;          // Current state of the character, true if alive, false if dead
+        Attack[] _attacks;      // List of the learned attacks
+        Dictionary<int,Attack> _possibelAttacks;  // List of the attacks the character can learn
 
         string _name;              // Name of the character
 
@@ -44,7 +46,7 @@ namespace MultiXPing.source.Character
         public int Health
         {
             get => _health;
-            private set => _health = value;
+            set => _health = value;
         }
 
         public int Damage
@@ -99,10 +101,21 @@ namespace MultiXPing.source.Character
             private set => _attacks = value;
         }
 
+        public bool IsAlive
+        {
+            get => _isAlive;
+            set => _isAlive = value;
+        }
+
         public string Name
         {
             get => _name;
             set => _name = value;
+        }
+        public Dictionary<int,Attack> PossibleAttacks
+        {
+            get => _possibelAttacks;
+            private set => _possibelAttacks = value;
         }
 
         #endregion Property
@@ -133,6 +146,7 @@ namespace MultiXPing.source.Character
         {
             Name = name;
             Level = 1;
+            IsAlive = true;
         }
 
         public void Healing(int heal)
@@ -151,10 +165,7 @@ namespace MultiXPing.source.Character
                 Mana = MaximumMana;
             }
         }
-        public virtual void Death()
-        {
-
-        }
+        public virtual void Death(){}
 
         #endregion Methods
     }

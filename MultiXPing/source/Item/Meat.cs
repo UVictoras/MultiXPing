@@ -14,7 +14,7 @@ namespace MultiXPing.source.Item
         |                                                         |
         \* ----------------------------------------------------- */
         #region Field
-        float _boost;
+        float _boost;       // Percentage of boost given by the item
         #endregion Field
 
         /* ----------------------------------------------------- *\

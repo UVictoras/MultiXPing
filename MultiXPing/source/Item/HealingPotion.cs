@@ -14,7 +14,7 @@ namespace MultiXPing.source.Item
         |                                                         |
         \* ----------------------------------------------------- */
         #region Field
-        int _heal;
+        int _heal;          // Amount of HP the potion give to the character
         #endregion Field
 
         /* ----------------------------------------------------- *\

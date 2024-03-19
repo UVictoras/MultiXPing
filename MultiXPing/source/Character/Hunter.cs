@@ -14,10 +14,10 @@ namespace MultiXPing
 
         int _experience;                // Amount of experience the hunter has
         int _experienceRequired;        // Amount of experience required to level up
-        float _damageBoost;
-        float _defenseBoost;
-        float _speedBoost;
-        float _accuracyBoost;
+        float _damageBoost;             // Percentage of damage the character has
+        float _defenseBoost;            // Percentage of defense the character has
+        float _speedBoost;              // Percentage of speed the character has
+        float _accuracyBoost;           // Percentage of accuracy the character has
 
         #endregion Field
 
@@ -91,6 +91,19 @@ namespace MultiXPing
         public override void Death()
         {
             base.Death();
+            if(IsAlive) {
+                IsAlive = false;
+                Health = 0;
+            }
+        }
+
+        public void Reanimate()
+        {
+            if(IsAlive == false)
+            {
+                IsAlive = true;
+                Health = MaximumHealth / 2;
+            }
         }
 
         public void BoosterDamage(float damage)
@@ -132,6 +145,17 @@ namespace MultiXPing
             Experience = Experience - ExperienceRequired;
             Level += 1;
             ExperienceRequired = (int)Math.Round((35.0 / 36.0) * Math.Pow(Level, 2) + (125.0 / 12.0) * Level - (25.0 / 18.0)); // The function f(x)= 35/36 x² + 125/12 x - 25/18, where x is the level, calculate the new amount of exp required
+
+              //----------------------//
+             //  Augmentez les stats //
+            //----------------------//
+
+            if (PossibleAttacks.ContainsKey(Level))
+            {
+                  //------------------------//
+                 //  Apprendre une attaque //
+                //------------------------//
+            }
 
             Console.WriteLine("Bravo tu est niveau" + Level);
             Console.WriteLine("Bravo tu a lvlUp, il te faut "+ExperienceRequired+" exp pour lvlUp");
