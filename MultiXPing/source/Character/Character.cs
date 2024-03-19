@@ -90,7 +90,7 @@ namespace MultiXPing.source.Character
         public int Level
         {
             get => _level;
-            private set => _level = value;
+            set => _level = value;
         }
 
         public Attack[] Attacks
@@ -102,7 +102,7 @@ namespace MultiXPing.source.Character
         public string Name
         {
             get => _name;
-            private set => _name = value;
+            set => _name = value;
         }
 
         #endregion Property
@@ -132,6 +132,7 @@ namespace MultiXPing.source.Character
         public void InitializeCharacter(string name)
         {
             Name = name;
+            Level = 1;
         }
 
         public void Healing(int heal)

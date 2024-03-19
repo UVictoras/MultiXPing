@@ -10,10 +10,13 @@ namespace MultiXPing
         {
             InitializeConsole();
 
-            Character character = new Character();
+            Hunter character = new Hunter();
             character.InitializeCharacter("Romain");
             Console.WriteLine(character.Name);
             Console.ReadLine();
+            character.GainExp(9);
+            character.GainExp(5);
+
         }
         
         public static void InitializeConsole()

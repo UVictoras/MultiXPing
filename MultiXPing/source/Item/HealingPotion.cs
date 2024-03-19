@@ -14,7 +14,7 @@ namespace MultiXPing.source.Item
         |                                                         |
         \* ----------------------------------------------------- */
         #region Field
-        int _heal
+        int _heal;
         #endregion Field
 
         /* ----------------------------------------------------- *\

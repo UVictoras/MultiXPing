@@ -117,6 +117,26 @@ namespace MultiXPing
             SpeedBoost = 1.0f;
             AccuracyBoost = 1.0f;
         }
+
+        public void GainExp(int experience)
+        {
+            Experience += experience;
+            Console.WriteLine("Tu as: "+Experience+" exp");
+            if (Experience >= ExperienceRequired) { 
+                LevelUp();
+            }
+        }
+        
+        void LevelUp()
+        {
+            Experience = Experience - ExperienceRequired;
+            Level += 1;
+            Console.WriteLine("Bravo tu est niveau"+ Level);
+            //Console.WriteLine((35.0f / 36.0f) * (int)Math.Pow(Level, 2));
+            ExperienceRequired = (int)Math.Round((35.0 / 36.0) * Math.Pow(Level, 2) + (125.0 / 12.0) * Level - (25.0 / 18.0));
+            Console.WriteLine("Bravo tu a lvlUp, il te faut "+ExperienceRequired+" exp pour lvlUp");
+            Console.WriteLine("Tu as "+ Experience+" experience");
+        }
         #endregion Methods
     }
 }
