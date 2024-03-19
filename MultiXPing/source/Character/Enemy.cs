@@ -1,16 +1,4 @@
 public struct GameItem { }
-public struct Player 
-{ 
-    List<GameItem> _inventory = new(); 
-
-    public List<GameItem> Inventory
-    {
-        get => _inventory;
-        set => _inventory = value;
-    }
-    public Player() { } 
-}
-
 
 namespace MultiXPing
 {
@@ -56,6 +44,9 @@ namespace MultiXPing
         \* ----------------------------------------------------- */
         #region Event
 
+        public override event Action OnDamage;
+        public override event Action OnDeath;
+
         #endregion Event
 
         /* ----------------------------------------------------- *\
@@ -66,7 +57,6 @@ namespace MultiXPing
         #region Methods
         public Enemy() 
         {
-            
         }
 
         public void DropItems(ref Player player)
@@ -77,9 +67,15 @@ namespace MultiXPing
             }
         }
 
+        public override void Initialize(string name, string element)
+        {
+            _droppedExperience = 0; 
+            base.Initialize(name, element);
+        }
+
         public override void Death()
         {
-            
+            OnDeath?.Invoke();
         }
 
         #endregion Methods

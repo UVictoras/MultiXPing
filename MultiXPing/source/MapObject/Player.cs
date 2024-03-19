@@ -1,19 +1,22 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
 namespace MultiXPing
 {
-	public struct Attack
-	{
+    class Player : MapObject
+    {
         /* ----------------------------------------------------- *\
         |                                                         |
         |                          Field                          |
-        |                                                         | 
+        |                                                         |
         \* ----------------------------------------------------- */
         #region Field
 
-        string   _element;		    // Defines the specificity of the attack
-		float	 _accuracy;         // Precision of the attack
-		float	 _criticalRate;     // Critical rate of the attack
-		int		 _damage;           // Amount of damage inflicted by the attack
-		bool	 _isMagic;          // Whether the attack has a magical type or not
+        List<GameItem>      _inventory = new List<GameItem>();         // List of the items the player has in its inventory
+        List<Hunter>        _team      = new List<Hunter>();           // List of hunters the player has in its team
 
         #endregion Field
 
@@ -24,35 +27,17 @@ namespace MultiXPing
         \* ----------------------------------------------------- */
         #region Property
 
-        public string Element
-		{
-			get => _element; 
-			set => _element = value;
-		}
+        public List<GameItem> Inventory
+        {
+            get => _inventory;
+            private set => _inventory = value;
+        }
 
-		public float Accuracy
-		{
-			get => _accuracy;
-			set => _accuracy  = value;
-		}
-
-		public float CriticalRate
-		{
-			get => _criticalRate;
-			set => _criticalRate = value;
-		}
-
-		public int Damage
-		{
-			get => _damage; 
-			set => _damage = value;
-		}
-
-		public bool IsMagic
-		{
-			get => _isMagic; 
-			set => _isMagic = value;
-		}
+        public List<Hunter> Team
+        {
+            get => _team;
+            private set => _team = value;
+        }
 
         #endregion Property
 
@@ -71,6 +56,9 @@ namespace MultiXPing
         |                                                         |
         \* ----------------------------------------------------- */
         #region Methods
+        public Player()
+        {
+        }
 
         #endregion Methods
     }

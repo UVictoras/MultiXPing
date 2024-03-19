@@ -44,6 +44,9 @@ namespace MultiXPing
         \* ----------------------------------------------------- */
         #region Event
 
+        public override event Action OnDamage;
+        public override event Action OnDeath;
+
         #endregion Event
 
         /* ----------------------------------------------------- *\
@@ -52,6 +55,17 @@ namespace MultiXPing
         |                                                         |
         \* ----------------------------------------------------- */
         #region Methods
+
+        public Hunter()
+        {
+
+        }
+
+        public override void Initialize(string name, string element)
+        {
+            Experience = 0;
+            base.Initialize(name, element);
+        }
 
         public override void Death()
         {

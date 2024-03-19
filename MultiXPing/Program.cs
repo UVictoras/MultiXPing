@@ -1,6 +1,4 @@
-﻿// See https://aka.ms/new-console-template for more information
-
-namespace MultiXPing
+﻿namespace MultiXPing
 {
     class Program
     {
@@ -8,10 +6,10 @@ namespace MultiXPing
         {
             InitializeConsole();
 
-            Character character = new Character();
-            character.InitializeCharacter("Romain");
+            Hunter character = new Hunter();
+            character.Initialize("Romain", "BipBoopBip");
 
-            Console.WriteLine(character.Name);
+            Console.WriteLine(character.Name + ", is type : " + character.Element);
             Console.ReadLine();
         }
         

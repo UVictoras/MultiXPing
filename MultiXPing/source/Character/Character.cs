@@ -17,7 +17,7 @@ namespace MultiXPing
         int         _damage;            // Amount of damage inflicted by the character
         int         _defense;           // Resistance of the character to damages
         int         _speed;             // Attacking speed of the character
-        int         _precision;         // Precision of the character's attack
+        int         _accuracy;         // Precision of the character's attack
         int         _maximumMana;       // Maximum amount of mana a character can have
         int         _mana;              // Current amount of mana of the character
         int         _level;             // Current level of progression of the character
@@ -65,10 +65,10 @@ namespace MultiXPing
             private set => _speed = value;
         }
 
-        public int Precision
+        public int Accuracy
         {
-            get => _precision;
-            private set => _precision = value;
+            get => _accuracy;
+            private set => _accuracy = value;
         }
 
         public int MaximumMana
@@ -116,8 +116,8 @@ namespace MultiXPing
         \* ----------------------------------------------------- */
         #region Event
 
-        public event Action OnDamage;
-        public event Action onDeath;
+        public virtual event Action OnDamage;
+        public virtual event Action OnDeath;
 
         #endregion Event
 
@@ -132,9 +132,12 @@ namespace MultiXPing
         {
         }
 
-        public void InitializeCharacter(string name)
+        public virtual void Initialize(string name, string element)
         {
+            
+            Level = 1;
             Name = name;
+            Element = element;
         }
 
         public virtual void Death()
