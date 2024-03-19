@@ -8,10 +8,15 @@ namespace MultiXPing
         {
             InitializeConsole();
 
-            Character character = new Character();
-            character.InitializeCharacter("Romain");
-            Console.WriteLine(character.Name);
-            Console.ReadLine();
+            //Character character = new Character();
+            //character.InitializeCharacter("Romain");
+            //Console.WriteLine(character.Name);
+            //Console.ReadLine();
+
+            GameManager gameManager = new GameManager();
+            gameManager.GameLoop();
+           
+
         }
         
         public static void InitializeConsole()
