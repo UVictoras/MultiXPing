@@ -43,14 +43,14 @@ namespace MultiXPing
 
         public int X
         {
-            get => X;
-            set => X = value;
+            get => _x;
+            set => _x = value;
         }
 
         public int Y
         {
-            get => Y;
-            set => Y = value;
+            get => _y;
+            set => _y = value;
         }
 
         #endregion Property
@@ -76,9 +76,11 @@ namespace MultiXPing
             Y = y;
         }
 
-        public void Update(ref char[,] buffer)
+        public void Update(GameManager gm)
         {
-
+            if (X < 0 || X > Constants.WIDTH &&
+               Y < 0 || Y > Constants.HEIGHT) return;
+            gm.Buffer[Y, X] = 'p';
         }
 
         #endregion Methods

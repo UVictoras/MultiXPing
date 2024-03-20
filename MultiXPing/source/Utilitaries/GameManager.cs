@@ -89,8 +89,8 @@ namespace MultiXPing
 
         public Player Player
         {
-            get => Player;
-            set => Player = value;
+            get => _player;
+            set => _player = value;
         }
 
         #endregion Property
@@ -143,14 +143,14 @@ namespace MultiXPing
 
         public void InitPlayer()
         {
-            Player = new Player(Width/2, Heigth/2);
+            Player = new Player(Width/2, _height/2);
         }
 
         #endregion Init
 
         public void GameLoop()
         {
-            
+            HandleInput();
             Update();
             
         }
@@ -174,7 +174,8 @@ namespace MultiXPing
 
         public void UpdateMap()
         {
-            Player.Update(ref char[,] buffer);
+            ResetBuffer();
+            Player.Update(this);
             Render();
         }
 
@@ -193,6 +194,12 @@ namespace MultiXPing
 
         }
 
+        public void Render()
+        {
+            Console.Clear();
+            RenderBuffer();
+        }
+
         public void RenderBuffer()
         {
             for (int i = 0; i < (Map.Tab.Count) - 1 && i < _height; i++)
@@ -201,9 +208,10 @@ namespace MultiXPing
                 {
                     if (ColorDic.ContainsKey(Map.Tab[i][j]) == true)    
                     {
-                    Console.BackgroundColor = ColorDic[Map.Tab[i][j]];
-                    Console.Write(Buffer[i, j]);
-                    Console.ResetColor();
+                        Console.ForegroundColor = ConsoleColor.Black;
+                        Console.BackgroundColor = ColorDic[Map.Tab[i][j]];
+                        Console.Write(Buffer[i, j]);
+                        Console.ResetColor();
 
                     }
                     else
@@ -217,11 +225,19 @@ namespace MultiXPing
             
         }
 
-        public void Render()
+        public void ResetBuffer()
         {
-            Console.Clear();
-            RenderBuffer();
-            
+            for(int i = 0; i < _height; i++)
+            {
+                for(int j = 0; j < _width; j++)
+                {
+                    Buffer[i, j] = ' ';   
+                }
+            }
+        }
+
+        public void HandleInput()
+        {
             
         }
 
