@@ -14,10 +14,12 @@ namespace MultiXPing.source.Character
 
         int _maximumHealth;     // Maximum amount of health a character can have
         int _health;            // Current amount of health of the character
-        int _damage;            // Amount of damage inflicted by the character
-        int _defense;           // Resistance of the character to damages
-        int _speed;             // Attacking speed of the character
-        int _accuracy;          // Precision of the character's attack
+        float _physicalDamage;  // Amount of physical damage inflicted by the character
+        float _physicalDefense; // Resistance of the character to physical damages
+        float _magicalDamage;  // Amount of magical damage inflicted by the character
+        float _magicalDefense; // Resistance of the character to magical damages
+        float _speed;             // Attacking speed of the character
+        float _accuracy;          // Precision of the character's attack
         int _maximumMana;       // Maximum amount of mana a character can have
         int _mana;              // Current amount of mana of the character
         int _experience;        // Current experience obtained by the character
@@ -40,47 +42,59 @@ namespace MultiXPing.source.Character
         public int MaximumHealth
         {
             get => _maximumHealth;
-            private set => _maximumHealth = value;
+            protected set => _maximumHealth = value;
         }
 
         public int Health
         {
             get => _health;
-            set => _health = value;
+            protected set => _health = value;
         }
 
-        public int Damage
+        public float PhysicalDamage
         {
-            get => _damage;
-            private set => _damage = value;
+            get => _physicalDamage;
+            protected set => _physicalDamage = value;
         }
 
-        public int Defense
+        public float PhysicalDefense
         {
-            get => _defense;
-            private set => _defense = value;
+            get => _physicalDefense;
+            protected set => _physicalDefense = value;
         }
 
-        public int Speed
+        public float MagicalDamage
+        {
+            get => _magicalDamage;
+            protected set => _magicalDamage = value;
+        }
+
+        public float MagicalDefense
+        {
+            get => _magicalDefense;
+            protected set => _magicalDefense = value;
+        }
+
+        public float Speed
         {
             get => _speed;
-            private set => _speed = value;
+            protected set => _speed = value;
         }
-        public int Accuracy {
+        public float Accuracy {
             get => _accuracy;
-            private set => _accuracy = value;
+            protected set => _accuracy = value;
         }
 
         public int MaximumMana
         {
             get => _maximumMana;
-            private set => _maximumMana = value;
+            protected set => _maximumMana = value;
         }
 
         public int Mana
         {
             get => _mana;
-            private set => _mana = value;
+            protected set => _mana = value;
         }
 
         public int Experience

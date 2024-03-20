@@ -140,15 +140,11 @@ namespace MultiXPing
             }
         }
         
-        void LevelUp()
+        public virtual void LevelUp()
         {
             Experience = Experience - ExperienceRequired;
             Level += 1;
             ExperienceRequired = (int)Math.Round((35.0 / 36.0) * Math.Pow(Level, 2) + (125.0 / 12.0) * Level - (25.0 / 18.0)); // The function f(x)= 35/36 x² + 125/12 x - 25/18, where x is the level, calculate the new amount of exp required
-
-              //----------------------//
-             //  Augmentez les stats //
-            //----------------------//
 
             if (PossibleAttacks.ContainsKey(Level))
             {

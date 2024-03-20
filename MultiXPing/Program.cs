@@ -10,8 +10,7 @@ namespace MultiXPing
         {
             InitializeConsole();
 
-            Hunter character = new Hunter();
-            character.InitializeCharacter("Romain");
+            Tank character = new Tank("Romain");
             Console.WriteLine(character.Name);
             Console.ReadLine();
             character.GainExp(9);
