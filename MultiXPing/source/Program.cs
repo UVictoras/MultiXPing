@@ -1,4 +1,7 @@
-﻿namespace MultiXPing
+﻿using Pastel;
+using Color = System.Drawing.Color;
+
+namespace MultiXPing
 {
 
     static class Constants
@@ -21,9 +24,9 @@
             //Console.WriteLine(character.Name);
             //Console.ReadLine();
 
-            GameManager gameManager = new GameManager();
-            gameManager.GameLoop();
-           
+            /*            GameManager gameManager = new GameManager();
+                        gameManager.GameLoop();*/
+            Console.WriteLine("ENTER".Pastel(Color.FromArgb(255, 0, 0)));
 
         }
         
