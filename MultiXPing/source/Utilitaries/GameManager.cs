@@ -117,6 +117,15 @@ namespace MultiXPing
         {
             ColorDic.Add('C', ConsoleColor.Cyan);
             ColorDic.Add('_', ConsoleColor.DarkGreen);
+            ColorDic.Add('B', ConsoleColor.DarkRed);
+            ColorDic.Add('F', ConsoleColor.Green);
+            ColorDic.Add('P', ConsoleColor.DarkMagenta);
+            ColorDic.Add('M', ConsoleColor.Magenta);
+            ColorDic.Add('O', ConsoleColor.DarkBlue);
+            ColorDic.Add('U', ConsoleColor.Blue);
+            ColorDic.Add('G', ConsoleColor.DarkGray);
+            ColorDic.Add('D', ConsoleColor.Black);
+            ColorDic.Add('S', ConsoleColor.Yellow);
         }
 
         public void InitBuffer()
