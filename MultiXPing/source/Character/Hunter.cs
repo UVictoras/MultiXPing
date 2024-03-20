@@ -140,7 +140,7 @@ namespace MultiXPing
             }
         }
         
-        public virtual void LevelUp()
+        public void LevelUp()
         {
             Experience = Experience - ExperienceRequired;
             Level += 1;

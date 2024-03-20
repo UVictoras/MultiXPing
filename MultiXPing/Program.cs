@@ -1,4 +1,6 @@
-﻿namespace MultiXPing
+﻿using MultiXPing.source.Utilitaries;
+
+namespace MultiXPing
 {
 
     static class Constants
@@ -20,7 +22,7 @@
             //character.InitializeCharacter("Romain");
             //Console.WriteLine(character.Name);
             //Console.ReadLine();
-
+            Parser.CSVParser("../Data/InitStats.csv");
             GameManager gameManager = new GameManager();
             gameManager.GameLoop();
            
