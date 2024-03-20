@@ -17,6 +17,8 @@ namespace MultiXPing
 
         List<GameItem>      _inventory = new List<GameItem>();         // List of the items the player has in its inventory
         List<Hunter>        _team      = new List<Hunter>();           // List of hunters the player has in its team
+        int _x = 0;
+        int _y = 0;
 
         #endregion Field
 
@@ -39,6 +41,18 @@ namespace MultiXPing
             private set => _team = value;
         }
 
+        public int X
+        {
+            get => X;
+            set => X = value;
+        }
+
+        public int Y
+        {
+            get => Y;
+            set => Y = value;
+        }
+
         #endregion Property
 
         /* ----------------------------------------------------- *\
@@ -56,8 +70,15 @@ namespace MultiXPing
         |                                                         |
         \* ----------------------------------------------------- */
         #region Methods
-        public Player() : base()
+        public Player(int x, int y) : base()
         {
+            X = x;
+            Y = y;
+        }
+
+        public void Update(ref char[,] buffer)
+        {
+
         }
 
         #endregion Methods

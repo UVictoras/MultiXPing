@@ -34,6 +34,8 @@ namespace MultiXPing
         bool _isRunning;
         Map _map;
 
+        Player _player;
+
         char[ , ] _buffer = new char[_height,_width];
 
         public Dictionary<char, ConsoleColor> _colorDic = new Dictionary<char, ConsoleColor>();
@@ -85,6 +87,12 @@ namespace MultiXPing
             set => _colorDic = value;
         }
 
+        public Player Player
+        {
+            get => Player;
+            set => Player = value;
+        }
+
         #endregion Property
 
         /* ----------------------------------------------------- *\
@@ -103,6 +111,8 @@ namespace MultiXPing
         \* ----------------------------------------------------- */
         #region Methods
 
+        #region Init
+
         public GameManager()
         {
             CurrentState = State.MAP;
@@ -110,6 +120,7 @@ namespace MultiXPing
             Map = new Map();
             InitDico();
             InitBuffer();
+            InitPlayer();
 
         }
 
@@ -129,6 +140,13 @@ namespace MultiXPing
                 }
             }
         }
+
+        public void InitPlayer()
+        {
+            Player = new Player(Width/2, Heigth/2);
+        }
+
+        #endregion Init
 
         public void GameLoop()
         {
@@ -156,6 +174,7 @@ namespace MultiXPing
 
         public void UpdateMap()
         {
+            Player.Update(ref char[,] buffer);
             Render();
         }
 

@@ -30,7 +30,7 @@
         public static void InitializeConsole()
         {
 
-            Console.ForegroundColor = ConsoleColor.White;
+            Console.ForegroundColor = ConsoleColor.Black;
             Console.Title = "MultiXPing";
 
             Console.SetWindowSize(Console.LargestWindowWidth, Console.LargestWindowHeight);
