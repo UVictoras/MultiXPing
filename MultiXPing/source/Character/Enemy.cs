@@ -11,8 +11,8 @@ namespace MultiXPing
         \* ----------------------------------------------------- */
         #region Field
 
-        List<GameItem>        _loot = new ();              // Item dropped by the enemy
-        int                   _droppedExperience;          // Amount of experience the enemy gives
+        List<GameItem> _loot = new();              // Item dropped by the enemy
+        int _droppedExperience;          // Amount of experience the enemy gives
 
         #endregion Field
 
@@ -55,7 +55,7 @@ namespace MultiXPing
         |                                                         |
         \* ----------------------------------------------------- */
         #region Methods
-        public Enemy() 
+        public Enemy() : base()
         {
         }
 
@@ -67,10 +67,10 @@ namespace MultiXPing
             }
         }
 
-        public override void Initialize(string name, string element)
+        public void Initialize(string name, string element)
         {
-            _droppedExperience = 0; 
-            base.Initialize(name, element);
+            _droppedExperience = 0;
+            base.InitializeCharacter(name);
         }
 
         public override void Death()
