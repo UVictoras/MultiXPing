@@ -33,13 +33,11 @@ namespace MultiXPing
         const int _height = Constants.HEIGHT;
         bool _isRunning;
         Map _map;
+        InputManager _inputmanager;
+        Render _renderTarget;
 
         Player _player;
-
-        char[ , ] _buffer = new char[_height,_width];
-
-        public Dictionary<char, ConsoleColor> _colorDic = new Dictionary<char, ConsoleColor>();
-
+        
         #endregion Field
 
         /* ----------------------------------------------------- *\
@@ -58,7 +56,7 @@ namespace MultiXPing
         {
             get => _width;
         }
-        public int Heigth
+        public int Height
         {
             get => _height;
         }
@@ -75,16 +73,16 @@ namespace MultiXPing
             set => _map = value;
         }
 
-        public char[,] Buffer
+        public InputManager Inputmanager
         {
-            get => _buffer;
-            set => _buffer = value;
+            get => _inputmanager;
+            set => _inputmanager = value;
         }
 
-        public Dictionary<char, ConsoleColor> ColorDic
+        public Render RenderTarget
         {
-            get => _colorDic; 
-            set => _colorDic = value;
+            get => _renderTarget;
+            set => _renderTarget = value;
         }
 
         public Player Player
@@ -117,42 +115,37 @@ namespace MultiXPing
         {
             CurrentState = State.MAP;
             IsRunning = true;
+
             Map = new Map();
-            InitDico();
-            InitBuffer();
+            Map.InitMap();
+
+            Inputmanager = new InputManager();
+            //Inputmanager.Initialize();
+
+            RenderTarget = new Render();
+            RenderTarget.InitBuffer();
+
+            
             InitPlayer();
 
         }
 
-        public void InitDico()
-        {
-            ColorDic.Add('C', ConsoleColor.Cyan);
-            ColorDic.Add('_', ConsoleColor.DarkGreen);
-        }
-
-        public void InitBuffer()
-        {
-            for (int i = 0; i < _height; i++)
-            {
-                for (int j = 0; j < _width; j++)
-                {
-                    Buffer[i, j] = ' ';
-                }
-            }
-        }
+        
 
         public void InitPlayer()
         {
-            Player = new Player(Width/2, _height/2);
+            Player = new Player(Width/2, Height/2);
         }
 
         #endregion Init
 
         public void GameLoop()
         {
-            HandleInput();
-            Update();
-            
+            while (IsRunning)
+            {
+                HandleInput();
+                Update();
+            }
         }
 
         public void Update()
@@ -174,8 +167,7 @@ namespace MultiXPing
 
         public void UpdateMap()
         {
-            ResetBuffer();
-            Player.Update(this);
+            _player.Move(1,0);
             Render();
         }
 
@@ -196,49 +188,31 @@ namespace MultiXPing
 
         public void Render()
         {
+            //Reset
             Console.Clear();
-            RenderBuffer();
-        }
+            RenderTarget.ResetBuffer();
 
-        public void RenderBuffer()
-        {
-            for (int i = 0; i < (Map.Tab.Count) - 1 && i < _height; i++)
-            {
-                for (int j = 0; j < Map.Tab[i].Count && j < _width; j++)
-                {
-                    if (ColorDic.ContainsKey(Map.Tab[i][j]) == true)    
-                    {
-                        Console.ForegroundColor = ConsoleColor.Black;
-                        Console.BackgroundColor = ColorDic[Map.Tab[i][j]];
-                        Console.Write(Buffer[i, j]);
-                        Console.ResetColor();
+            //Draw map
+            RenderTarget.DrawMap(Map);
 
-                    }
-                    else
-                    {
-                        Console.Write(Buffer[i, j]);
-                    }
-                }
-                Console.BackgroundColor = ConsoleColor.Black;
-                Console.Write("\n");
-            }
+            //Draw items
+            RenderTarget.Draw(Player);
             
+            //Render
+            RenderTarget.RenderBuffer();
         }
 
-        public void ResetBuffer()
-        {
-            for(int i = 0; i < _height; i++)
-            {
-                for(int j = 0; j < _width; j++)
-                {
-                    Buffer[i, j] = ' ';   
-                }
-            }
-        }
+        
+
+        
 
         public void HandleInput()
         {
-            
+            //Inputmanager.Update();
+            //if (Inputmanager.KeyState[ConsoleKey.Z])
+            //{
+            //    Player.Move(1,0);
+            //}
         }
 
         #endregion Methods

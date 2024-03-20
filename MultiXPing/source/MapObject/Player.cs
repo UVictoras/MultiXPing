@@ -17,8 +17,6 @@ namespace MultiXPing
 
         List<GameItem>      _inventory = new List<GameItem>();         // List of the items the player has in its inventory
         List<Hunter>        _team      = new List<Hunter>();           // List of hunters the player has in its team
-        int _x = 0;
-        int _y = 0;
 
         #endregion Field
 
@@ -39,18 +37,6 @@ namespace MultiXPing
         {
             get => _team;
             private set => _team = value;
-        }
-
-        public int X
-        {
-            get => _x;
-            set => _x = value;
-        }
-
-        public int Y
-        {
-            get => _y;
-            set => _y = value;
         }
 
         #endregion Property
@@ -74,13 +60,12 @@ namespace MultiXPing
         {
             X = x;
             Y = y;
+            Sprite = new PlayerSpirte().Sprite;
         }
 
         public void Update(GameManager gm)
         {
-            if (X < 0 || X > Constants.WIDTH &&
-               Y < 0 || Y > Constants.HEIGHT) return;
-            gm.Buffer[Y, X] = 'p';
+
         }
 
         #endregion Methods

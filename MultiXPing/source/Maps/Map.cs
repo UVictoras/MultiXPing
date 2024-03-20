@@ -52,7 +52,7 @@ namespace MultiXPing
 
          
         public Map() {
-            InitMap();
+            
         }
 
         public void InitMap()

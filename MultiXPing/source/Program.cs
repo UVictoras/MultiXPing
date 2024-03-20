@@ -5,7 +5,7 @@
     {
         public const string PROJECTPATH = "..\\..\\..\\..\\";
         public const int WIDTH = 200;
-        public const int HEIGHT = 100;
+        public const int HEIGHT = 50;
 
 
     }
