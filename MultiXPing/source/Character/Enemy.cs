@@ -55,7 +55,7 @@ namespace MultiXPing
         |                                                         |
         \* ----------------------------------------------------- */
         #region Methods
-        public Enemy() 
+        public Enemy() : base()
         {
         }
 
@@ -67,10 +67,10 @@ namespace MultiXPing
             }
         }
 
-        public override void Initialize(string name, string element)
+        public void Initialize(string name, string element)
         {
             _droppedExperience = 0; 
-            base.Initialize(name, element);
+            base.InitializeCharacter(name);
         }
 
         public override void Death()
