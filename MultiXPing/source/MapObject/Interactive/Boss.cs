@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MultiXPing
 {
-    class Player : MapObject
+    internal class Boss : Interactive
     {
         /* ----------------------------------------------------- *\
         |                                                         |
@@ -14,9 +14,6 @@ namespace MultiXPing
         |                                                         |
         \* ----------------------------------------------------- */
         #region Field
-
-        List<GameItem>      _inventory = new List<GameItem>();         // List of the items the player has in its inventory
-        List<Hunter>        _team      = new List<Hunter>();           // List of hunters the player has in its team
 
         #endregion Field
 
@@ -26,18 +23,6 @@ namespace MultiXPing
         |                                                         |
         \* ----------------------------------------------------- */
         #region Property
-
-        public List<GameItem> Inventory
-        {
-            get => _inventory;
-            private set => _inventory = value;
-        }
-
-        public List<Hunter> Team
-        {
-            get => _team;
-            private set => _team = value;
-        }
 
         #endregion Property
 
@@ -56,9 +41,8 @@ namespace MultiXPing
         |                                                         |
         \* ----------------------------------------------------- */
         #region Methods
-        public Player() : base()
-        {
-        }
+
+        public Boss(string message) : base(message) { }
 
         #endregion Methods
     }

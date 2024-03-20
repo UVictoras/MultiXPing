@@ -42,7 +42,7 @@ namespace MultiXPing
         \* ----------------------------------------------------- */
         #region Methods
 
-        public Obstacle()
+        public Obstacle() : base()
         {
         }
 

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MultiXPing
 {
-    class Player : MapObject
+    internal class Sign : Interactive
     {
         /* ----------------------------------------------------- *\
         |                                                         |
@@ -15,8 +15,7 @@ namespace MultiXPing
         \* ----------------------------------------------------- */
         #region Field
 
-        List<GameItem>      _inventory = new List<GameItem>();         // List of the items the player has in its inventory
-        List<Hunter>        _team      = new List<Hunter>();           // List of hunters the player has in its team
+        string      _indication;                // Specific text printed on the sign itself
 
         #endregion Field
 
@@ -26,17 +25,10 @@ namespace MultiXPing
         |                                                         |
         \* ----------------------------------------------------- */
         #region Property
-
-        public List<GameItem> Inventory
-        {
-            get => _inventory;
-            private set => _inventory = value;
-        }
-
-        public List<Hunter> Team
-        {
-            get => _team;
-            private set => _team = value;
+        public string Indication 
+        { 
+            get => _indication; 
+            private set => _indication = value; 
         }
 
         #endregion Property
@@ -56,10 +48,15 @@ namespace MultiXPing
         |                                                         |
         \* ----------------------------------------------------- */
         #region Methods
-        public Player() : base()
-        {
-        }
 
+        public Sign(string message) : base(message) { }
+
+        public override void Interact(Player player)
+        {
+            base.Interact(player);
+
+            Console.WriteLine(Indication);
+        }
         #endregion Methods
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MultiXPing
 {
-    class Player : MapObject
+    internal class Interactive : MapObject
     {
         /* ----------------------------------------------------- *\
         |                                                         |
@@ -15,8 +15,8 @@ namespace MultiXPing
         \* ----------------------------------------------------- */
         #region Field
 
-        List<GameItem>      _inventory = new List<GameItem>();         // List of the items the player has in its inventory
-        List<Hunter>        _team      = new List<Hunter>();           // List of hunters the player has in its team
+        string      _message;               // Message printed when Interacting with the object
+        bool        _isOpened;              // To check whether we're interacting with the item or not
 
         #endregion Field
 
@@ -26,17 +26,15 @@ namespace MultiXPing
         |                                                         |
         \* ----------------------------------------------------- */
         #region Property
-
-        public List<GameItem> Inventory
-        {
-            get => _inventory;
-            private set => _inventory = value;
+        public string Message 
+        { 
+            get => _message; 
+            private set => _message = value; 
         }
-
-        public List<Hunter> Team
-        {
-            get => _team;
-            private set => _team = value;
+        public bool IsOpened 
+        { 
+            get => _isOpened; 
+            private set => _isOpened = value; 
         }
 
         #endregion Property
@@ -56,8 +54,13 @@ namespace MultiXPing
         |                                                         |
         \* ----------------------------------------------------- */
         #region Methods
-        public Player() : base()
+
+        public Interactive(string message) : base() { Message = message; IsOpened = false; }
+
+
+        public virtual void Interact(Player player) 
         {
+            Console.WriteLine(Message);
         }
 
         #endregion Methods
