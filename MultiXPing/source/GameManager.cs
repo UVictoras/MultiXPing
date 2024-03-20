@@ -115,7 +115,7 @@ namespace MultiXPing
 
         public void InitDico()
         {
-            ColorDic.Add('C', ConsoleColor.Red);
+            ColorDic.Add('C', ConsoleColor.Cyan);
             ColorDic.Add('_', ConsoleColor.DarkGreen);
         }
 
@@ -176,17 +176,26 @@ namespace MultiXPing
 
         public void RenderBuffer()
         {
-            //for (int i = 0; i < Map.Tab.Count || i < _height; i++)
-            //{
-            //    for (int j = 0; j < Map.Tab[i].Count || j < _width; j++)
-            //    {
-            //        Console.BackgroundColor = ColorDic[Map.Tab[i][j]];
-            //        Console.Write(Buffer[i, j]);
-            //        Console.ResetColor();
-            //    }
-            //    Console.Write("\n");
-            //}
-            Console.WriteLine(Map.Tab[0][100]);
+            for (int i = 0; i < (Map.Tab.Count) - 1 && i < _height; i++)
+            {
+                for (int j = 0; j < Map.Tab[i].Count && j < _width; j++)
+                {
+                    if (ColorDic.ContainsKey(Map.Tab[i][j]) == true)    
+                    {
+                    Console.BackgroundColor = ColorDic[Map.Tab[i][j]];
+                    Console.Write(Buffer[i, j]);
+                    Console.ResetColor();
+
+                    }
+                    else
+                    {
+                        Console.Write(Buffer[i, j]);
+                    }
+                }
+                Console.BackgroundColor = ConsoleColor.Black;
+                Console.Write("\n");
+            }
+            
         }
 
         public void Render()

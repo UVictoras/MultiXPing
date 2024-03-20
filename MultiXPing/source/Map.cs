@@ -57,31 +57,44 @@ namespace MultiXPing
 
         public void InitMap()
         {
-            int count = 0;
             string text = File.ReadAllText(Constants.PROJECTPATH + "MultiXPing\\source\\Maps\\Map1.txt");
-            int countMax = text.Length;
-            for (int i = 0; i < Constants.HEIGHT; i++)
+
+            int count = 0;
+            Tab.Add(new List<char>());
+            foreach (char c in text)
             {
-                Tab.Add(new List<char>());
-                for (int j = 0; j < Constants.WIDTH; j++)
+                if (c == '\r')
                 {
-                    if (count > countMax)
-                    {
-                        return;
-                    }
-                    if (text[count] == '\n')
-                    {
-                        count++;
-                        break;
-                    }
-                        
-
-                    Tab[i].Add(text[count]);
-                    count++;
-
+                    Tab.Add(new List<char>());
+                    count ++;
+                }
+                else if (c == '\n')
+                {
+                    
+                }
+                else
+                {
+                    Tab[count].Add(c);
                 }
             }
-            
+        }
+
+        public int WidthMap(string text)
+        {
+            return text.IndexOf("\n");
+        }
+
+        public int HeightMap(string text)
+        {
+            int count = 0;
+            foreach (char c in text)
+            {
+                if(c == '\n')
+                {
+                    count++;
+                }
+            }
+            return count;
         }
 
         #endregion Methods

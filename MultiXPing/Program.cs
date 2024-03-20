@@ -6,8 +6,8 @@ namespace MultiXPing
     static class Constants
     {
         public const string PROJECTPATH = "..\\..\\..\\..\\";
-        public const int WIDTH = 240;
-        public const int HEIGHT = 64;
+        public const int WIDTH = 200;
+        public const int HEIGHT = 100;
 
 
     }
@@ -35,8 +35,8 @@ namespace MultiXPing
             Console.ForegroundColor = ConsoleColor.White;
             Console.Title = "MultiXPing";
 
-            Console.SetWindowSize(Constants.WIDTH, Constants.HEIGHT);
-            Console.SetBufferSize(Constants.WIDTH, Constants.HEIGHT);
+            Console.SetWindowSize(Console.LargestWindowWidth, Console.LargestWindowHeight);
+            Console.SetBufferSize(Console.LargestWindowWidth, Console.LargestWindowHeight);
         }
     }
 }
