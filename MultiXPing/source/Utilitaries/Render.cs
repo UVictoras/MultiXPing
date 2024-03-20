@@ -109,6 +109,10 @@ namespace MultiXPing
                     y++;
                     countX = x;
                 }
+                else if (c == ' '){
+                    Buffer[y, countX] = Buffer[y, countX];
+                    countX++;
+                }
                 else
                 {
                     Buffer[y, countX] = c;

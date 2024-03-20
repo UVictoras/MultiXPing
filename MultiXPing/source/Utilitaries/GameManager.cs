@@ -141,11 +141,11 @@ namespace MultiXPing
 
         public void GameLoop()
         {
-            while (IsRunning)
-            {
+            //while (IsRunning)
+            //{
                 HandleInput();
                 Update();
-            }
+            //}
         }
 
         public void Update()

@@ -12,9 +12,10 @@
 
         public PlayerSpirte()
         {
-            _sprite = "PPP\n" +
-                      "P\n" +
-                      "P\n";
+            _sprite = " P \n" +
+                      "PPP\n" +
+                      " P\n" +
+                      " P\n";
         }
     }
 }
