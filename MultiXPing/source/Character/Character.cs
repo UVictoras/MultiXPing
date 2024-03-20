@@ -141,8 +141,8 @@ namespace MultiXPing
         \* ----------------------------------------------------- */
         #region Event
 
-        public event Action OnDamage;
-        public event Action onDeath;
+        public virtual event Action OnDamage;
+        public virtual event Action OnDeath;
 
         #endregion Event
 
