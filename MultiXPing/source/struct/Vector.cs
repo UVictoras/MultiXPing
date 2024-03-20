@@ -24,13 +24,13 @@ namespace MultiXPing
         public float X
         {
             get => _x; 
-            private set => _x = value;
+            set => _x = value;
         }
 
         public float Y
         {
             get => _y; 
-            private set => _y = value;
+            set => _y = value;
         }
         #endregion Property
     }

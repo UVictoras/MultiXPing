@@ -2,7 +2,6 @@ using System;
 using System.Runtime.CompilerServices;
 
 namespace MultiXPing
-namespace MultiXPing.source.Character
 {
     public class Character
     {

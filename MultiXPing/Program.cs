@@ -1,8 +1,4 @@
-﻿// See https://aka.ms/new-console-template for more information
-
-using MultiXPing.source.Character;
-
-namespace MultiXPing
+﻿namespace MultiXPing
 {
 
     static class Constants
