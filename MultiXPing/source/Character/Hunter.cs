@@ -1,4 +1,4 @@
-using MultiXPing.source.Character;
+using MultiXPing;
 using System.Security.Cryptography.X509Certificates;
 
 namespace MultiXPing
@@ -18,6 +18,7 @@ namespace MultiXPing
         float _defenseBoost;            // Percentage of defense the character has
         float _speedBoost;              // Percentage of speed the character has
         float _accuracyBoost;           // Percentage of accuracy the character has
+        List<float> _characterMultiplicator;
 
         #endregion Field
 
@@ -59,6 +60,7 @@ namespace MultiXPing
             get => _accuracyBoost;
             private set => _accuracyBoost = value;
         }
+        public List<float> CharacterMultiplicator { get => _characterMultiplicator; set => _characterMultiplicator = value; }
 
         #endregion Property
 
@@ -86,6 +88,22 @@ namespace MultiXPing
             DamageBoost = 1.0f;
             SpeedBoost = 1.0f;
             AccuracyBoost = 1.0f;
+        }
+
+        public void InitializeHunter(string name, List<float> characterType, List<float> characterMultiplicator)
+        {
+            InitializeCharacter(name);
+            CharacterMultiplicator = characterMultiplicator;
+
+            MaximumHealth = (int)characterType[0];
+            Health = MaximumHealth;
+            MaximumMana = (int)characterType[1];
+            Mana = MaximumMana;
+            PhysicalDamage = characterType[2];
+            PhysicalDefense = characterType[3];
+            MagicalDamage = characterType[4];
+            MagicalDefense = characterType[5];
+            Speed = characterType[6];
         }
 
         public override void Death()
@@ -146,12 +164,22 @@ namespace MultiXPing
             Level += 1;
             ExperienceRequired = (int)Math.Round((35.0 / 36.0) * Math.Pow(Level, 2) + (125.0 / 12.0) * Level - (25.0 / 18.0)); // The function f(x)= 35/36 x² + 125/12 x - 25/18, where x is the level, calculate the new amount of exp required
 
-            if (PossibleAttacks.ContainsKey(Level))
-            {
-                  //------------------------//
-                 //  Apprendre une attaque //
-                //------------------------//
-            }
+            // Increase Statistics
+            MaximumHealth += (int)Math.Round(CharacterMultiplicator[0] * Math.Log(Level));
+            Health += (int)Math.Round(CharacterMultiplicator[0] * Math.Log(Level));
+            MaximumMana += (int)Math.Round(CharacterMultiplicator[1] * Math.Log(Level));
+            PhysicalDamage += (int)Math.Round(CharacterMultiplicator[2] * Math.Log(Level));
+            PhysicalDefense += (int)Math.Round(CharacterMultiplicator[3] * Math.Log(Level));
+            MagicalDamage += (int)Math.Round(CharacterMultiplicator[4] * Math.Log(Level));
+            MagicalDefense += (int)Math.Round(CharacterMultiplicator[5] * Math.Log(Level));
+            Speed += (int)Math.Round(CharacterMultiplicator[6] * Math.Log(Level));
+
+            //if (PossibleAttacks.ContainsKey(Level))
+            //{
+            //      //------------------------//
+            //     //  Apprendre une attaque //
+            //    //------------------------//
+            //}
 
             Console.WriteLine("Bravo tu est niveau" + Level);
             Console.WriteLine("Bravo tu a lvlUp, il te faut "+ExperienceRequired+" exp pour lvlUp");
