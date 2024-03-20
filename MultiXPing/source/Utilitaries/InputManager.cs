@@ -15,8 +15,7 @@ namespace MultiXPing
         \* ----------------------------------------------------- */
         #region Field
 
-        Dictionary<string, bool> _keyState = new Dictionary<string, bool>();
-        List<ConsoleKeyInfo> _keysInfo = new List<ConsoleKeyInfo>();
+        Dictionary<ConsoleKeyInfo, bool> _keyState = new Dictionary<ConsoleKeyInfo, bool>();
 
         #endregion Field
 
@@ -26,6 +25,12 @@ namespace MultiXPing
         |                                                         |
         \* ----------------------------------------------------- */
         #region Property
+
+        public Dictionary<ConsoleKeyInfo, bool> KeyState 
+        { 
+            get => _keyState; 
+            private set => _keyState = value;
+        }
 
         #endregion Property
 
@@ -45,6 +50,21 @@ namespace MultiXPing
         \* ----------------------------------------------------- */
         #region Methods
 
+        public void Initialize()
+        {
+            foreach (ConsoleKeyInfo key in Enum.GetValues(typeof(ConsoleKeyInfo))) 
+            {
+                KeyState.Add(key, false);
+            }
+        }
+
+        public void Update()
+        {
+            foreach (ConsoleKeyInfo key in KeyState.Keys.ToList())
+            {
+                KeyState[key] = (Console.ReadKey().Key == key.Key);
+            }
+        }
         #endregion Methods
     }
 }
