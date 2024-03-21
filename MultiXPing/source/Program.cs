@@ -9,8 +9,10 @@ namespace MultiXPing
     static class Constants
     {
         public const string PROJECTPATH = "..\\..\\..\\..\\";
-        public const int WIDTH = 150;
-        public const int HEIGHT = 100;
+        public const int WIDTH = 100;
+        public const int HEIGHT = 50;
+
+
     }
     
     class Program
