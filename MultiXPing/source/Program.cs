@@ -24,9 +24,9 @@ namespace MultiXPing
             //Console.WriteLine(character.Name);
             //Console.ReadLine();
 
-            /*            GameManager gameManager = new GameManager();
-                        gameManager.GameLoop();*/
-            Console.WriteLine("ENTER".Pastel(Color.FromArgb(255, 0, 0)));
+            GameManager gameManager = new GameManager();
+            gameManager.GameLoop();
+            //Console.WriteLine("ENTER".Pastel(Color.FromArgb(255, 0, 0)));
 
         }
         

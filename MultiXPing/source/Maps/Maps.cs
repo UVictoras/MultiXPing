@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace MultiXPing
 {
-    struct Map
+    struct Maps
         {
         /* ----------------------------------------------------- *\
         |                                                         |
@@ -16,6 +17,11 @@ namespace MultiXPing
         #region Field
 
         private List<List<char>> _tab = new List<List<char>>();
+
+        string _text = "";
+
+        private int _width = 0;
+        private int _height = 0;
 
         #endregion Field
 
@@ -30,6 +36,23 @@ namespace MultiXPing
         {
             get => _tab; 
             set => _tab = value;
+        }
+
+        public string Text
+        {
+            get => _text;
+            set => _text = value;
+        }
+
+        public int Width
+        {
+            get => _width;
+            set => _width = value;
+        }
+        public int Height
+        {
+            get => _height;
+            set => _height = value;
         }
 
         #endregion Property
@@ -51,17 +74,19 @@ namespace MultiXPing
         #region Methods
 
          
-        public Map() {
-            
+        public Maps() {
+            InitMap();
         }
 
         public void InitMap()
         {
-            string text = File.ReadAllText(Constants.PROJECTPATH + "MultiXPing\\source\\Maps\\Map1.txt");
+            _text = File.ReadAllText(Constants.PROJECTPATH + "MultiXPing\\source\\Maps\\Map1.txt");
+            _width = WidthMap();
+            _height = HeightMap();
 
             int count = 0;
             Tab.Add(new List<char>());
-            foreach (char c in text)
+            foreach (char c in Text)
             {
                 if (c == '\r')
                 {
@@ -79,22 +104,22 @@ namespace MultiXPing
             }
         }
 
-        public int WidthMap(string text)
+        public int WidthMap()
         {
-            return text.IndexOf("\n");
+            return (Text.IndexOf("\n"))-1;
         }
 
-        public int HeightMap(string text)
+        public int HeightMap()
         {
             int count = 0;
-            foreach (char c in text)
+            foreach (char c in Text)
             {
                 if(c == '\n')
                 {
                     count++;
                 }
             }
-            return count;
+            return count+1;
         }
 
         #endregion Methods

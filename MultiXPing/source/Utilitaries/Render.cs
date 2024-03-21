@@ -78,7 +78,15 @@ namespace MultiXPing
         {
             ColorDic.Add('C', ConsoleColor.Cyan);
             ColorDic.Add('_', ConsoleColor.DarkGreen);
-            ColorDic.Add('P', ConsoleColor.DarkRed);
+            ColorDic.Add('B', ConsoleColor.DarkRed);
+            ColorDic.Add('F', ConsoleColor.Green);
+            ColorDic.Add('P', ConsoleColor.DarkMagenta);
+            ColorDic.Add('M', ConsoleColor.Magenta);
+            ColorDic.Add('O', ConsoleColor.DarkBlue);
+            ColorDic.Add('U', ConsoleColor.Blue);
+            ColorDic.Add('G', ConsoleColor.DarkGray);
+            ColorDic.Add('D', ConsoleColor.Black);
+            ColorDic.Add('S', ConsoleColor.Yellow);
 
         }
 
@@ -121,14 +129,14 @@ namespace MultiXPing
             }
         }
 
-        public void DrawMap(Map map)
+        public void DrawMap(Maps map)
         {
             int offsetX = 0;
             int offsetY = 0;
 
-            for (int i = 0; i < _height; i++)
+            for (int i = 0; i < _height && i < map.Height; i++)
             {
-                for (int j = 0; j < _width; j++)
+                for (int j = 0; j < _width && i < map.Width; j++)
                 {
                     Buffer[i, j] = map.Tab[i+offsetX][j+offsetY];
                 }

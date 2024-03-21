@@ -32,7 +32,7 @@ namespace MultiXPing
         const int _width = Constants.WIDTH;
         const int _height = Constants.HEIGHT;
         bool _isRunning;
-        Map _map;
+        Maps _map;
         InputManager _inputmanager;
         Render _renderTarget;
 
@@ -67,7 +67,7 @@ namespace MultiXPing
             private set => _isRunning = value;
         }
 
-        public Map Map
+        public Maps Map
         {
             get => _map;
             set => _map = value;
@@ -116,8 +116,7 @@ namespace MultiXPing
             CurrentState = State.MAP;
             IsRunning = true;
 
-            Map = new Map();
-            Map.InitMap();
+            Map = new Maps();
 
             Inputmanager = new InputManager();
             //Inputmanager.Initialize();
