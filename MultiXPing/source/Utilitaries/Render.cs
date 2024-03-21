@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -85,8 +86,9 @@ namespace MultiXPing
             ColorDic.Add('O', ConsoleColor.DarkBlue);
             ColorDic.Add('U', ConsoleColor.Blue);
             ColorDic.Add('G', ConsoleColor.DarkGray);
-            ColorDic.Add('D', ConsoleColor.Black);
+            ColorDic.Add('D', ConsoleColor.Red);
             ColorDic.Add('S', ConsoleColor.Yellow);
+            ColorDic.Add(' ', ConsoleColor.Black);
 
         }
 
@@ -105,14 +107,18 @@ namespace MultiXPing
 
         public void Draw(MapObject entity)
         {
-            int x = entity.X;
-            int y = entity.Y;
+            int x = entity.Position.X;
+            int y = entity.Position.Y;
             int countX = x;
-            if (x < 0 || x > Constants.WIDTH &&
-               y < 0 || y > Constants.HEIGHT) return;
-            foreach(char c in entity.Sprite) 
+            
+            foreach(char c in entity.Sprite.Sprite) 
             {
-                if(c == '\n')
+                if (countX < 0 || countX >= Constants.WIDTH ||
+                    y < 0 || y >= Constants.HEIGHT)
+                {
+                    countX++;
+                }
+                else if (c == '\n')
                 {
                     y++;
                     countX = x;
@@ -128,17 +134,52 @@ namespace MultiXPing
                 }
             }
         }
-
-        public void DrawMap(Maps map)
+        
+        public void DrawPlayer(MapObject entity)
         {
-            int offsetX = 0;
-            int offsetY = 0;
+            int x = Constants.WIDTH/2 - entity.Sprite.Width;
+            int y = Constants.HEIGHT/2 - entity.Sprite.Height;
+            int countX = x;
+            
+            foreach(char c in entity.Sprite.Sprite) 
+            {
+                if (c == '\n')
+                {
+                    y++;
+                    countX = x;
+                }
+                else if (c == ' '){
+                    Buffer[y, countX] = Buffer[y, countX];
+                    countX++;
+                }
+                else
+                {
+                    Buffer[y, countX] = c;
+                    countX++;
+                }
+            }
+        }
+        
+        
+
+        public void DrawMap(Maps map, Player player)
+        {
+            int offsetX = player.Position.Y - _height/2;
+            int offsetY = player.Position.X - _width/2;
 
             for (int i = 0; i < _height && i < map.Height; i++)
             {
-                for (int j = 0; j < _width && i < map.Width; j++)
+                for (int j = 0; j < _width && j < map.Width; j++)
                 {
-                    Buffer[i, j] = map.Tab[i+offsetX][j+offsetY];
+                    if(i + offsetX < 0 || i + offsetX > map.Height ||
+                       j + offsetY < 0 || j + offsetY > map.Width)
+                    {
+                        Buffer[i, j] = ' ';
+                    }
+                    else
+                    {
+                        Buffer[i, j] = map.Tab[i+offsetX][j+offsetY];
+                    }
                 }
             }
         }
@@ -156,6 +197,7 @@ namespace MultiXPing
 
         public void RenderBuffer()
         {
+            
             for (int i = 0; i < _height - 1; i++)
             {
                 for (int j = 0; j < _width - 1; j++)

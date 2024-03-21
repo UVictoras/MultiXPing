@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -21,7 +22,7 @@ namespace MultiXPing
         int _height = Constants.HEIGHT / 3;
 
         int _x = 10;
-        int _y = Constants.WIDTH* (2 / 3);
+        int _y = (int)(Constants.WIDTH * (2f / 3f));
 
 
         #endregion Field
@@ -81,6 +82,11 @@ namespace MultiXPing
         \* ----------------------------------------------------- */
         #region Methods
 
+        public Window(string content)
+        {
+            Content = content;
+        }
+
         public void DrawWindow()
         {
             if (_content == String.Empty)
@@ -88,7 +94,41 @@ namespace MultiXPing
                 return;
             }
 
-            for(int i = 0; i < _height; i++) { 
+            int count = 0;
+            bool isEndLine = false;
+
+            Console.SetCursorPosition(X, Y);
+
+            for (int i = 0; i < _width; i++)
+            {
+                Console.BackgroundColor = ConsoleColor.White;
+                Console.Write(" ");
+            }
+
+            Console.SetCursorPosition(X, Y);
+
+            for (int i = 0; i < _height; i++) { 
+                for(int j = 0; j < _width; j++)
+                {
+                    Console.BackgroundColor = ConsoleColor.Black;
+                    Console.Write("  ");
+                }
+                //Console.BackgroundColor = ConsoleColor.White;
+                Console.Write('\n');
+                Console.SetCursorPosition(X, Y + i);
+            }
+
+            Console.SetCursorPosition(X + 1, Y + 1);
+            int countLine = 1;
+
+            foreach (char c in Content)
+            {
+                Console.Write(c);
+                if(c == '\n')
+                {
+                    countLine++;
+                    Console.SetCursorPosition(X + 1, Y + countLine);
+                }
             }
         }
 

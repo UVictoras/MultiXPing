@@ -37,6 +37,7 @@ namespace MultiXPing
         Render _renderTarget;
 
         Player _player;
+        Window _mainWindow;
         
         #endregion Field
 
@@ -90,6 +91,10 @@ namespace MultiXPing
             get => _player;
             set => _player = value;
         }
+        internal Window MainWindow { 
+            get => _mainWindow; 
+            set => _mainWindow = value; 
+        }
 
         #endregion Property
 
@@ -124,7 +129,8 @@ namespace MultiXPing
             RenderTarget = new Render();
             RenderTarget.InitBuffer();
 
-            
+            //MainWindow = new Window("Pouet la chouette");
+
             InitPlayer();
 
         }
@@ -142,12 +148,8 @@ namespace MultiXPing
         {
             while (IsRunning)
             {
-                HandleInput();
                 Update();
-                while (Inputmanager.isAnyKeyPressed() == false)
-                {
-
-                }
+                HandleInput();
             }
         }
 
@@ -170,7 +172,6 @@ namespace MultiXPing
 
         public void UpdateMap()
         {
-            _player.Move(1,0);
             Render();
         }
 
@@ -192,14 +193,15 @@ namespace MultiXPing
         public void Render()
         {
             //Reset
-            Console.Clear();
+            //Console.Clear();
+            Console.SetCursorPosition(0, 0);
             RenderTarget.ResetBuffer();
 
             //Draw map
-            RenderTarget.DrawMap(Map);
+            RenderTarget.DrawMap(Map, Player);
 
             //Draw items
-            RenderTarget.Draw(Player);
+            RenderTarget.DrawPlayer(Player);
             
             //Render
             RenderTarget.RenderBuffer();
@@ -207,12 +209,29 @@ namespace MultiXPing
 
         public void HandleInput()
         {
-            //Inputmanager.Update(); // à modifier
+            Inputmanager.Update(); // à modifier
 
             if (Inputmanager.GetKeyState(ConsoleKey.D))
             {
-                Player.Move(1, 0);
+                Player.Move(4, 0);
             }
+            if (Inputmanager.GetKeyState(ConsoleKey.Q))
+            {
+                Player.Move(-4, 0);
+            } 
+            if (Inputmanager.GetKeyState(ConsoleKey.Z))
+            {
+                Player.Move(0, -4);
+            }
+            if (Inputmanager.GetKeyState(ConsoleKey.S))
+            {
+                Player.Move(0, 4);
+            }
+            if (Inputmanager.GetKeyState(ConsoleKey.T))
+            {
+                //MainWindow.DrawWindow();
+            }
+
         }
 
         #endregion Methods

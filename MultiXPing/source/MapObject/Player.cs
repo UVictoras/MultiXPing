@@ -58,9 +58,8 @@ namespace MultiXPing
         #region Methods
         public Player(int x, int y) : base()
         {
-            X = x;
-            Y = y;
-            Sprite = new PlayerSpirte().Sprite;
+            Position = new Vector2(x, y);
+            Sprite = new PlayerSprite();
         }
 
         public void Update(GameManager gm)

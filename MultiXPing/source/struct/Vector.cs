@@ -9,8 +9,8 @@ namespace MultiXPing
         \* ----------------------------------------------------- */
         #region Field
 
-        float       _x;          // X axis 
-        float       _y;          // Y axis
+        int _x;          // X axis 
+        int _y;          // Y axis
 
         #endregion Field
 
@@ -21,17 +21,28 @@ namespace MultiXPing
         \* ----------------------------------------------------- */
         #region Property
 
-        public float X
+        public int X
         {
-            get => _x; 
+            get => _x;
             set => _x = value;
         }
 
-        public float Y
+        public int Y
         {
-            get => _y; 
+            get => _y;
             set => _y = value;
         }
         #endregion Property
+
+        #region Constructeur
+
+        public Vector2(int x, int y) {
+            _x = x;
+            _y = y;
+        }
+        
+
+        #endregion Constructeur 
+
     }
 }

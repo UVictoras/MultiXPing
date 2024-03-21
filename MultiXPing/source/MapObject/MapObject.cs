@@ -7,7 +7,7 @@ using System.Threading.Tasks.Dataflow;
 
 namespace MultiXPing
 {
-    internal class MapObject
+    class MapObject
     {
         /* ----------------------------------------------------- *\
         |                                                         |
@@ -16,10 +16,8 @@ namespace MultiXPing
         \* ----------------------------------------------------- */
         #region Field
 
-        Vector2         _pos;           // Object position on the map
-        int             _x;
-        int             _y;
-        protected string  _sprite;
+        protected Vector2                   _pos;           // Object position on the map
+        protected PlayerSprite              _sprite = new PlayerSprite();
 
         #endregion Field
 
@@ -33,21 +31,10 @@ namespace MultiXPing
         public Vector2 Position
         {
             get => _pos; 
-            private set => _pos = value;
-        }
-        public int X
-        {
-            get => _x;
-            set => _x = value;
+            protected set => _pos = value;
         }
 
-        public int Y
-        {
-            get => _y;
-            set => _y = value;
-        }
-
-        public string Sprite
+        public PlayerSprite Sprite
         {
             get => _sprite;
             set => _sprite = value;
@@ -73,16 +60,10 @@ namespace MultiXPing
         public MapObject() 
         {
         }
-        public void Move(Vector2 dir)
-        {
-            _pos.X += dir.X;
-            _pos.Y += dir.Y;
-        }
-
         public void Move(int x, int y)
         {
-            X += x;
-            Y += y;
+            _pos.X += x;
+            _pos.Y += y;
         }
 
         #endregion Methods
