@@ -18,7 +18,7 @@ namespace MultiXPing
 
         private List<List<char>> _tab = new List<List<char>>();
 
-        string _text = "";
+        string _text = String.Empty;
 
         private int _width = 0;
         private int _height = 0;

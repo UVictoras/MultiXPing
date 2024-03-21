@@ -140,11 +140,15 @@ namespace MultiXPing
 
         public void GameLoop()
         {
-            //while (IsRunning)
-            //{
+            while (IsRunning)
+            {
                 HandleInput();
                 Update();
-            //}
+                while (Inputmanager.isAnyKeyPressed() == false)
+                {
+
+                }
+            }
         }
 
         public void Update()
@@ -201,17 +205,14 @@ namespace MultiXPing
             RenderTarget.RenderBuffer();
         }
 
-        
-
-        
-
         public void HandleInput()
         {
-            //Inputmanager.Update();
-            //if (Inputmanager.KeyState[ConsoleKey.Z])
-            //{
-            //    Player.Move(1,0);
-            //}
+            //Inputmanager.Update(); // à modifier
+
+            if (Inputmanager.GetKeyState(ConsoleKey.D))
+            {
+                Player.Move(1, 0);
+            }
         }
 
         #endregion Methods
