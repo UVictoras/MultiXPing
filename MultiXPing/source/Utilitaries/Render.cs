@@ -143,6 +143,11 @@ namespace MultiXPing
             }
         }
 
+        public void DrawFight(Maps map)
+        {
+            DrawMap(map);
+        }
+
         public void ResetBuffer()
         {
             for (int i = 0; i < _height; i++)

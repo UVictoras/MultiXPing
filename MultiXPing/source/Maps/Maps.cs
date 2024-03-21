@@ -74,13 +74,13 @@ namespace MultiXPing
         #region Methods
 
          
-        public Maps() {
-            InitMap();
+        public Maps(string filepath) {
+            InitMap(filepath);
         }
 
-        public void InitMap()
+        public void InitMap(string filepath)
         {
-            _text = File.ReadAllText(Constants.PROJECTPATH + "MultiXPing\\source\\Maps\\Map1.txt");
+            _text = File.ReadAllText(Constants.PROJECTPATH + filepath);
             _width = WidthMap();
             _height = HeightMap();
 

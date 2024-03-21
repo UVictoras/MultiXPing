@@ -33,6 +33,7 @@ namespace MultiXPing
         const int _height = Constants.HEIGHT;
         bool _isRunning;
         Maps _map;
+        Maps _fight;
         InputManager _inputmanager;
         Render _renderTarget;
 
@@ -90,6 +91,7 @@ namespace MultiXPing
             get => _player;
             set => _player = value;
         }
+        internal Maps Fight { get => _fight; set => _fight = value; }
 
         #endregion Property
 
@@ -113,10 +115,11 @@ namespace MultiXPing
 
         public GameManager()
         {
-            CurrentState = State.MAP;
+            CurrentState = State.FIGHT;
             IsRunning = true;
 
-            Map = new Maps();
+            Map = new Maps("MultiXPing\\source\\Maps\\Map1.txt");
+            Fight = new Maps("MultiXPing\\source\\Maps\\Fight.txt");
 
             Inputmanager = new InputManager();
             //Inputmanager.Initialize();
@@ -146,7 +149,6 @@ namespace MultiXPing
                 Update();
                 while (Inputmanager.isAnyKeyPressed() == false)
                 {
-
                 }
             }
         }
@@ -161,6 +163,7 @@ namespace MultiXPing
                     UpdateMap();
                     break;
                 case State.FIGHT:
+                    UpdateFight();
                     break;
                 case State.PAUSE:
                     break;
@@ -171,12 +174,30 @@ namespace MultiXPing
         public void UpdateMap()
         {
             _player.Move(1,0);
+
+            //Reset
+            Console.Clear();
+            RenderTarget.ResetBuffer();
+
+            //Draw map
+            RenderTarget.DrawMap(Map);
+
+            //Draw items
+            RenderTarget.Draw(Player);
+
             Render();
         }
 
         public void UpdateFight()
         {
+            //Reset
+            Console.Clear();
+            RenderTarget.ResetBuffer();
 
+            //Draw map
+            RenderTarget.DrawFight(Fight);
+
+            Render();
         }
 
         public void UpdatePause()
@@ -191,15 +212,7 @@ namespace MultiXPing
 
         public void Render()
         {
-            //Reset
-            Console.Clear();
-            RenderTarget.ResetBuffer();
-
-            //Draw map
-            RenderTarget.DrawMap(Map);
-
-            //Draw items
-            RenderTarget.Draw(Player);
+           
             
             //Render
             RenderTarget.RenderBuffer();

@@ -10,7 +10,7 @@ namespace MultiXPing
     {
         public const string PROJECTPATH = "..\\..\\..\\..\\";
         public const int WIDTH = 100;
-        public const int HEIGHT = 50;
+        public const int HEIGHT = 60;
 
 
     }
@@ -32,11 +32,11 @@ namespace MultiXPing
             GameManager gameManager = new GameManager();
             gameManager.GameLoop();
 
-            Hunter Romain = new Hunter();
-            Romain.InitializeHunter("Romain", Stats.Support, Stats.SupportMultiplicator);
-            Console.WriteLine("HP: "+Romain.Health+" Mana: "+ Romain.Mana+" Atk: "+Romain.PhysicalDamage+" Def: "+Romain.PhysicalDefense+" MAtk: "+Romain.MagicalDamage+" MDef: "+Romain.MagicalDefense+" Speed: "+Romain.Speed);
-            Romain.LevelUp();
-            Console.WriteLine("HP: " + Romain.Health + " Mana: " + Romain.Mana + " Atk: " + Romain.PhysicalDamage + " Def: " + Romain.PhysicalDefense + " MAtk: " + Romain.MagicalDamage + " MDef: " + Romain.MagicalDefense + " Speed: " + Romain.Speed);
+            //Hunter Romain = new Hunter();
+            //Romain.InitializeHunter("Romain", Stats.Support, Stats.SupportMultiplicator);
+            //Console.WriteLine("HP: "+Romain.Health+" Mana: "+ Romain.Mana+" Atk: "+Romain.PhysicalDamage+" Def: "+Romain.PhysicalDefense+" MAtk: "+Romain.MagicalDamage+" MDef: "+Romain.MagicalDefense+" Speed: "+Romain.Speed);
+            //Romain.LevelUp();
+            //Console.WriteLine("HP: " + Romain.Health + " Mana: " + Romain.Mana + " Atk: " + Romain.PhysicalDamage + " Def: " + Romain.PhysicalDefense + " MAtk: " + Romain.MagicalDamage + " MDef: " + Romain.MagicalDefense + " Speed: " + Romain.Speed);
 
             //Console.WriteLine("ENTER".Pastel(Color.FromArgb(255, 0, 0)));
 
