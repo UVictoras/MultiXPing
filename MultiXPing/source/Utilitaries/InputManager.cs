@@ -15,7 +15,9 @@ namespace MultiXPing
         \* ----------------------------------------------------- */
         #region Field
 
-        Dictionary<ConsoleKeyInfo, bool> _keyState = new Dictionary<ConsoleKeyInfo, bool>();
+        Dictionary<string, bool>     _keysState     = new Dictionary<string, bool>();
+
+        HashSet<ConsoleKey>          _pressedKeys   = new HashSet<ConsoleKey>();
 
         #endregion Field
 
@@ -26,10 +28,10 @@ namespace MultiXPing
         \* ----------------------------------------------------- */
         #region Property
 
-        public Dictionary<ConsoleKeyInfo, bool> KeyState 
+        public Dictionary<string, bool> KeysState 
         { 
-            get => _keyState; 
-            private set => _keyState = value;
+            get => _keysState; 
+            private set => _keysState = value;
         }
 
         #endregion Property
@@ -39,6 +41,7 @@ namespace MultiXPing
         |                          Event                          |
         |                                                         |
         \* ----------------------------------------------------- */
+
         #region Event
 
         #endregion Event
@@ -50,21 +53,24 @@ namespace MultiXPing
         \* ----------------------------------------------------- */
         #region Methods
 
-        public void Initialize()
-        {
-            foreach (ConsoleKeyInfo key in Enum.GetValues(typeof(ConsoleKeyInfo))) 
-            {
-                KeyState.Add(key, false);
-            }
-        }
-
         public void Update()
         {
-            foreach (ConsoleKeyInfo key in KeyState.Keys.ToList())
+            _pressedKeys.Clear();
+
+            do
             {
-                KeyState[key] = (Console.ReadKey().Key == key.Key);
-            }
+                ConsoleKeyInfo keyInfo = Console.ReadKey(intercept: true);
+                _pressedKeys.Add(keyInfo.Key);
+            } while (Console.KeyAvailable);
         }
+
+        public bool GetKeyState(ConsoleKey key)
+        {
+            return _pressedKeys.Contains(key);
+        }
+
+        public bool isAnyKeyPressed() {  return _pressedKeys.Count() > 0; }
+
         #endregion Methods
     }
 }

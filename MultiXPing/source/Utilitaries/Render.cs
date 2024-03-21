@@ -1,24 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Linq;
-using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using System.Transactions;
 
 namespace MultiXPing
 {
-
-    public enum State
-    {
-        MENU = 0,
-        MAP = 1,
-        FIGHT = 2,
-        PAUSE = 3,
-    };
-
-    class GameManager
+    class Render
     {
         /* ----------------------------------------------------- *\
         |                                                         |
@@ -27,16 +16,13 @@ namespace MultiXPing
         \* ----------------------------------------------------- */
         #region Field
 
-        State _currentState;
-
         const int _width = Constants.WIDTH;
         const int _height = Constants.HEIGHT;
-        bool _isRunning;
-        Map _map;
 
-        char[ , ] _buffer = new char[_height,_width];
+        char[,] _buffer = new char[_height, _width];
 
         public Dictionary<char, ConsoleColor> _colorDic = new Dictionary<char, ConsoleColor>();
+
 
         #endregion Field
 
@@ -46,12 +32,6 @@ namespace MultiXPing
         |                                                         |
         \* ----------------------------------------------------- */
         #region Property
-
-        public State CurrentState 
-        {
-            get => _currentState;
-            private set => _currentState = value;
-        }
         public int Width
         {
             get => _width;
@@ -60,28 +40,15 @@ namespace MultiXPing
         {
             get => _height;
         }
-        
-        public bool IsRunning
-        {
-            get => _isRunning;
-            private set => _isRunning = value;
-        }
-
-        public Map Map
-        {
-            get => _map;
-            set => _map = value;
-        }
 
         public char[,] Buffer
         {
             get => _buffer;
             set => _buffer = value;
         }
-
         public Dictionary<char, ConsoleColor> ColorDic
         {
-            get => _colorDic; 
+            get => _colorDic;
             set => _colorDic = value;
         }
 
@@ -103,20 +70,24 @@ namespace MultiXPing
         \* ----------------------------------------------------- */
         #region Methods
 
-        public GameManager()
+        public Render()
         {
-            CurrentState = State.MAP;
-            IsRunning = true;
-            Map = new Map();
-            InitDico();
-            InitBuffer();
-
+            
         }
-
         public void InitDico()
         {
             ColorDic.Add('C', ConsoleColor.Cyan);
             ColorDic.Add('_', ConsoleColor.DarkGreen);
+            ColorDic.Add('B', ConsoleColor.DarkRed);
+            ColorDic.Add('F', ConsoleColor.Green);
+            ColorDic.Add('P', ConsoleColor.DarkMagenta);
+            ColorDic.Add('M', ConsoleColor.Magenta);
+            ColorDic.Add('O', ConsoleColor.DarkBlue);
+            ColorDic.Add('U', ConsoleColor.Blue);
+            ColorDic.Add('G', ConsoleColor.DarkGray);
+            ColorDic.Add('D', ConsoleColor.Black);
+            ColorDic.Add('S', ConsoleColor.Yellow);
+
         }
 
         public void InitBuffer()
@@ -128,64 +99,73 @@ namespace MultiXPing
                     Buffer[i, j] = ' ';
                 }
             }
+
+            InitDico();
         }
 
-        public void GameLoop()
+        public void Draw(MapObject entity)
         {
-            
-            Update();
-            
-        }
-
-        public void Update()
-        {
-            switch (_currentState)
+            int x = entity.X;
+            int y = entity.Y;
+            int countX = x;
+            if (x < 0 || x > Constants.WIDTH &&
+               y < 0 || y > Constants.HEIGHT) return;
+            foreach(char c in entity.Sprite) 
             {
-                case State.MENU:
-                    break;
-                case State.MAP:
-                    UpdateMap();
-                    break;
-                case State.FIGHT:
-                    break;
-                case State.PAUSE:
-                    break;
+                if(c == '\n')
+                {
+                    y++;
+                    countX = x;
+                }
+                else if (c == ' '){
+                    Buffer[y, countX] = Buffer[y, countX];
+                    countX++;
+                }
+                else
+                {
+                    Buffer[y, countX] = c;
+                    countX++;
+                }
             }
-
         }
 
-        public void UpdateMap()
+        public void DrawMap(Maps map)
         {
-            Render();
+            int offsetX = 0;
+            int offsetY = 0;
+
+            for (int i = 0; i < _height && i < map.Height; i++)
+            {
+                for (int j = 0; j < _width && i < map.Width; j++)
+                {
+                    Buffer[i, j] = map.Tab[i+offsetX][j+offsetY];
+                }
+            }
         }
 
-        public void UpdateFight()
+        public void ResetBuffer()
         {
-
-        }
-
-        public void UpdatePause()
-        { 
-        
-        }
-
-        public void UpdateMenu()
-        {
-
+            for (int i = 0; i < _height; i++)
+            {
+                for (int j = 0; j < _width; j++)
+                {
+                    Buffer[i, j] = ' ';
+                }
+            }
         }
 
         public void RenderBuffer()
         {
-            for (int i = 0; i < (Map.Tab.Count) - 1 && i < _height; i++)
+            for (int i = 0; i < _height - 1; i++)
             {
-                for (int j = 0; j < Map.Tab[i].Count && j < _width; j++)
+                for (int j = 0; j < _width - 1; j++)
                 {
-                    if (ColorDic.ContainsKey(Map.Tab[i][j]) == true)    
+                    if (ColorDic.ContainsKey(Buffer[i,j]) == true)
                     {
-                    Console.BackgroundColor = ColorDic[Map.Tab[i][j]];
-                    Console.Write(Buffer[i, j]);
-                    Console.ResetColor();
-
+                        Console.ForegroundColor = ConsoleColor.White;
+                        Console.BackgroundColor = ColorDic[Buffer[i, j]];
+                        Console.Write("  ");
+                        Console.ResetColor();
                     }
                     else
                     {
@@ -195,19 +175,9 @@ namespace MultiXPing
                 Console.BackgroundColor = ConsoleColor.Black;
                 Console.Write("\n");
             }
-            
-        }
 
-        public void Render()
-        {
-            Console.Clear();
-            RenderBuffer();
-            
-            
         }
 
         #endregion Methods
     }
 }
-
-

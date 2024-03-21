@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace MultiXPing
 {
-    struct Map
-        {
+    class Window
+    {
         /* ----------------------------------------------------- *\
         |                                                         |
         |                          Field                          |
@@ -15,7 +15,14 @@ namespace MultiXPing
         \* ----------------------------------------------------- */
         #region Field
 
-        private List<List<char>> _tab = new List<List<char>>();
+        string _content = String.Empty;
+
+        int _width = Constants.WIDTH/2;
+        int _height = Constants.HEIGHT / 3;
+
+        int _x = 10;
+        int _y = Constants.WIDTH* (2 / 3);
+
 
         #endregion Field
 
@@ -26,10 +33,34 @@ namespace MultiXPing
         \* ----------------------------------------------------- */
         #region Property
 
-        public dynamic Tab
+        string Content
         {
-            get => _tab; 
-            set => _tab = value;
+            get => _content;
+            set => _content = value;
+        }
+
+        public int Width
+        {
+            get => _width;
+            set => _width = value;
+        }
+
+        public int Height 
+        {
+            get => _height;
+            set => _height = value;
+        }
+
+        public int X
+        {
+            get => _x; 
+            set => _x = value; 
+        }
+
+        public int Y
+        {
+            get => _y; 
+            set => _y = value;
         }
 
         #endregion Property
@@ -50,56 +81,17 @@ namespace MultiXPing
         \* ----------------------------------------------------- */
         #region Methods
 
-         
-        public Map() {
-            InitMap();
-        }
-
-        public void InitMap()
+        public void DrawWindow()
         {
-            string text = File.ReadAllText(Constants.PROJECTPATH + "MultiXPing\\source\\Maps\\Map1.txt");
-
-            int count = 0;
-            Tab.Add(new List<char>());
-            foreach (char c in text)
+            if (_content == String.Empty)
             {
-                if (c == '\r')
-                {
-                    Tab.Add(new List<char>());
-                    count ++;
-                }
-                else if (c == '\n')
-                {
-                    
-                }
-                else
-                {
-                    Tab[count].Add(c);
-                }
+                return;
             }
-        }
 
-        public int WidthMap(string text)
-        {
-            return text.IndexOf("\n");
-        }
-
-        public int HeightMap(string text)
-        {
-            int count = 0;
-            foreach (char c in text)
-            {
-                if(c == '\n')
-                {
-                    count++;
-                }
+            for(int i = 0; i < _height; i++) { 
             }
-            return count;
         }
 
         #endregion Methods
-        
     }
-
 }
-

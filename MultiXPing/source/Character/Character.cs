@@ -12,23 +12,23 @@ namespace MultiXPing
         \* ----------------------------------------------------- */
         #region Field
 
-        int _maximumHealth;     // Maximum amount of health a character can have
-        int _health;            // Current amount of health of the character
-        float _physicalDamage;  // Amount of physical damage inflicted by the character
-        float _physicalDefense; // Resistance of the character to physical damages
-        float _magicalDamage;  // Amount of magical damage inflicted by the character
-        float _magicalDefense; // Resistance of the character to magical damages
-        float _speed;             // Attacking speed of the character
-        float _accuracy;          // Precision of the character's attack
-        int _maximumMana;       // Maximum amount of mana a character can have
-        int _mana;              // Current amount of mana of the character
-        int _experience;        // Current experience obtained by the character
-        int _level;             // Current level of progression of the character
-        bool _isAlive;          // Current state of the character, true if alive, false if dead
-        Attack[] _attacks;      // List of the learned attacks
-        Dictionary<int,Attack> _possibelAttacks;  // List of the attacks the character can learn
+        int                     _maximumHealth;         // Maximum amount of health a character can have
+        int                     _health;                // Current amount of health of the character
+        float                   _physicalDamage;        // Amount of physical damage inflicted by the character
+        float                   _physicalDefense;       // Resistance of the character to physical damages
+        float                   _magicalDamage;         // Amount of magical damage inflicted by the character
+        float                   _magicalDefense;        // Resistance of the character to magical damages
+        float                   _speed;                 // Attacking speed of the character
+        float                   _accuracy;              // Precision of the character's attack
+        int                     _maximumMana;           // Maximum amount of mana a character can have
+        int                     _mana;                  // Current amount of mana of the character
+        int                     _experience;            // Current experience obtained by the character
+        int                     _level;                 // Current level of progression of the character
+        bool                    _isAlive;               // Current state of the character, true if alive, false if dead
+        Attack[]                _attacks;               // List of the learned attacks
+        Dictionary<int,Attack>  _possibelAttacks;       // List of the attacks the character can learn
 
-        string _name;              // Name of the character
+        string                  _name;                  // Name of the character
 
         #endregion Field
 

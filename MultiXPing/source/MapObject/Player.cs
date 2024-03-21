@@ -56,8 +56,16 @@ namespace MultiXPing
         |                                                         |
         \* ----------------------------------------------------- */
         #region Methods
-        public Player() : base()
+        public Player(int x, int y) : base()
         {
+            X = x;
+            Y = y;
+            Sprite = new PlayerSpirte().Sprite;
+        }
+
+        public void Update(GameManager gm)
+        {
+
         }
 
         #endregion Methods

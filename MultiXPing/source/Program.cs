@@ -1,5 +1,8 @@
 ﻿using MultiXPing.source.Utilitaries;
 
+using Pastel;
+using Color = System.Drawing.Color;
+
 namespace MultiXPing
 {
 
@@ -7,7 +10,7 @@ namespace MultiXPing
     {
         public const string PROJECTPATH = "..\\..\\..\\..\\";
         public const int WIDTH = 200;
-        public const int HEIGHT = 100;
+        public const int HEIGHT = 50;
 
 
     }
@@ -35,13 +38,14 @@ namespace MultiXPing
             Romain.LevelUp();
             Console.WriteLine("HP: " + Romain.Health + " Mana: " + Romain.Mana + " Atk: " + Romain.PhysicalDamage + " Def: " + Romain.PhysicalDefense + " MAtk: " + Romain.MagicalDamage + " MDef: " + Romain.MagicalDefense + " Speed: " + Romain.Speed);
 
+            //Console.WriteLine("ENTER".Pastel(Color.FromArgb(255, 0, 0)));
 
         }
 
         public static void InitializeConsole()
         {
 
-            Console.ForegroundColor = ConsoleColor.White;
+            Console.ForegroundColor = ConsoleColor.Black;
             Console.Title = "MultiXPing";
 
             Console.SetWindowSize(Console.LargestWindowWidth, Console.LargestWindowHeight);
