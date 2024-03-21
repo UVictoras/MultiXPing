@@ -164,7 +164,7 @@ namespace MultiXPing
                     {
                         Console.ForegroundColor = ConsoleColor.White;
                         Console.BackgroundColor = ColorDic[Buffer[i, j]];
-                        Console.Write(' ');
+                        Console.Write("  ");
                         Console.ResetColor();
                     }
                     else
