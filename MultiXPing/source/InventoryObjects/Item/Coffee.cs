@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MultiXPing.source.Item
+namespace MultiXPing
 {
-    class Egg : GameItem
+    class Coffee : GameItem
     {
         /* ----------------------------------------------------- *\
         |                                                         |
@@ -41,16 +41,16 @@ namespace MultiXPing.source.Item
         |                                                         |
         \* ----------------------------------------------------- */
         #region Methods
-        public Egg()
+        public Coffee()
         {
-            Id = 3;
-            Description = "Cet oeuf augmente votre defence de 5% durant ce combat";
+            Id = 5;
+            Description = "Ce café augmente votre vitesse de 5% durant ce combat";
             Boost = 5.0f;
             NumberUse = 1;
         }
         public override void Use(ref Hunter hunter)
         {
-            hunter.BoosterDefense(Boost);
+            hunter.BoosterSpeed(Boost);
             NumberUse -= 1;
         }
         #endregion Methods

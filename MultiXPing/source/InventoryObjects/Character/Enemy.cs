@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+ 
 
-namespace MultiXPing.source.Item
+public struct GameItem { }
+
+namespace MultiXPing
 {
-    class Feather : GameItem
+    class Enemy : Character
     {
         /* ----------------------------------------------------- *\
         |                                                         |
@@ -14,6 +12,10 @@ namespace MultiXPing.source.Item
         |                                                         |
         \* ----------------------------------------------------- */
         #region Field
+
+        List<GameItem> _loot = new();              // Item dropped by the enemy
+        int _droppedExperience;          // Amount of experience the enemy gives
+
         #endregion Field
 
         /* ----------------------------------------------------- *\
@@ -22,6 +24,19 @@ namespace MultiXPing.source.Item
         |                                                         |
         \* ----------------------------------------------------- */
         #region Property
+
+        public List<GameItem> Loot
+        {
+            get => _loot;
+            private set => _loot = value;
+        }
+
+        public int DroppedExperience
+        {
+            get => _droppedExperience;
+            private set => _droppedExperience = value;
+        }
+
         #endregion Property
 
         /* ----------------------------------------------------- *\
@@ -31,6 +46,9 @@ namespace MultiXPing.source.Item
         \* ----------------------------------------------------- */
         #region Event
 
+        public override event Action OnDamage;
+        public override event Action OnDeath;
+
         #endregion Event
 
         /* ----------------------------------------------------- *\
@@ -39,17 +57,29 @@ namespace MultiXPing.source.Item
         |                                                         |
         \* ----------------------------------------------------- */
         #region Methods
-        public Feather()
+        public Enemy() : base()
         {
-            Id = 6;
-            Description = "Cette plume permet de réanimer un allié avec la moitier de ses PV";
-            NumberUse = 1;
         }
-        public override void Use(ref Hunter hunter)
+
+        public void DropItems(ref Player player)
         {
-            hunter.Reanimate();
-            NumberUse -= 1;
+            for (int i = 0; i < _loot.Count; i++)
+            {
+                player.Inventory.ListInventory.Add(_loot[i]);
+            }
         }
+
+        public void Initialize(string name, string element)
+        {
+            _droppedExperience = 0;
+            InitializeCharacter(name);
+        }
+
+        public override void Death()
+        {
+            OnDeath?.Invoke();
+        }
+
         #endregion Methods
     }
 }

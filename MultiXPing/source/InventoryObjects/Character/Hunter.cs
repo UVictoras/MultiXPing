@@ -1,4 +1,3 @@
-using MultiXPing;
 using System.Security.Cryptography.X509Certificates;
 
 namespace MultiXPing
@@ -42,7 +41,7 @@ namespace MultiXPing
         }
         public float DamageBoost
         {
-            get=> _damageBoost;
+            get => _damageBoost;
             private set => _damageBoost = value;
         }
         public float DefenseBoost
@@ -52,7 +51,7 @@ namespace MultiXPing
         }
         public float SpeedBoost
         {
-            get => _speedBoost; 
+            get => _speedBoost;
             private set => _speedBoost = value;
         }
         public float AccuracyBoost
@@ -109,7 +108,8 @@ namespace MultiXPing
         public override void Death()
         {
             base.Death();
-            if(IsAlive) {
+            if (IsAlive)
+            {
                 IsAlive = false;
                 Health = 0;
             }
@@ -117,7 +117,7 @@ namespace MultiXPing
 
         public void Reanimate()
         {
-            if(IsAlive == false)
+            if (IsAlive == false)
             {
                 IsAlive = true;
                 Health = MaximumHealth / 2;
@@ -129,7 +129,8 @@ namespace MultiXPing
             DamageBoost *= damage;
         }
 
-        public void BoosterDefense(float defense) {
+        public void BoosterDefense(float defense)
+        {
             DefenseBoost *= defense;
         }
         public void BoosterSpeed(float speed)
@@ -152,17 +153,18 @@ namespace MultiXPing
         public void GainExp(int experience)
         {
             Experience += experience;
-            Console.WriteLine("Tu as: "+Experience+" exp");
-            if (Experience >= ExperienceRequired) { 
+            Console.WriteLine("Tu as: " + Experience + " exp");
+            if (Experience >= ExperienceRequired)
+            {
                 LevelUp();
             }
         }
-        
+
         public void LevelUp()
         {
             Experience = Experience - ExperienceRequired;
             Level += 1;
-            ExperienceRequired = (int)Math.Round((35.0 / 36.0) * Math.Pow(Level, 2) + (125.0 / 12.0) * Level - (25.0 / 18.0)); // The function f(x)= 35/36 x² + 125/12 x - 25/18, where x is the level, calculate the new amount of exp required
+            ExperienceRequired = (int)Math.Round(35.0 / 36.0 * Math.Pow(Level, 2) + 125.0 / 12.0 * Level - 25.0 / 18.0); // The function f(x)= 35/36 x² + 125/12 x - 25/18, where x is the level, calculate the new amount of exp required
 
             // Increase Statistics
             MaximumHealth += (int)Math.Round(CharacterMultiplicator[0] * Math.Log(Level));
@@ -182,8 +184,8 @@ namespace MultiXPing
             //}
 
             Console.WriteLine("Bravo tu est niveau" + Level);
-            Console.WriteLine("Bravo tu a lvlUp, il te faut "+ExperienceRequired+" exp pour lvlUp");
-            Console.WriteLine("Tu as "+ Experience+" experience");
+            Console.WriteLine("Bravo tu a lvlUp, il te faut " + ExperienceRequired + " exp pour lvlUp");
+            Console.WriteLine("Tu as " + Experience + " experience");
         }
         #endregion Methods
     }

@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading.Tasks.Dataflow;
 
 namespace MultiXPing
 {
-    internal class Chest : Interactive
+    class MapObject
     {
         /* ----------------------------------------------------- *\
         |                                                         |
@@ -15,7 +16,8 @@ namespace MultiXPing
         \* ----------------------------------------------------- */
         #region Field
 
-        List<GameItem>      _content;           // Content of the chest
+        protected Vector2 _pos;           // Object position on the map
+        protected PlayerSprite _sprite = new PlayerSprite();
 
         #endregion Field
 
@@ -25,10 +27,17 @@ namespace MultiXPing
         |                                                         |
         \* ----------------------------------------------------- */
         #region Property
-        public List<GameItem> Content 
-        { 
-            get => _content; 
-            private set => _content = value; 
+
+        public Vector2 Position
+        {
+            get => _pos;
+            protected set => _pos = value;
+        }
+
+        public PlayerSprite Sprite
+        {
+            get => _sprite;
+            set => _sprite = value;
         }
 
         #endregion Property
@@ -48,17 +57,13 @@ namespace MultiXPing
         |                                                         |
         \* ----------------------------------------------------- */
         #region Methods
-
-        public Chest(string message) : base(message) { }
-
-        public override void Interact(Player player)
+        public MapObject()
         {
-            base.Interact(player);
-
-            foreach (var item in _content) 
-            { 
-                player.Inventory.Add(item);
-            }
+        }
+        public void Move(int x, int y)
+        {
+            _pos.X += x;
+            _pos.Y += y;
         }
 
         #endregion Methods

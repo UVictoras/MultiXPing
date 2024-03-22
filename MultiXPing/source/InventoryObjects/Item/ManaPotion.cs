@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MultiXPing
 {
-    internal class Sign : Interactive
+    class ManaPotion : GameItem
     {
         /* ----------------------------------------------------- *\
         |                                                         |
@@ -14,9 +14,7 @@ namespace MultiXPing
         |                                                         |
         \* ----------------------------------------------------- */
         #region Field
-
-        string      _indication;                // Specific text printed on the sign itself
-
+        int _mana;          // Amount of mana the potion give to the character
         #endregion Field
 
         /* ----------------------------------------------------- *\
@@ -25,12 +23,7 @@ namespace MultiXPing
         |                                                         |
         \* ----------------------------------------------------- */
         #region Property
-        public string Indication 
-        { 
-            get => _indication; 
-            private set => _indication = value; 
-        }
-
+        public int Mana { get => _mana; private set => _mana = value; }
         #endregion Property
 
         /* ----------------------------------------------------- *\
@@ -48,14 +41,17 @@ namespace MultiXPing
         |                                                         |
         \* ----------------------------------------------------- */
         #region Methods
-
-        public Sign(string message) : base(message) { }
-
-        public override void Interact(Player player)
+        public ManaPotion()
         {
-            base.Interact(player);
-
-            Console.WriteLine(Indication);
+            Id = 1;
+            Description = "Cette potion vous rend 20 PM";
+            Mana = 20;
+            NumberUse = 1;
+        }
+        public override void Use(ref Hunter hunter)
+        {
+            hunter.ManaRegeneration(Mana);
+            NumberUse -= 1;
         }
         #endregion Methods
     }

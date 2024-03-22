@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MultiXPing.source.Item
+namespace MultiXPing
 {
-    class Meat : GameItem
+    class Egg : GameItem
     {
         /* ----------------------------------------------------- *\
         |                                                         |
@@ -15,6 +15,7 @@ namespace MultiXPing.source.Item
         \* ----------------------------------------------------- */
         #region Field
         float _boost;       // Percentage of boost given by the item
+        
         #endregion Field
 
         /* ----------------------------------------------------- *\
@@ -41,16 +42,17 @@ namespace MultiXPing.source.Item
         |                                                         |
         \* ----------------------------------------------------- */
         #region Methods
-        public Meat()
+        public Egg()
         {
-            Id = 2;
-            Description = "Ce morceau de viande augmente vos degat de 5% durant ce combat";
+            Id = 3;
+            Description = "Cet oeuf augmente votre defence de 5% durant ce combat";
             Boost = 5.0f;
             NumberUse = 1;
+            Name = "Egg";
         }
         public override void Use(ref Hunter hunter)
         {
-            hunter.BoosterDamage(Boost);
+            hunter.BoosterDefense(Boost);
             NumberUse -= 1;
         }
         #endregion Methods

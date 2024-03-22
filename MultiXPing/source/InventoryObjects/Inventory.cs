@@ -4,17 +4,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MultiXPing.source.Item
+namespace MultiXPing
 {
-    class Glasses : GameItem
+    class Inventory : NodeObject
     {
+
         /* ----------------------------------------------------- *\
         |                                                         |
         |                          Field                          |
         |                                                         |
         \* ----------------------------------------------------- */
         #region Field
-        float _boost;       // Percentage of boost given by the item
+
+        List<GameItem> _listInventory = new List<GameItem>();// List of hunters the player has in its team
+
         #endregion Field
 
         /* ----------------------------------------------------- *\
@@ -23,7 +26,25 @@ namespace MultiXPing.source.Item
         |                                                         |
         \* ----------------------------------------------------- */
         #region Property
-        public float Boost { get => _boost; private set => _boost = value; }
+
+        public List<GameItem> ListInventory
+        {
+            get => _listInventory;
+            private set => _listInventory = value;
+        }
+
+        public GameItem this[int index]
+        {
+            get
+            {
+                return _listInventory[index];
+            }
+            set
+            {
+                _listInventory[index] = value;
+            }
+        }
+
         #endregion Property
 
         /* ----------------------------------------------------- *\
@@ -41,18 +62,19 @@ namespace MultiXPing.source.Item
         |                                                         |
         \* ----------------------------------------------------- */
         #region Methods
-        public Glasses()
+
+        public Inventory()
         {
-            Id = 4;
-            Description = "Cette pair de lunette augmente votre précision de 5% durant ce combat";
-            Boost = 5.0f;
-            NumberUse = 1;
+            Name = "inventory";
         }
-        public override void Use(ref Hunter hunter)
+
+        public void AddItem(GameItem obj)
         {
-            hunter.BoosterAccuracy(Boost);
-            NumberUse -= 1;
+            _listInventory.Add(obj);
+            NodeRef.InsertChild(obj);
         }
+
         #endregion Methods
+
     }
 }

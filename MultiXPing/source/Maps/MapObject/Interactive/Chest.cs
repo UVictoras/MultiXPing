@@ -1,8 +1,12 @@
-public struct GameItem { }
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace MultiXPing
 {
-    class Enemy : Character
+    internal class Chest : Interactive
     {
         /* ----------------------------------------------------- *\
         |                                                         |
@@ -11,8 +15,7 @@ namespace MultiXPing
         \* ----------------------------------------------------- */
         #region Field
 
-        List<GameItem> _loot = new();              // Item dropped by the enemy
-        int _droppedExperience;          // Amount of experience the enemy gives
+        List<GameItem> _content;           // Content of the chest
 
         #endregion Field
 
@@ -22,17 +25,10 @@ namespace MultiXPing
         |                                                         |
         \* ----------------------------------------------------- */
         #region Property
-
-        public List<GameItem> Loot
+        public List<GameItem> Content
         {
-            get => _loot;
-            private set => _loot = value;
-        }
-
-        public int DroppedExperience
-        {
-            get => _droppedExperience;
-            private set => _droppedExperience = value;
+            get => _content;
+            private set => _content = value;
         }
 
         #endregion Property
@@ -44,9 +40,6 @@ namespace MultiXPing
         \* ----------------------------------------------------- */
         #region Event
 
-        public override event Action OnDamage;
-        public override event Action OnDeath;
-
         #endregion Event
 
         /* ----------------------------------------------------- *\
@@ -55,27 +48,17 @@ namespace MultiXPing
         |                                                         |
         \* ----------------------------------------------------- */
         #region Methods
-        public Enemy() : base()
-        {
-        }
 
-        public void DropItems(ref Player player)
+        public Chest(string message) : base(message) { }
+
+        public override void Interact(Player player)
         {
-            for (int i = 0; i < _loot.Count; i++)
+            base.Interact(player);
+
+            foreach (var item in _content)
             {
-                player.Inventory.Add(_loot[i]);
+                player.Inventory.ListInventory.Add(item);
             }
-        }
-
-        public void Initialize(string name, string element)
-        {
-            _droppedExperience = 0;
-            base.InitializeCharacter(name);
-        }
-
-        public override void Death()
-        {
-            OnDeath?.Invoke();
         }
 
         #endregion Methods

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MultiXPing.source.Item
+namespace MultiXPing
 {
-    class HealingPotion: GameItem
+    class Glasses : GameItem
     {
         /* ----------------------------------------------------- *\
         |                                                         |
@@ -14,7 +14,7 @@ namespace MultiXPing.source.Item
         |                                                         |
         \* ----------------------------------------------------- */
         #region Field
-        int _heal;          // Amount of HP the potion give to the character
+        float _boost;       // Percentage of boost given by the item
         #endregion Field
 
         /* ----------------------------------------------------- *\
@@ -23,7 +23,7 @@ namespace MultiXPing.source.Item
         |                                                         |
         \* ----------------------------------------------------- */
         #region Property
-        public int Heal { get => _heal; private set => _heal = value; }  
+        public float Boost { get => _boost; private set => _boost = value; }
         #endregion Property
 
         /* ----------------------------------------------------- *\
@@ -41,16 +41,16 @@ namespace MultiXPing.source.Item
         |                                                         |
         \* ----------------------------------------------------- */
         #region Methods
-        public HealingPotion()
+        public Glasses()
         {
-            Id = 0;
-            Description = "Cette potion soigne 20 PV";
-            Heal = 20;
+            Id = 4;
+            Description = "Cette pair de lunette augmente votre précision de 5% durant ce combat";
+            Boost = 5.0f;
             NumberUse = 1;
         }
         public override void Use(ref Hunter hunter)
         {
-            hunter.Healing(Heal);
+            hunter.BoosterAccuracy(Boost);
             NumberUse -= 1;
         }
         #endregion Methods

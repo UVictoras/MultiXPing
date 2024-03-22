@@ -3,17 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
-namespace MultiXPing
-{
-    class Obstacle : MapObject 
+namespace MultiXPing 
+{ 
+    abstract class GameItem : NodeObject
     {
         /* ----------------------------------------------------- *\
         |                                                         |
         |                          Field                          |
-        |                                                         |
+        |                                                         | 
         \* ----------------------------------------------------- */
         #region Field
+        int _id;
+        string _description;
+        int _numberUse;
 
         #endregion Field
 
@@ -23,17 +27,10 @@ namespace MultiXPing
         |                                                         |
         \* ----------------------------------------------------- */
         #region Property
-
+        public int Id { get => _id; set => _id = value; }
+        public string Description { get => _description; set => _description = value; }
+        public int NumberUse { get => _numberUse; set => _numberUse = value; }
         #endregion Property
-
-        /* ----------------------------------------------------- *\
-        |                                                         |
-        |                          Event                          |
-        |                                                         |
-        \* ----------------------------------------------------- */
-        #region Event
-
-        #endregion Event
 
         /* ----------------------------------------------------- *\
         |                                                         |
@@ -41,11 +38,7 @@ namespace MultiXPing
         |                                                         |
         \* ----------------------------------------------------- */
         #region Methods
-
-        public Obstacle() : base()
-        {
-        }
-
+        public abstract void Use(ref Hunter hunter);
         #endregion Methods
     }
 }

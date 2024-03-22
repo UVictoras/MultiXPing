@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using MultiXPing;
 
 namespace MultiXPing
 {
-    struct Maps
-        {
+    class MenuWindow : Window
+    {
         /* ----------------------------------------------------- *\
         |                                                         |
         |                          Field                          |
@@ -16,12 +16,10 @@ namespace MultiXPing
         \* ----------------------------------------------------- */
         #region Field
 
-        private List<List<char>> _tab = new List<List<char>>();
+        Player _mainPlayer;
 
-        string _text = String.Empty;
-
-        private int _width = 0;
-        private int _height = 0;
+        int _currentChoice;
+        //List<List<>> _choices;
 
         #endregion Field
 
@@ -32,28 +30,12 @@ namespace MultiXPing
         \* ----------------------------------------------------- */
         #region Property
 
-        public dynamic Tab
+        public Player MainPlayer
         {
-            get => _tab; 
-            set => _tab = value;
+            get => _mainPlayer; 
+            set => _mainPlayer = value;
         }
-
-        public string Text
-        {
-            get => _text;
-            set => _text = value;
-        }
-
-        public int Width
-        {
-            get => _width;
-            set => _width = value;
-        }
-        public int Height
-        {
-            get => _height;
-            set => _height = value;
-        }
+        public int CurrentChoixe { get => _currentChoice; set => _currentChoice = value; }
 
         #endregion Property
 
@@ -73,58 +55,16 @@ namespace MultiXPing
         \* ----------------------------------------------------- */
         #region Methods
 
-         
-        public Maps() {
-            InitMap();
+        MenuWindow(Player mainPlayer)
+        {
+            _mainPlayer = mainPlayer;
         }
 
-        public void InitMap()
+        new public void DrawContent()
         {
-            _text = File.ReadAllText(Constants.PROJECTPATH + "MultiXPing\\source\\Maps\\MapDesign\\Map1.txt");
-            _width = WidthMap();
-            _height = HeightMap();
 
-            int count = 0;
-            Tab.Add(new List<char>());
-            foreach (char c in Text)
-            {
-                if (c == '\r')
-                {
-                    Tab.Add(new List<char>());
-                    count ++;
-                }
-                else if (c == '\n')
-                {
-                    
-                }
-                else
-                {
-                    Tab[count].Add(c);
-                }
-            }
-        }
-
-        public int WidthMap()
-        {
-            return (Text.IndexOf("\n"))-1;
-        }
-
-        public int HeightMap()
-        {
-            int count = 0;
-            foreach (char c in Text)
-            {
-                if(c == '\n')
-                {
-                    count++;
-                }
-            }
-            return count+1;
         }
 
         #endregion Methods
-        
     }
-
 }
-

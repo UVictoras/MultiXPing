@@ -1,5 +1,4 @@
-﻿using MultiXPing.source.Utilitaries;
-
+﻿
 namespace MultiXPing
 {
     public struct CharacterStats

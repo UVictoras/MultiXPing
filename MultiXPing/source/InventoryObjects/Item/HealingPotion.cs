@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MultiXPing
 {
-    internal class InputManager
+    class HealingPotion : GameItem
     {
         /* ----------------------------------------------------- *\
         |                                                         |
@@ -14,11 +14,7 @@ namespace MultiXPing
         |                                                         |
         \* ----------------------------------------------------- */
         #region Field
-
-        Dictionary<string, bool>     _keysState     = new Dictionary<string, bool>();
-
-        HashSet<ConsoleKey>          _pressedKeys   = new HashSet<ConsoleKey>();
-
+        int _heal;          // Amount of HP the potion give to the character
         #endregion Field
 
         /* ----------------------------------------------------- *\
@@ -27,13 +23,7 @@ namespace MultiXPing
         |                                                         |
         \* ----------------------------------------------------- */
         #region Property
-
-        public Dictionary<string, bool> KeysState 
-        { 
-            get => _keysState; 
-            private set => _keysState = value;
-        }
-
+        public int Heal { get => _heal; private set => _heal = value; }
         #endregion Property
 
         /* ----------------------------------------------------- *\
@@ -41,7 +31,6 @@ namespace MultiXPing
         |                          Event                          |
         |                                                         |
         \* ----------------------------------------------------- */
-
         #region Event
 
         #endregion Event
@@ -52,25 +41,18 @@ namespace MultiXPing
         |                                                         |
         \* ----------------------------------------------------- */
         #region Methods
-
-        public void Update()
+        public HealingPotion()
         {
-            _pressedKeys.Clear();
-
-            do
-            {
-                ConsoleKeyInfo keyInfo = Console.ReadKey(intercept: true);
-                _pressedKeys.Add(keyInfo.Key);
-            } while (Console.KeyAvailable);
+            Id = 0;
+            Description = "Cette potion soigne 20 PV";
+            Heal = 20;
+            NumberUse = 1;
         }
-
-        public bool GetKeyState(ConsoleKey key)
+        public override void Use(ref Hunter hunter)
         {
-            return _pressedKeys.Contains(key);
+            hunter.Healing(Heal);
+            NumberUse -= 1;
         }
-
-        public bool isAnyKeyPressed() {  return _pressedKeys.Count() > 0; }
-
         #endregion Methods
     }
 }

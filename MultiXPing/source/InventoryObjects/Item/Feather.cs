@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MultiXPing.source.Item
+namespace MultiXPing
 {
-    class ManaPotion : GameItem
+    class Feather : GameItem
     {
         /* ----------------------------------------------------- *\
         |                                                         |
@@ -14,7 +14,6 @@ namespace MultiXPing.source.Item
         |                                                         |
         \* ----------------------------------------------------- */
         #region Field
-        int _mana;          // Amount of mana the potion give to the character
         #endregion Field
 
         /* ----------------------------------------------------- *\
@@ -23,7 +22,6 @@ namespace MultiXPing.source.Item
         |                                                         |
         \* ----------------------------------------------------- */
         #region Property
-        public int Mana { get => _mana; private set => _mana = value; }
         #endregion Property
 
         /* ----------------------------------------------------- *\
@@ -41,16 +39,15 @@ namespace MultiXPing.source.Item
         |                                                         |
         \* ----------------------------------------------------- */
         #region Methods
-        public ManaPotion()
+        public Feather()
         {
-            Id = 1;
-            Description = "Cette potion vous rend 20 PM";
-            Mana = 20;
+            Id = 6;
+            Description = "Cette plume permet de réanimer un allié avec la moitier de ses PV";
             NumberUse = 1;
         }
         public override void Use(ref Hunter hunter)
         {
-            hunter.ManaRegeneration(Mana);
+            hunter.Reanimate();
             NumberUse -= 1;
         }
         #endregion Methods

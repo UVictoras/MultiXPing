@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace MultiXPing
 {
-    struct Maps
-        {
+    internal class InputManager
+    {
         /* ----------------------------------------------------- *\
         |                                                         |
         |                          Field                          |
@@ -16,12 +15,9 @@ namespace MultiXPing
         \* ----------------------------------------------------- */
         #region Field
 
-        private List<List<char>> _tab = new List<List<char>>();
+        Dictionary<string, bool> _keysState = new Dictionary<string, bool>();
 
-        string _text = String.Empty;
-
-        private int _width = 0;
-        private int _height = 0;
+        HashSet<ConsoleKey> _pressedKeys = new HashSet<ConsoleKey>();
 
         #endregion Field
 
@@ -32,27 +28,10 @@ namespace MultiXPing
         \* ----------------------------------------------------- */
         #region Property
 
-        public dynamic Tab
+        public Dictionary<string, bool> KeysState
         {
-            get => _tab; 
-            set => _tab = value;
-        }
-
-        public string Text
-        {
-            get => _text;
-            set => _text = value;
-        }
-
-        public int Width
-        {
-            get => _width;
-            set => _width = value;
-        }
-        public int Height
-        {
-            get => _height;
-            set => _height = value;
+            get => _keysState;
+            private set => _keysState = value;
         }
 
         #endregion Property
@@ -62,6 +41,7 @@ namespace MultiXPing
         |                          Event                          |
         |                                                         |
         \* ----------------------------------------------------- */
+
         #region Event
 
         #endregion Event
@@ -73,58 +53,24 @@ namespace MultiXPing
         \* ----------------------------------------------------- */
         #region Methods
 
-         
-        public Maps() {
-            InitMap();
-        }
-
-        public void InitMap()
+        public void Update()
         {
-            _text = File.ReadAllText(Constants.PROJECTPATH + "MultiXPing\\source\\Maps\\MapDesign\\Map1.txt");
-            _width = WidthMap();
-            _height = HeightMap();
+            _pressedKeys.Clear();
 
-            int count = 0;
-            Tab.Add(new List<char>());
-            foreach (char c in Text)
+            do
             {
-                if (c == '\r')
-                {
-                    Tab.Add(new List<char>());
-                    count ++;
-                }
-                else if (c == '\n')
-                {
-                    
-                }
-                else
-                {
-                    Tab[count].Add(c);
-                }
-            }
+                ConsoleKeyInfo keyInfo = Console.ReadKey(intercept: true);
+                _pressedKeys.Add(keyInfo.Key);
+            } while (Console.KeyAvailable);
         }
 
-        public int WidthMap()
+        public bool GetKeyState(ConsoleKey key)
         {
-            return (Text.IndexOf("\n"))-1;
+            return _pressedKeys.Contains(key);
         }
 
-        public int HeightMap()
-        {
-            int count = 0;
-            foreach (char c in Text)
-            {
-                if(c == '\n')
-                {
-                    count++;
-                }
-            }
-            return count+1;
-        }
+        public bool isAnyKeyPressed() { return _pressedKeys.Count() > 0; }
 
         #endregion Methods
-        
     }
-
 }
-

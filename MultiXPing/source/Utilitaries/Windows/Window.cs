@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Pastel;
+using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -16,13 +18,15 @@ namespace MultiXPing
         \* ----------------------------------------------------- */
         #region Field
 
-        string _content = String.Empty;
+        string _content = string.Empty;
 
-        int _width = Constants.WIDTH/2;
+        int _width = Constants.WIDTH / 2;
         int _height = Constants.HEIGHT / 3;
 
         int _x = 10;
-        int _y = (int)(Constants.WIDTH * (2f / 3f));
+        int _y = (int)(Constants.HEIGHT * (2f / 3f));
+
+        bool _isOpen = false;
 
 
         #endregion Field
@@ -46,7 +50,7 @@ namespace MultiXPing
             set => _width = value;
         }
 
-        public int Height 
+        public int Height
         {
             get => _height;
             set => _height = value;
@@ -54,15 +58,16 @@ namespace MultiXPing
 
         public int X
         {
-            get => _x; 
-            set => _x = value; 
+            get => _x;
+            set => _x = value;
         }
 
         public int Y
         {
-            get => _y; 
+            get => _y;
             set => _y = value;
         }
+        public bool IsOpen { get => _isOpen; set => _isOpen = value; }
 
         #endregion Property
 
@@ -82,40 +87,33 @@ namespace MultiXPing
         \* ----------------------------------------------------- */
         #region Methods
 
-        public Window(string content)
+        public Window()
+        {
+        }
+
+        public void InitContent(string content)
         {
             Content = content;
         }
 
         public void DrawWindow()
         {
-            if (_content == String.Empty)
+            if (IsOpen == false)
             {
                 return;
             }
 
-            int count = 0;
-            bool isEndLine = false;
+            DrawFrame();
+            DrawContent(); 
+        }
 
-            Console.SetCursorPosition(X, Y);
+        public void DrawContent()
+        {
+            //Fonction qui dessine le contenu de la fenetre
 
-            for (int i = 0; i < _width; i++)
+            if (_content == string.Empty)
             {
-                Console.BackgroundColor = ConsoleColor.White;
-                Console.Write(" ");
-            }
-
-            Console.SetCursorPosition(X, Y);
-
-            for (int i = 0; i < _height; i++) { 
-                for(int j = 0; j < _width; j++)
-                {
-                    Console.BackgroundColor = ConsoleColor.Black;
-                    Console.Write("  ");
-                }
-                //Console.BackgroundColor = ConsoleColor.White;
-                Console.Write('\n');
-                Console.SetCursorPosition(X, Y + i);
+                return;
             }
 
             Console.SetCursorPosition(X + 1, Y + 1);
@@ -123,12 +121,52 @@ namespace MultiXPing
 
             foreach (char c in Content)
             {
-                Console.Write(c);
-                if(c == '\n')
+                if (c == '\n')
                 {
                     countLine++;
                     Console.SetCursorPosition(X + 1, Y + countLine);
                 }
+                else
+                {
+                    Console.Write(c);
+                }
+            }
+
+            
+        }
+
+        public void DrawFrame()
+        {
+            //Fonction qui dessine la window en elle meme
+
+            Console.SetCursorPosition(X, Y);
+
+            for (int i = 0; i < _width; i++)
+            {
+                Console.BackgroundColor = ConsoleColor.White;
+                Console.Write("  ");
+            }
+
+            Console.SetCursorPosition(X, Y + 1);
+
+            for (int i = 0; i < _height; i++)
+            {
+                for (int j = 0; j < _width; j++)
+                {
+                    Console.BackgroundColor = ConsoleColor.Black;
+                    Console.Write("  ");
+                }
+                //Console.BackgroundColor = ConsoleColor.White;
+                Console.Write('\n');
+                Console.SetCursorPosition(X, Y + 2 + i);
+            }
+
+            Console.SetCursorPosition(X, Y + _height + 1);
+
+            for (int i = 0; i < _width; i++)
+            {
+                Console.BackgroundColor = ConsoleColor.White;
+                Console.Write("  ");
             }
         }
 

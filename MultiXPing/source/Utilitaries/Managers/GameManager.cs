@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using MultiXPing;     
 
 namespace MultiXPing
 {
@@ -38,7 +39,9 @@ namespace MultiXPing
 
         Player _player;
         Window _mainWindow;
-        
+
+        Tree _mainMenu;
+
         #endregion Field
 
         /* ----------------------------------------------------- *\
@@ -48,7 +51,7 @@ namespace MultiXPing
         \* ----------------------------------------------------- */
         #region Property
 
-        public State CurrentState 
+        public State CurrentState
         {
             get => _currentState;
             private set => _currentState = value;
@@ -61,7 +64,7 @@ namespace MultiXPing
         {
             get => _height;
         }
-        
+
         public bool IsRunning
         {
             get => _isRunning;
@@ -91,10 +94,12 @@ namespace MultiXPing
             get => _player;
             set => _player = value;
         }
-        internal Window MainWindow { 
-            get => _mainWindow; 
-            set => _mainWindow = value; 
+        internal Window MainWindow
+        {
+            get => _mainWindow;
+            set => _mainWindow = value;
         }
+        public Tree MainMenu { get => _mainMenu; set => _mainMenu = value; }
 
         #endregion Property
 
@@ -129,17 +134,24 @@ namespace MultiXPing
             RenderTarget = new Render();
             RenderTarget.InitBuffer();
 
-            //MainWindow = new Window("Pouet la chouette");
+            MainWindow = new Window();
+            MainWindow.InitContent("Pouet la chouette\n elle est trop cool");
 
             InitPlayer();
 
+            MainMenu = new Tree();
+            MainMenu.AddNode(Player.Inventory);
+            MainMenu.AddNode(Player.Team);
+
+            Player.Inventory.AddItem(new Egg());
+
         }
 
-        
+
 
         public void InitPlayer()
         {
-            Player = new Player(Width/2, Height/2);
+            Player = new Player(Width / 2, Height / 2);
         }
 
         #endregion Init
@@ -150,6 +162,7 @@ namespace MultiXPing
             {
                 Update();
                 HandleInput();
+
             }
         }
 
@@ -172,7 +185,8 @@ namespace MultiXPing
 
         public void UpdateMap()
         {
-            Render();
+            //Render();
+            MainMenu.PrintTree();
         }
 
         public void UpdateFight()
@@ -181,8 +195,8 @@ namespace MultiXPing
         }
 
         public void UpdatePause()
-        { 
-        
+        {
+
         }
 
         public void UpdateMenu()
@@ -202,7 +216,7 @@ namespace MultiXPing
 
             //Draw items
             RenderTarget.DrawPlayer(Player);
-            
+
             //Render
             RenderTarget.RenderBuffer();
         }
@@ -218,7 +232,7 @@ namespace MultiXPing
             if (Inputmanager.GetKeyState(ConsoleKey.Q))
             {
                 Player.Move(-4, 0);
-            } 
+            }
             if (Inputmanager.GetKeyState(ConsoleKey.Z))
             {
                 Player.Move(0, -4);
@@ -229,7 +243,11 @@ namespace MultiXPing
             }
             if (Inputmanager.GetKeyState(ConsoleKey.T))
             {
-                //MainWindow.DrawWindow();
+                MainWindow.DrawWindow();
+            }
+            if (Inputmanager.GetKeyState(ConsoleKey.E))
+            {
+                Player.OnUseWindow();
             }
 
         }

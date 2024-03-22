@@ -7,7 +7,7 @@ using System.Reflection.PortableExecutable;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MultiXPing.source.Utilitaries
+namespace MultiXPing
 {
     class Parser
     {
@@ -22,9 +22,9 @@ namespace MultiXPing.source.Utilitaries
                     string[] splitLine = line.Split(",");
                     List<float> floatLine = new List<float>();
 
-                    foreach (string numberStr in  splitLine)
+                    foreach (string numberStr in splitLine)
                     {
-                        if (float.TryParse(numberStr, NumberStyles.Float, CultureInfo.InvariantCulture, out float number)) 
+                        if (float.TryParse(numberStr, NumberStyles.Float, CultureInfo.InvariantCulture, out float number))
                         {
                             floatLine.Add(number);
                         };

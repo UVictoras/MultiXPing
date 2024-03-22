@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MultiXPing
 {
-    internal class Interactive : MapObject
+    class Player : MapObject
     {
         /* ----------------------------------------------------- *\
         |                                                         |
@@ -15,8 +15,10 @@ namespace MultiXPing
         \* ----------------------------------------------------- */
         #region Field
 
-        string      _message;               // Message printed when Interacting with the object
-        bool        _isOpened;              // To check whether we're interacting with the item or not
+        Inventory _inventory = new Inventory();
+        Team _team = new Team();          
+
+        Window _menu = new Window();
 
         #endregion Field
 
@@ -26,16 +28,10 @@ namespace MultiXPing
         |                                                         |
         \* ----------------------------------------------------- */
         #region Property
-        public string Message 
-        { 
-            get => _message; 
-            private set => _message = value; 
-        }
-        public bool IsOpened 
-        { 
-            get => _isOpened; 
-            private set => _isOpened = value; 
-        }
+
+        
+        internal Team Team { get => _team; set => _team = value; }
+        internal Inventory Inventory { get => _inventory; set => _inventory = value; }
 
         #endregion Property
 
@@ -46,6 +42,8 @@ namespace MultiXPing
         \* ----------------------------------------------------- */
         #region Event
 
+        public event Action<Vector2> onUse;
+
         #endregion Event
 
         /* ----------------------------------------------------- *\
@@ -54,13 +52,20 @@ namespace MultiXPing
         |                                                         |
         \* ----------------------------------------------------- */
         #region Methods
-
-        public Interactive(string message) : base() { Message = message; IsOpened = false; }
-
-
-        public virtual void Interact(Player player) 
+        public Player(int x, int y) : base()
         {
-            Console.WriteLine(Message);
+            Position = new Vector2(x, y);
+            Sprite = new PlayerSprite();
+        }
+
+        public void Update(GameManager gm)
+        {
+
+        }
+
+        public void OnUseWindow()
+        {
+            onUse(Position);
         }
 
         #endregion Methods

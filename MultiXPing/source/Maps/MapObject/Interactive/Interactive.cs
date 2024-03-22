@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MultiXPing.source.Item
+namespace MultiXPing
 {
-    class Coffee : GameItem
+    internal class Interactive : MapObject
     {
         /* ----------------------------------------------------- *\
         |                                                         |
@@ -14,7 +14,10 @@ namespace MultiXPing.source.Item
         |                                                         |
         \* ----------------------------------------------------- */
         #region Field
-        float _boost;       // Percentage of boost given by the item
+
+        string _message;               // Message printed when Interacting with the object
+        bool _isOpened;              // To check whether we're interacting with the item or not
+
         #endregion Field
 
         /* ----------------------------------------------------- *\
@@ -23,7 +26,17 @@ namespace MultiXPing.source.Item
         |                                                         |
         \* ----------------------------------------------------- */
         #region Property
-        public float Boost { get => _boost; private set => _boost = value; }
+        public string Message
+        {
+            get => _message;
+            private set => _message = value;
+        }
+        public bool IsOpened
+        {
+            get => _isOpened;
+            private set => _isOpened = value;
+        }
+
         #endregion Property
 
         /* ----------------------------------------------------- *\
@@ -41,18 +54,15 @@ namespace MultiXPing.source.Item
         |                                                         |
         \* ----------------------------------------------------- */
         #region Methods
-        public Coffee()
+
+        public Interactive(string message) : base() { Message = message; IsOpened = false; }
+
+
+        public virtual void Interact(Player player)
         {
-            Id = 5;
-            Description = "Ce café augmente votre vitesse de 5% durant ce combat";
-            Boost = 5.0f;
-            NumberUse = 1;
+            Console.WriteLine(Message);
         }
-        public override void Use(ref Hunter hunter)
-        {
-            hunter.BoosterSpeed(Boost);
-            NumberUse -= 1;
-        }
+
         #endregion Methods
     }
 }

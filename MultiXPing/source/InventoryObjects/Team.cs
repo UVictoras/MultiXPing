@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace MultiXPing
 {
-    class Player : MapObject
+    internal class Team : NodeObject
     {
         /* ----------------------------------------------------- *\
         |                                                         |
@@ -15,8 +16,7 @@ namespace MultiXPing
         \* ----------------------------------------------------- */
         #region Field
 
-        List<GameItem>      _inventory = new List<GameItem>();         // List of the items the player has in its inventory
-        List<Hunter>        _team      = new List<Hunter>();           // List of hunters the player has in its team
+        List<Hunter> _team = new List<Hunter>();// List of hunters the player has in its team
 
         #endregion Field
 
@@ -27,16 +27,22 @@ namespace MultiXPing
         \* ----------------------------------------------------- */
         #region Property
 
-        public List<GameItem> Inventory
-        {
-            get => _inventory;
-            private set => _inventory = value;
-        }
-
-        public List<Hunter> Team
+        public List<Hunter> ListTeam
         {
             get => _team;
             private set => _team = value;
+        }
+
+        public Hunter this[int index]
+        {
+            get
+            {
+                return _team[index];
+            }
+            set
+            {
+                _team[index] = value;
+            }
         }
 
         #endregion Property
@@ -56,15 +62,10 @@ namespace MultiXPing
         |                                                         |
         \* ----------------------------------------------------- */
         #region Methods
-        public Player(int x, int y) : base()
-        {
-            Position = new Vector2(x, y);
-            Sprite = new PlayerSprite();
-        }
 
-        public void Update(GameManager gm)
+        public Team()
         {
-
+            Name = "team";
         }
 
         #endregion Methods

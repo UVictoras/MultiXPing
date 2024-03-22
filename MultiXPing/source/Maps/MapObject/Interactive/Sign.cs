@@ -3,21 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Xml.Linq;
 
-namespace MultiXPing.source.Item
+namespace MultiXPing
 {
-    abstract class GameItem
+    internal class Sign : Interactive
     {
         /* ----------------------------------------------------- *\
         |                                                         |
         |                          Field                          |
-        |                                                         | 
+        |                                                         |
         \* ----------------------------------------------------- */
         #region Field
-        int _id;
-        string _description;
-        int _numberUse;
+
+        string _indication;                // Specific text printed on the sign itself
 
         #endregion Field
 
@@ -27,10 +25,22 @@ namespace MultiXPing.source.Item
         |                                                         |
         \* ----------------------------------------------------- */
         #region Property
-        public int Id { get => _id; set => _id = value; }
-        public string Description { get => _description; set => _description = value; }
-        public int NumberUse { get => _numberUse; set => _numberUse = value; }
+        public string Indication
+        {
+            get => _indication;
+            private set => _indication = value;
+        }
+
         #endregion Property
+
+        /* ----------------------------------------------------- *\
+        |                                                         |
+        |                          Event                          |
+        |                                                         |
+        \* ----------------------------------------------------- */
+        #region Event
+
+        #endregion Event
 
         /* ----------------------------------------------------- *\
         |                                                         |
@@ -38,7 +48,15 @@ namespace MultiXPing.source.Item
         |                                                         |
         \* ----------------------------------------------------- */
         #region Methods
-        public abstract void Use(ref Hunter hunter);
+
+        public Sign(string message) : base(message) { }
+
+        public override void Interact(Player player)
+        {
+            base.Interact(player);
+
+            Console.WriteLine(Indication);
+        }
         #endregion Methods
     }
 }
