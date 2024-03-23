@@ -47,6 +47,7 @@ namespace MultiXPing
             Description = "Ce morceau de viande augmente vos degat de 5% durant ce combat";
             Boost = 5.0f;
             NumberUse = 1;
+            Name = "Meat";
         }
         public override void Use(ref Hunter hunter)
         {

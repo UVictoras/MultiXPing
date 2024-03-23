@@ -15,8 +15,7 @@ namespace MultiXPing
         \* ----------------------------------------------------- */
         #region Field
 
-        string _message;               // Message printed when Interacting with the object
-        bool _isOpened;              // To check whether we're interacting with the item or not
+        private Window _window;
 
         #endregion Field
 
@@ -26,15 +25,11 @@ namespace MultiXPing
         |                                                         |
         \* ----------------------------------------------------- */
         #region Property
-        public string Message
+
+        protected Window Window
         {
-            get => _message;
-            private set => _message = value;
-        }
-        public bool IsOpened
-        {
-            get => _isOpened;
-            private set => _isOpened = value;
+            get => _window;
+            set => _window = value;
         }
 
         #endregion Property
@@ -55,12 +50,26 @@ namespace MultiXPing
         \* ----------------------------------------------------- */
         #region Methods
 
-        public Interactive(string message) : base() { Message = message; IsOpened = false; }
+        public Interactive(int x,int y, string message) : base(x, y) 
+        {
+            _window = new Window();
+            _window.InitContent(_pos,message);
+        }
 
 
         public virtual void Interact(Player player)
         {
-            Console.WriteLine(Message);
+            int xP = player.Position.X;
+            int yP = player.Position.Y;
+            int xO = Position.X;
+            int yO = Position.Y;
+
+            int distance = Math.Abs((xO - xP)+(yO - yP));
+
+            if( distance != 1) 
+            {
+                return;
+            }
         }
 
         #endregion Methods

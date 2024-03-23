@@ -47,6 +47,7 @@ namespace MultiXPing
             Description = "Cette potion soigne 20 PV";
             Heal = 20;
             NumberUse = 1;
+            Name = "Healing Potion";
         }
         public override void Use(ref Hunter hunter)
         {

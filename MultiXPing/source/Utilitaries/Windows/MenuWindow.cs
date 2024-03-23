@@ -19,7 +19,10 @@ namespace MultiXPing
         Player _mainPlayer;
 
         int _currentChoice;
+        Node _currentNode;
+
         //List<List<>> _choices;
+        Tree _arbre;
 
         #endregion Field
 
@@ -35,7 +38,10 @@ namespace MultiXPing
             get => _mainPlayer; 
             set => _mainPlayer = value;
         }
-        public int CurrentChoixe { get => _currentChoice; set => _currentChoice = value; }
+        public int CurrentChoice { get => _currentChoice; set => _currentChoice = value; }
+       
+        public Tree Arbre { get => _arbre; set => _arbre = value; }
+        public Node CurrentNode { get => _currentNode; set => _currentNode = value; }
 
         #endregion Property
 
@@ -55,14 +61,39 @@ namespace MultiXPing
         \* ----------------------------------------------------- */
         #region Methods
 
-        MenuWindow(Player mainPlayer)
+        public MenuWindow(Player mainPlayer, Tree arbre)
         {
             _mainPlayer = mainPlayer;
+            _arbre = arbre;
+            _currentNode = arbre.Root;
         }
 
-        new public void DrawContent()
+        public override void DrawContent()
         {
+            base.DrawContent();
 
+            Console.SetCursorPosition(X + 1, Y);
+            _currentNode.PrintChildrenOnly(X + 1 , Y + 2, CurrentChoice);
+
+        }
+
+        public void Select()
+        {
+            Node node = _currentNode.Children[_currentChoice];
+
+            if(node.HasChildren() == true)
+            {
+                _currentNode = node;
+            }
+            else
+            {
+                node.Obj.Use();                
+            }
+        }
+
+        public void UpdateChoice(int i)
+        {
+            _currentChoice = (_currentChoice + i) % _currentNode.ChildrenCount;
         }
 
         #endregion Methods

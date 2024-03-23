@@ -42,7 +42,7 @@ namespace MultiXPing
         \* ----------------------------------------------------- */
         #region Methods
 
-        public Boss(string message) : base(message) { }
+        public Boss(int x, int y, string message) : base(x, y, message) { }
 
         #endregion Methods
     }

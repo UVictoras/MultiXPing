@@ -198,7 +198,6 @@ namespace MultiXPing
 
         public void RenderBuffer()
         {
-            
             for (int i = 0; i < _height - 1; i++)
             {
                 for (int j = 0; j < _width - 1; j++)

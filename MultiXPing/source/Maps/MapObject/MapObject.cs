@@ -57,8 +57,10 @@ namespace MultiXPing
         |                                                         |
         \* ----------------------------------------------------- */
         #region Methods
-        public MapObject()
+        public MapObject(int x, int y)
         {
+            _pos = new Vector2(x,y);
+            
         }
         public void Move(int x, int y)
         {

@@ -21,13 +21,14 @@ namespace MultiXPing
         string _content = string.Empty;
 
         int _width = Constants.WIDTH / 2;
-        int _height = Constants.HEIGHT / 3;
+        int _height = Constants.HEIGHT / 3 - 2;//-2 pour afficher les bordures blanches en haut et en bas
 
-        int _x = 10;
+        int _x = 5;
         int _y = (int)(Constants.HEIGHT * (2f / 3f));
 
         bool _isOpen = false;
 
+        Vector2 _posEntity = new();
 
         #endregion Field
 
@@ -91,9 +92,16 @@ namespace MultiXPing
         {
         }
 
-        public void InitContent(string content)
+        public void InitContent(Vector2 posEntity, string content)
         {
             Content = content;
+            _posEntity = posEntity;
+        }
+
+        public void Open()
+        {
+            if (IsOpen) { IsOpen = false; }
+            else { IsOpen = true; }
         }
 
         public void DrawWindow()
@@ -107,7 +115,7 @@ namespace MultiXPing
             DrawContent(); 
         }
 
-        public void DrawContent()
+        public virtual void DrawContent()
         {
             //Fonction qui dessine le contenu de la fenetre
 
@@ -116,6 +124,7 @@ namespace MultiXPing
                 return;
             }
 
+            Console.BackgroundColor = ConsoleColor.Black;
             Console.SetCursorPosition(X + 1, Y + 1);
             int countLine = 1;
 
@@ -131,12 +140,11 @@ namespace MultiXPing
                     Console.Write(c);
                 }
             }
-
-            
         }
 
         public void DrawFrame()
         {
+
             //Fonction qui dessine la window en elle meme
 
             Console.SetCursorPosition(X, Y);

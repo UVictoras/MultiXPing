@@ -16,9 +16,9 @@ namespace MultiXPing
         #region Field
 
         Inventory _inventory = new Inventory();
-        Team _team = new Team();          
+        Team _team = new Team();
 
-        Window _menu = new Window();
+        Window _menu;
 
         #endregion Field
 
@@ -52,10 +52,11 @@ namespace MultiXPing
         |                                                         |
         \* ----------------------------------------------------- */
         #region Methods
-        public Player(int x, int y) : base()
+        public Player(int x, int y) : base(x,y)
         {
             Position = new Vector2(x, y);
             Sprite = new PlayerSprite();
+            _menu = new Window();
         }
 
         public void Update(GameManager gm)
@@ -65,7 +66,7 @@ namespace MultiXPing
 
         public void OnUseWindow()
         {
-            onUse(Position);
+            onUse?.Invoke(Position);
         }
 
         #endregion Methods

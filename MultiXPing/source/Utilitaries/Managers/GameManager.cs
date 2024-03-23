@@ -38,7 +38,7 @@ namespace MultiXPing
         Render _renderTarget;
 
         Player _player;
-        Window _mainWindow;
+        MenuWindow _mainWindow;
 
         Tree _mainMenu;
 
@@ -94,7 +94,7 @@ namespace MultiXPing
             get => _player;
             set => _player = value;
         }
-        internal Window MainWindow
+        internal MenuWindow MainWindow
         {
             get => _mainWindow;
             set => _mainWindow = value;
@@ -134,9 +134,7 @@ namespace MultiXPing
             RenderTarget = new Render();
             RenderTarget.InitBuffer();
 
-            MainWindow = new Window();
-            MainWindow.InitContent("Pouet la chouette\n elle est trop cool");
-
+            
             InitPlayer();
 
             MainMenu = new Tree();
@@ -144,6 +142,12 @@ namespace MultiXPing
             MainMenu.AddNode(Player.Team);
 
             Player.Inventory.AddItem(new Egg());
+            Player.Inventory.AddItem(new Coffee());
+            Player.Inventory.AddItem(new Glasses());
+
+            MainWindow = new MenuWindow(Player, MainMenu);
+            MainWindow.InitContent(new Vector2(0, 0), "MENU");
+
 
         }
 
@@ -185,8 +189,8 @@ namespace MultiXPing
 
         public void UpdateMap()
         {
-            //Render();
-            MainMenu.PrintTree();
+            Render();
+            //MainMenu.PrintTree();
         }
 
         public void UpdateFight()
@@ -219,6 +223,9 @@ namespace MultiXPing
 
             //Render
             RenderTarget.RenderBuffer();
+
+            //Draw la window
+            MainWindow.DrawWindow();
         }
 
         public void HandleInput()
@@ -243,11 +250,23 @@ namespace MultiXPing
             }
             if (Inputmanager.GetKeyState(ConsoleKey.T))
             {
-                MainWindow.DrawWindow();
+                MainWindow.Open();
             }
             if (Inputmanager.GetKeyState(ConsoleKey.E))
             {
                 Player.OnUseWindow();
+            }
+            if (Inputmanager.GetKeyState(ConsoleKey.UpArrow))
+            {
+                MainWindow.UpdateChoice(-1);
+            }
+            if (Inputmanager.GetKeyState(ConsoleKey.DownArrow))
+            {
+                MainWindow.UpdateChoice(1);
+            }
+            if (Inputmanager.GetKeyState(ConsoleKey.Enter))
+            {
+                MainWindow.Select();
             }
 
         }

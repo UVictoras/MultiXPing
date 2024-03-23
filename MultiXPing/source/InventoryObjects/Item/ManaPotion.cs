@@ -47,6 +47,7 @@ namespace MultiXPing
             Description = "Cette potion vous rend 20 PM";
             Mana = 20;
             NumberUse = 1;
+            Name = "Mana Potion";
         }
         public override void Use(ref Hunter hunter)
         {

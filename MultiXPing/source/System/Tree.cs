@@ -8,21 +8,24 @@ using System.Threading.Tasks;
 
 namespace MultiXPing
 {
-    public struct Node
+    public class Node
     {
-        NodeObject? _obj;
-        NodeObject? _parent;
+        NodeObject _obj;
+        NodeObject _parent;
         List<Node> _children;
+        int _childrenCount;
 
         public NodeObject Obj { get => _obj; set => _obj = value; }
         public NodeObject Parent { get => _parent; set => _parent = value; }
         public List<Node> Children { get => _children; set => _children = value; }
-        
+        public int ChildrenCount { get => _childrenCount; set => _childrenCount = value; }
+
         public Node()
         {
             _obj = null;
             _parent = null;
             _children = new List<Node>();
+            _childrenCount = 0; 
         }
 
         public void InsertChild(NodeObject obj)
@@ -31,9 +34,11 @@ namespace MultiXPing
             noeud.Obj = obj;
             noeud.Parent = Obj;
             if(Obj == null) { throw new NullReferenceException("Parent must be non nullable"); }
-            
+
+            _childrenCount++;
             Children.Add(noeud);
             obj.SetNode(noeud);
+            
             
         }
 
@@ -47,12 +52,25 @@ namespace MultiXPing
             }
         }
 
-        public void PrintChildrenOnly()
+        public void PrintChildrenOnly(int x, int y, int currentChoice)
         {
+            Console.SetCursorPosition(x,y);
+            if(ChildrenCount == 0) { return; }
             for (int i = 0; i < Children.Count(); i++)
             {
-                Console.Write("- " + Obj.Name + "\n");
+                Console.SetCursorPosition(x, y + i);
+                if(i == currentChoice)
+                {
+                    Console.Write("> ");
+                }
+                Console.Write("- " + Children[i].Obj.Name);
             }
+        }
+
+        public bool HasChildren()
+        {
+            if(ChildrenCount == 0) { return false; }
+            return true;
         }
     }
 

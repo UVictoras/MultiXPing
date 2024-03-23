@@ -49,7 +49,7 @@ namespace MultiXPing
         \* ----------------------------------------------------- */
         #region Methods
 
-        public Sign(string message) : base(message) { }
+        public Sign(int x, int y, string message) : base(x, y, message) { }
 
         public override void Interact(Player player)
         {

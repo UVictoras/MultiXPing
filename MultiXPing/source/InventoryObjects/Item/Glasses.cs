@@ -47,6 +47,7 @@ namespace MultiXPing
             Description = "Cette pair de lunette augmente votre précision de 5% durant ce combat";
             Boost = 5.0f;
             NumberUse = 1;
+            Name = "Glasses";
         }
         public override void Use(ref Hunter hunter)
         {

@@ -44,6 +44,7 @@ namespace MultiXPing
             Id = 6;
             Description = "Cette plume permet de réanimer un allié avec la moitier de ses PV";
             NumberUse = 1;
+            Name = "Feather";
         }
         public override void Use(ref Hunter hunter)
         {

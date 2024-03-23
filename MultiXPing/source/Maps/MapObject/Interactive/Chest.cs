@@ -49,7 +49,7 @@ namespace MultiXPing
         \* ----------------------------------------------------- */
         #region Methods
 
-        public Chest(string message) : base(message) { }
+        public Chest(int x, int y, string message) : base(x,y,message) { }
 
         public override void Interact(Player player)
         {
@@ -59,6 +59,8 @@ namespace MultiXPing
             {
                 player.Inventory.ListInventory.Add(item);
             }
+
+            Window.DrawWindow();
         }
 
         #endregion Methods

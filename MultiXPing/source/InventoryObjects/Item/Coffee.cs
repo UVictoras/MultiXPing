@@ -47,6 +47,7 @@ namespace MultiXPing
             Description = "Ce café augmente votre vitesse de 5% durant ce combat";
             Boost = 5.0f;
             NumberUse = 1;
+            Name = "Coffee";
         }
         public override void Use(ref Hunter hunter)
         {
