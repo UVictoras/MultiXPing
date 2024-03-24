@@ -21,7 +21,6 @@ namespace MultiXPing
         int _currentChoice;
         Node _currentNode;
 
-        //List<List<>> _choices;
         Tree _arbre;
 
         #endregion Field
@@ -74,7 +73,7 @@ namespace MultiXPing
 
             Console.SetCursorPosition(X + 1, Y);
             _currentNode.PrintChildrenOnly(X + 1 , Y + 2, CurrentChoice);
-
+            
         }
 
         public void Select()
@@ -93,7 +92,7 @@ namespace MultiXPing
 
         public void UpdateChoice(int i)
         {
-            _currentChoice = (_currentChoice + i) % _currentNode.ChildrenCount;
+            _currentChoice = (_currentChoice + i) % _currentNode.ChildrenCount ;
         }
 
         #endregion Methods

@@ -54,6 +54,13 @@ namespace MultiXPing
         {
             hunter.BoosterDefense(Boost);
             NumberUse -= 1;
+
+        }
+
+        public override void Use()
+        {
+            Console.Write("Egg used");
+
         }
         #endregion Methods
     }

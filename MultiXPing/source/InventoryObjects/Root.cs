@@ -8,6 +8,10 @@ namespace MultiXPing
 {
     class Root : NodeObject
     {
+        public Root() 
+        {
+            Name = "Menu";
+        }
         //C'est pour avoir une instance de NodeObject à mettre dans root du tree
     }
 }

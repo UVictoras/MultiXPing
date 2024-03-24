@@ -146,7 +146,7 @@ namespace MultiXPing
             Player.Inventory.AddItem(new Glasses());
 
             MainWindow = new MenuWindow(Player, MainMenu);
-            MainWindow.InitContent(new Vector2(0, 0), "MENU");
+            MainWindow.InitContent(new Vector2(0, 0), " ");
 
 
         }

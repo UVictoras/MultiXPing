@@ -55,15 +55,16 @@ namespace MultiXPing
         public void PrintChildrenOnly(int x, int y, int currentChoice)
         {
             Console.SetCursorPosition(x,y);
+            Console.Write(Obj.Name + " : ");
             if(ChildrenCount == 0) { return; }
             for (int i = 0; i < Children.Count(); i++)
             {
-                Console.SetCursorPosition(x, y + i);
+                Console.SetCursorPosition(x, y + i + 1);
                 if(i == currentChoice)
                 {
                     Console.Write("> ");
                 }
-                Console.Write("- " + Children[i].Obj.Name);
+                Console.Write(" - " + Children[i].Obj.Name);
             }
         }
 
