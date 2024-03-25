@@ -51,8 +51,13 @@ namespace MultiXPing
 
         public Chest(int x, int y) : base(x,y) 
         {
+            
+        }
+
+        public void InitChestText()
+        {
             Text = "Vous recevez ";
-            if(Content != null) 
+            if (Content != null)
             {
                 foreach (GameItem item in Content)
                 {
@@ -76,7 +81,7 @@ namespace MultiXPing
 
             foreach (var item in _content)
             {
-                player.Inventory.ListInventory.Add(item);
+                player.Inventory.AddItem(item);
             }
 
             Content = null;

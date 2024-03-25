@@ -62,6 +62,12 @@ namespace MultiXPing
                 ConsoleKeyInfo keyInfo = Console.ReadKey(intercept: true);
                 _pressedKeys.Add(keyInfo.Key);
             } while (Console.KeyAvailable);
+
+            while (IsAnyKeyPressed() == false)
+            {
+
+            }
+
         }
 
         public bool GetKeyState(ConsoleKey key)
@@ -69,7 +75,7 @@ namespace MultiXPing
             return _pressedKeys.Contains(key);
         }
 
-        public bool isAnyKeyPressed() { return _pressedKeys.Count() > 0; }
+        public bool IsAnyKeyPressed() { return _pressedKeys.Count() > 0; }
 
         #endregion Methods
     }

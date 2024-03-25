@@ -144,6 +144,8 @@ namespace MultiXPing
                 {
                     Chest chest = new Chest(x, y);
                     chest.Content.Add(new Coffee());
+
+                    chest.InitChestText();
                     player.onUse += chest.Interact;
                     chest.PrintText += window.DrawWindowInteractive;
                     list.Add(chest);

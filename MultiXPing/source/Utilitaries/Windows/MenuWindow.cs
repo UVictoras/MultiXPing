@@ -67,9 +67,15 @@ namespace MultiXPing
             _currentNode = arbre.Root;
         }
 
+        public void ResetNode()
+        {
+            _currentNode = _arbre.Root;
+        }
+
         public override void DrawContent()
         {
             base.DrawContent();
+            
 
             Console.SetCursorPosition(X + 1, Y);
             _currentNode.PrintChildrenOnly(X + 1 , Y + 2, CurrentChoice);

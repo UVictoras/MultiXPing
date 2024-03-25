@@ -72,7 +72,7 @@ namespace MultiXPing
             int xO = Position.X;
             int yO = Position.Y;
 
-            int Distance = Math.Abs((xO - xP)+(yO - yP));
+            Distance = Math.Abs((xO - xP)+(yO - yP));
 
             if (Distance != 1)
             {

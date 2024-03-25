@@ -99,7 +99,7 @@ namespace MultiXPing
 
         public void Open()
         {
-            if (IsOpen) { IsOpen = false; Content = "default"; }
+            if (IsOpen) { IsOpen = false; Content = " "; }
             else { IsOpen = true; }
         }
 

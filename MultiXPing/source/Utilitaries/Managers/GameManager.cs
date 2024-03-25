@@ -172,9 +172,9 @@ namespace MultiXPing
         {
             while (IsRunning)
             {
-                Update();
                 HandleInput();
-
+                Update();
+                
             }
         }
 
@@ -221,6 +221,7 @@ namespace MultiXPing
             //Reset
             //Console.Clear();
             Console.SetCursorPosition(0, 0);
+            Console.CursorVisible = false;
             RenderTarget.ResetBuffer();
 
             //Draw map
@@ -259,6 +260,7 @@ namespace MultiXPing
             }
             if (Inputmanager.GetKeyState(ConsoleKey.M))
             {
+                MainMenuWindow.ResetNode();
                 MainMenuWindow.Open();
             }
             if (Inputmanager.GetKeyState(ConsoleKey.E))

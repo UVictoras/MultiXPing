@@ -43,6 +43,8 @@
             Console.ForegroundColor = ConsoleColor.Black;
             Console.Title = "MultiXPing";
 
+            Console.CursorVisible = false;
+
             Console.SetWindowSize(Console.LargestWindowWidth, Console.LargestWindowHeight);
             Console.SetBufferSize(Console.LargestWindowWidth, Console.LargestWindowHeight);
         }
