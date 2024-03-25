@@ -25,8 +25,8 @@ namespace MultiXPing
         int _experience;            // Current experience obtained by the character
         int _level;                 // Current level of progression of the character
         bool _isAlive;               // Current state of the character, true if alive, false if dead
-        Attack[] _attacks;               // List of the learned attacks
         Dictionary<int, Attack> _possibelAttacks;       // List of the attacks the character can learn
+        CharactersAttacks _charactersAttacks;
 
         string _name;                  // Name of the character
 
@@ -78,7 +78,7 @@ namespace MultiXPing
         public float Speed
         {
             get => _speed;
-            protected set => _speed = value;
+            set => _speed = value;
         }
         public float Accuracy
         {
@@ -110,12 +110,6 @@ namespace MultiXPing
             set => _level = value;
         }
 
-        public Attack[] Attacks
-        {
-            get => _attacks;
-            private set => _attacks = value;
-        }
-
         public bool IsAlive
         {
             get => _isAlive;
@@ -132,6 +126,7 @@ namespace MultiXPing
             get => _possibelAttacks;
             private set => _possibelAttacks = value;
         }
+        internal CharactersAttacks CharactersAttacks { get => _charactersAttacks; set => _charactersAttacks = value; }
 
         #endregion Property
 
@@ -156,6 +151,7 @@ namespace MultiXPing
 
         public Character()
         {
+            CharactersAttacks = new CharactersAttacks();
         }
 
         public void InitializeCharacter(string name)

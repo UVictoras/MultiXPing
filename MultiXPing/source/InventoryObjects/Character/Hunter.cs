@@ -79,7 +79,7 @@ namespace MultiXPing
         \* ----------------------------------------------------- */
         #region Methods
 
-        public Hunter()
+        public Hunter():base()
         {
             Experience = 0;
             ExperienceRequired = 10;

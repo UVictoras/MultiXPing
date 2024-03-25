@@ -1,12 +1,15 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
-using MultiXPing;     
+using MultiXPing;
+using MultiXPing.source.Utilitaries.Managers;
 
 namespace MultiXPing
 {
@@ -39,8 +42,10 @@ namespace MultiXPing
 
         Player _player;
         MenuWindow _mainWindow;
+        FightWindow _fight;
 
         Tree _mainMenu;
+        Tree _fightMenu;
 
         #endregion Field
 
@@ -100,6 +105,8 @@ namespace MultiXPing
             set => _mainWindow = value;
         }
         public Tree MainMenu { get => _mainMenu; set => _mainMenu = value; }
+        internal FightWindow Fight { get => _fight; set => _fight = value; }
+        public Tree FightMenu { get => _fightMenu; set => _fightMenu = value; }
 
         #endregion Property
 
@@ -137,6 +144,9 @@ namespace MultiXPing
             
             InitPlayer();
 
+            FightMenu = new Tree();
+            FightMenu.AddNode(Player.Inventory);
+
             MainMenu = new Tree();
             MainMenu.AddNode(Player.Inventory);
             MainMenu.AddNode(Player.Team);
@@ -148,7 +158,19 @@ namespace MultiXPing
             MainWindow = new MenuWindow(Player, MainMenu);
             MainWindow.InitContent(new Vector2(0, 0), "MENU");
 
+            Enemy mechant = new Enemy();
+            mechant.InitializeCharacter("Mechant");
+            mechant.Speed = 25;
 
+            CharacterStats Stats = new CharacterStats();
+            Stats.InitializeCSVStats(Constants.PROJECTPATH + "MultiXPing\\source\\Data\\InitStats.csv", Constants.PROJECTPATH + "MultiXPing\\source\\Data\\LevelUpMultiplicator.csv");
+            Hunter Romain = new Hunter();
+            Romain.InitializeHunter("Romain", Stats.Support, Stats.SupportMultiplicator);
+
+            Player.Team.ListTeam.Add(Romain);
+
+            Fight = new FightWindow(Player, FightMenu, mechant);
+            Fight.InitContent(new Vector2(0, 0), "FIGHT");
         }
 
 
@@ -180,6 +202,7 @@ namespace MultiXPing
                     UpdateMap();
                     break;
                 case State.FIGHT:
+                    UpdateFight();
                     break;
                 case State.PAUSE:
                     break;
@@ -195,7 +218,8 @@ namespace MultiXPing
 
         public void UpdateFight()
         {
-
+            Fight.UpdateFight();
+            RenderFight();
         }
 
         public void UpdatePause()
@@ -228,6 +252,26 @@ namespace MultiXPing
             MainWindow.DrawWindow();
         }
 
+        public void RenderFight() 
+        {
+            //Reset
+            //Console.Clear();
+            Console.SetCursorPosition(0, 0);
+            RenderTarget.ResetBuffer();
+
+            //Draw map
+            //RenderTarget.DrawMap(Map, Player);
+
+            //Draw items
+            //RenderTarget.DrawPlayer(Player);
+
+            //Render
+            RenderTarget.RenderBuffer();
+
+            //Draw la window
+            Fight.DrawWindow();
+        }
+
         public void HandleInput()
         {
             Inputmanager.Update(); // à modifier
@@ -252,21 +296,47 @@ namespace MultiXPing
             {
                 MainWindow.Open();
             }
+            if (Inputmanager.GetKeyState(ConsoleKey.P))
+            {
+                _currentState = State.FIGHT;
+                Fight.Open();
+            }
             if (Inputmanager.GetKeyState(ConsoleKey.E))
             {
                 Player.OnUseWindow();
             }
             if (Inputmanager.GetKeyState(ConsoleKey.UpArrow))
             {
-                MainWindow.UpdateChoice(-1);
+                if (MainWindow.IsOpen)
+                {
+                    MainWindow.UpdateChoice(-1);
+                }
+                if (Fight.IsOpen)
+                {
+                    MainWindow.UpdateChoice(-1);
+                }
             }
             if (Inputmanager.GetKeyState(ConsoleKey.DownArrow))
             {
-                MainWindow.UpdateChoice(1);
+                if (MainWindow.IsOpen)
+                {
+                    MainWindow.UpdateChoice(1);
+                }
+                if (Fight.IsOpen)
+                {
+                    Fight.UpdateChoice(1);
+                }
             }
             if (Inputmanager.GetKeyState(ConsoleKey.Enter))
             {
-                MainWindow.Select();
+                if (MainWindow.IsOpen)
+                {
+                    MainWindow.Select();
+                }
+                if (Fight.IsOpen)
+                {
+                    Fight.Select();
+                }
             }
 
         }
