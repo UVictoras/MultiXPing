@@ -7,7 +7,7 @@ using MultiXPing;
 
 namespace MultiXPing
 {
-    class MenuWindow : Window
+    public class MenuWindow : Window
     {
         /* ----------------------------------------------------- *\
         |                                                         |

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MultiXPing
 {
-    class Player : MapObject
+    public class Player : MapObject
     {
         /* ----------------------------------------------------- *\
         |                                                         |

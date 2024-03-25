@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace MultiXPing
 {
-    class Parser
+    public class Parser
     {
         public static List<List<float>> CSVParser(string filePath)
         {

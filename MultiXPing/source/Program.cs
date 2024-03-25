@@ -1,7 +1,7 @@
 ﻿namespace MultiXPing
 {
 
-    static class Constants
+    static public class Constants
     {
         public const string PROJECTPATH = "..\\..\\..\\..\\";
         public const int WIDTH = 80;
@@ -10,7 +10,7 @@
 
     }
     
-    class Program
+    public class Program
     {
         static void Main(string[] args)
         {

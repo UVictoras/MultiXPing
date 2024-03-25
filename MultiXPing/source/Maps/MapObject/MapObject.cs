@@ -7,7 +7,7 @@ using System.Threading.Tasks.Dataflow;
 
 namespace MultiXPing
 {
-    class MapObject
+    public class MapObject
     {
         /* ----------------------------------------------------- *\
         |                                                         |

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MultiXPing
 {
-    internal class Sign : Interactive
+    public class Sign : Interactive
     {
         /* ----------------------------------------------------- *\
         |                                                         |

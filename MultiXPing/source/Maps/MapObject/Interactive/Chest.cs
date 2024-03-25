@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MultiXPing
 {
-    internal class Chest : Interactive
+    public class Chest : Interactive
     {
         /* ----------------------------------------------------- *\
         |                                                         |
@@ -51,23 +51,7 @@ namespace MultiXPing
 
         public Chest(int x, int y) : base(x,y) 
         {
-            
-        }
-
-        public void InitChestText()
-        {
             Text = "Vous recevez ";
-            if (Content != null)
-            {
-                foreach (GameItem item in Content)
-                {
-                    Text += item.Name + ", ";
-                }
-            }
-            else
-            {
-                Text = "Coffre vide";
-            }
         }
 
         public override void Interact(Player player)
@@ -84,7 +68,15 @@ namespace MultiXPing
                 player.Inventory.AddItem(item);
             }
 
+            Text = "Coffre vide";
+
             Content = null;
+        }
+        
+        public void AddItem(GameItem item)
+        {
+            Content.Add(item);
+            Text += ", " + item.Name;
         }
 
         #endregion Methods

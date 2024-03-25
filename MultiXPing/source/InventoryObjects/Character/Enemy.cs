@@ -4,7 +4,7 @@ public struct GameItem { }
 
 namespace MultiXPing
 {
-    class Enemy : Character
+    public class Enemy : Character
     {
         /* ----------------------------------------------------- *\
         |                                                         |

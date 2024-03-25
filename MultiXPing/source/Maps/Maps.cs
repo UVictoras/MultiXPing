@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace MultiXPing
 {
-    struct Maps
+    public struct Maps
         {
         /* ----------------------------------------------------- *\
         |                                                         |
@@ -143,9 +143,8 @@ namespace MultiXPing
                 else if (c == 'C')
                 {
                     Chest chest = new Chest(x, y);
-                    chest.Content.Add(new Coffee());
+                    chest.AddItem(new Coffee());
 
-                    chest.InitChestText();
                     player.onUse += chest.Interact;
                     chest.PrintText += window.DrawWindowInteractive;
                     list.Add(chest);

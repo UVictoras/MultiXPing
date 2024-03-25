@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MultiXPing
 {
-    class HealingPotion : GameItem
+    public class HealingPotion : GameItem
     {
         /* ----------------------------------------------------- *\
         |                                                         |

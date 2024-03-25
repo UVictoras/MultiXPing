@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MultiXPing
 {
-    internal class Boss : Interactive
+    public class Boss : Interactive
     {
         /* ----------------------------------------------------- *\
         |                                                         |

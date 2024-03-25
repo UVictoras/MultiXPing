@@ -7,7 +7,7 @@ using System.Xml.Linq;
 
 namespace MultiXPing 
 { 
-    abstract class GameItem : NodeObject
+    abstract public class GameItem : NodeObject
     {
         /* ----------------------------------------------------- *\
         |                                                         |

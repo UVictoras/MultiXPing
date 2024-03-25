@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MultiXPing
 {
-    class Coffee : GameItem
+    public class Coffee : GameItem
     {
         /* ----------------------------------------------------- *\
         |                                                         |

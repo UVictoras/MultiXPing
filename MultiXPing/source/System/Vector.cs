@@ -34,7 +34,7 @@ namespace MultiXPing
         }
         #endregion Property
 
-        #region Constructeur
+        #region Conpublic structeur
 
         public Vector2(int x, int y) {
             _x = x;
@@ -42,7 +42,7 @@ namespace MultiXPing
         }
         
 
-        #endregion Constructeur 
+        #endregion Conpublic structeur 
 
     }
 }

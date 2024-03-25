@@ -19,7 +19,7 @@ namespace MultiXPing
         PAUSE = 3,
     };
 
-    class GameManager
+    public class GameManager
     {
         /* ----------------------------------------------------- *\
         |                                                         |

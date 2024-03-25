@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MultiXPing
 {
-    internal class Team : NodeObject
+    public class Team : NodeObject
     {
         /* ----------------------------------------------------- *\
         |                                                         |

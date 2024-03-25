@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MultiXPing
 {
-    class Inventory : NodeObject
+    public class Inventory : NodeObject
     {
 
         /* ----------------------------------------------------- *\

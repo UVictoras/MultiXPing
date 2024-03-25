@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace MultiXPing
 {
-    class Window
+    public class Window
     {
         /* ----------------------------------------------------- *\
         |                                                         |
@@ -39,7 +39,7 @@ namespace MultiXPing
         \* ----------------------------------------------------- */
         #region Property
 
-        string Content
+        public string Content
         {
             get => _content;
             set => _content = value;

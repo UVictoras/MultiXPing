@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MultiXPing
 {
-    class Root : NodeObject
+    public class Root : NodeObject
     {
         public Root() 
         {

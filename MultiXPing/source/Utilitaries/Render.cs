@@ -9,7 +9,7 @@ using MultiXPing;
 
 namespace MultiXPing
 {
-    class Render
+    public class Render
     {
         /* ----------------------------------------------------- *\
         |                                                         |

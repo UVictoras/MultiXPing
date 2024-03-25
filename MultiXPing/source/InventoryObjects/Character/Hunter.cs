@@ -2,7 +2,7 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace MultiXPing
 {
-    class Hunter : Character
+    public class Hunter : Character
     {
         /* ----------------------------------------------------- *\
         |                                                         |

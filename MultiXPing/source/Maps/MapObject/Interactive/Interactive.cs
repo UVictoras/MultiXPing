@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MultiXPing
 {
-    internal class Interactive : MapObject
+    public class Interactive : MapObject
     {
         /* ----------------------------------------------------- *\
         |                                                         |
@@ -35,7 +35,7 @@ namespace MultiXPing
             get => _window;
             set => _window = value;
         }
-        protected string Text { get => text; set => text = value; }
+        public string Text { get => text; set => text = value; }
         protected int Distance { get => distance; set => distance = value; }
 
         #endregion Property
