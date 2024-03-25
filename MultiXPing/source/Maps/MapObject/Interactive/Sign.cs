@@ -55,7 +55,6 @@ namespace MultiXPing
         {
             base.Interact(player);
 
-            Console.WriteLine(Indication);
         }
         #endregion Methods
     }

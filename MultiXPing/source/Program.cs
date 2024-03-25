@@ -4,8 +4,8 @@
     static class Constants
     {
         public const string PROJECTPATH = "..\\..\\..\\..\\";
-        public const int WIDTH = 100;
-        public const int HEIGHT = 50;
+        public const int WIDTH = 80;
+        public const int HEIGHT = 40;
 
 
     }

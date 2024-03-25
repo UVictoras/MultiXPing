@@ -78,7 +78,7 @@ namespace MultiXPing
         }
         public void InitDico()
         {
-            ColorDic.Add('C', ConsoleColor.Cyan);
+            ColorDic.Add('T', ConsoleColor.Cyan);
             ColorDic.Add('_', ConsoleColor.DarkGreen);
             ColorDic.Add('B', ConsoleColor.DarkRed);
             ColorDic.Add('F', ConsoleColor.Green);
@@ -90,6 +90,7 @@ namespace MultiXPing
             ColorDic.Add('D', ConsoleColor.Red);
             ColorDic.Add('S', ConsoleColor.Yellow);
             ColorDic.Add(' ', ConsoleColor.Black);
+            ColorDic.Add('C', ConsoleColor.Red);
 
         }
 

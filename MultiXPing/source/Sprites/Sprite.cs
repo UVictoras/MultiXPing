@@ -18,10 +18,13 @@ namespace MultiXPing
 
         public PlayerSprite()
         {
-            _sprite = " P \n" +
-                      "PPP\n" +
-                      " P\n" +
-                      " P\n";
+            //_sprite = " S \n" +
+            //          "TTT\n" +
+            //          "STS\n" +
+            //          " O\n" +
+            //          " O\n";
+
+            _sprite = "O";
 
             Width = WidthSprite();
             Height = HeightSprite();

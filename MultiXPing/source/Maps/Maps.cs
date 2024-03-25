@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Runtime.ExceptionServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -76,6 +77,7 @@ namespace MultiXPing
          
         public Maps() {
             InitMap();
+            
         }
 
         public void InitMap()
@@ -120,6 +122,38 @@ namespace MultiXPing
                 }
             }
             return count+1;
+        }
+
+        public void InitInteractive(List<Interactive> list, Player player, Window window)
+        {
+            int x = 0;
+            int y = 0;
+
+            foreach(char c in Text)
+            {
+                if (c == '\r')
+                {
+                    y++;
+                    x = 0;
+                }
+                else if (c == '\n')
+                {
+
+                }
+                else if (c == 'C')
+                {
+                    Chest chest = new Chest(x, y);
+                    chest.Content.Add(new Coffee());
+                    player.onUse += chest.Interact;
+                    chest.PrintText += window.DrawWindowInteractive;
+                    list.Add(chest);
+
+                }
+                else
+                {
+                    x++;
+                }
+            }
         }
 
         #endregion Methods

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MultiXPing
 {
-    class Player : MapObject
+    class Npc : Interactive
     {
         /* ----------------------------------------------------- *\
         |                                                         |
@@ -15,10 +15,8 @@ namespace MultiXPing
         \* ----------------------------------------------------- */
         #region Field
 
-        Inventory _inventory = new Inventory();
-        Team _team = new Team();
-
-        Window _menu;
+        string _name;
+        string _content;
 
         #endregion Field
 
@@ -28,10 +26,8 @@ namespace MultiXPing
         |                                                         |
         \* ----------------------------------------------------- */
         #region Property
-
-        
-        internal Team Team { get => _team; set => _team = value; }
-        internal Inventory Inventory { get => _inventory; set => _inventory = value; }
+        public string Name { get => _name; set => _name = value; }
+        public string Content { get => _content; set => _content = value; }
 
         #endregion Property
 
@@ -42,8 +38,6 @@ namespace MultiXPing
         \* ----------------------------------------------------- */
         #region Event
 
-        public event Action<Player> onUse = null;
-
         #endregion Event
 
         /* ----------------------------------------------------- *\
@@ -52,20 +46,11 @@ namespace MultiXPing
         |                                                         |
         \* ----------------------------------------------------- */
         #region Methods
-        public Player(int x, int y) : base(x,y)
-        {
-            Position = new Vector2(x, y);
-            Sprite = new PlayerSprite();
-            _menu = new Window();
-        }
 
-        public void Update(GameManager gm)
-        {
+        public Npc(int x, int y, string message) : base(x, y, message) { }
 
-        }
 
-        public void OnUseWindow() => onUse?.Invoke(this);
-        
         #endregion Methods
+
     }
 }

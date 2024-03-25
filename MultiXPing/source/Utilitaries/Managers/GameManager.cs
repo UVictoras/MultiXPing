@@ -38,9 +38,12 @@ namespace MultiXPing
         Render _renderTarget;
 
         Player _player;
-        MenuWindow _mainWindow;
+        MenuWindow _mainMenuWindow;
+        Window _mainWindow;
 
         Tree _mainMenu;
+
+        List<Interactive> _listInteractives = new();
 
         #endregion Field
 
@@ -94,12 +97,14 @@ namespace MultiXPing
             get => _player;
             set => _player = value;
         }
-        internal MenuWindow MainWindow
+        internal MenuWindow MainMenuWindow
         {
-            get => _mainWindow;
-            set => _mainWindow = value;
+            get => _mainMenuWindow;
+            set => _mainMenuWindow = value;
         }
         public Tree MainMenu { get => _mainMenu; set => _mainMenu = value; }
+        internal List<Interactive> ListInteractives { get => _listInteractives; set => _listInteractives = value; }
+        internal Window MainWindow { get => _mainWindow; set => _mainWindow = value; }
 
         #endregion Property
 
@@ -126,6 +131,8 @@ namespace MultiXPing
             CurrentState = State.MAP;
             IsRunning = true;
 
+            InitPlayer();
+
             Map = new Maps();
 
             Inputmanager = new InputManager();
@@ -134,8 +141,6 @@ namespace MultiXPing
             RenderTarget = new Render();
             RenderTarget.InitBuffer();
 
-            
-            InitPlayer();
 
             MainMenu = new Tree();
             MainMenu.AddNode(Player.Inventory);
@@ -145,9 +150,12 @@ namespace MultiXPing
             Player.Inventory.AddItem(new Coffee());
             Player.Inventory.AddItem(new Glasses());
 
-            MainWindow = new MenuWindow(Player, MainMenu);
-            MainWindow.InitContent(new Vector2(0, 0), " ");
+            MainWindow = new Window();
 
+            MainMenuWindow = new MenuWindow(Player, MainMenu);
+            MainMenuWindow.InitContent(new Vector2(0, 0), " ");
+
+            Map.InitInteractive(ListInteractives, Player, MainWindow);
 
         }
 
@@ -225,6 +233,7 @@ namespace MultiXPing
             RenderTarget.RenderBuffer();
 
             //Draw la window
+            MainMenuWindow.DrawWindow();
             MainWindow.DrawWindow();
         }
 
@@ -234,39 +243,46 @@ namespace MultiXPing
 
             if (Inputmanager.GetKeyState(ConsoleKey.D))
             {
-                Player.Move(4, 0);
+                Player.Move(1, 0);
             }
             if (Inputmanager.GetKeyState(ConsoleKey.Q))
             {
-                Player.Move(-4, 0);
+                Player.Move(-1, 0);
             }
             if (Inputmanager.GetKeyState(ConsoleKey.Z))
             {
-                Player.Move(0, -4);
+                Player.Move(0, -1);
             }
             if (Inputmanager.GetKeyState(ConsoleKey.S))
             {
-                Player.Move(0, 4);
+                Player.Move(0, 1);
             }
-            if (Inputmanager.GetKeyState(ConsoleKey.T))
+            if (Inputmanager.GetKeyState(ConsoleKey.M))
             {
-                MainWindow.Open();
+                MainMenuWindow.Open();
             }
             if (Inputmanager.GetKeyState(ConsoleKey.E))
             {
-                Player.OnUseWindow();
+                if (MainWindow.IsOpen)
+                {
+                    MainWindow.Close();
+                }
+                else
+                {
+                    Player.OnUseWindow();
+                }
             }
             if (Inputmanager.GetKeyState(ConsoleKey.UpArrow))
             {
-                MainWindow.UpdateChoice(-1);
+                MainMenuWindow.UpdateChoice(-1);
             }
             if (Inputmanager.GetKeyState(ConsoleKey.DownArrow))
             {
-                MainWindow.UpdateChoice(1);
+                MainMenuWindow.UpdateChoice(1);
             }
             if (Inputmanager.GetKeyState(ConsoleKey.Enter))
             {
-                MainWindow.Select();
+                MainMenuWindow.Select();
             }
 
         }

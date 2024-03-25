@@ -95,16 +95,27 @@ namespace MultiXPing
         public void InitContent(Vector2 posEntity, string content)
         {
             Content = content;
-            _posEntity = posEntity;
         }
 
         public void Open()
         {
-            if (IsOpen) { IsOpen = false; }
+            if (IsOpen) { IsOpen = false; Content = "default"; }
             else { IsOpen = true; }
         }
 
-        public void DrawWindow()
+        public void Close()
+        {
+            IsOpen = false;
+        }
+
+        public void DrawWindowInteractive(string text)
+        {
+            IsOpen = true;
+            Content = text;
+            DrawWindow();
+        }
+
+         public void DrawWindow()
         {
             if (IsOpen == false)
             {
@@ -119,7 +130,7 @@ namespace MultiXPing
         {
             //Fonction qui dessine le contenu de la fenetre
 
-            if (_content == string.Empty)
+            if (Content == string.Empty)
             {
                 return;
             }

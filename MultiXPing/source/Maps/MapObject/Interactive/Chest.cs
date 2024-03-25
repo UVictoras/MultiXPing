@@ -15,7 +15,7 @@ namespace MultiXPing
         \* ----------------------------------------------------- */
         #region Field
 
-        List<GameItem> _content;           // Content of the chest
+        List<GameItem> _content = new List<GameItem>();           // Content of the chest
 
         #endregion Field
 
@@ -49,18 +49,37 @@ namespace MultiXPing
         \* ----------------------------------------------------- */
         #region Methods
 
-        public Chest(int x, int y, string message) : base(x,y,message) { }
+        public Chest(int x, int y) : base(x,y) 
+        {
+            Text = "Vous recevez ";
+            if(Content != null) 
+            {
+                foreach (GameItem item in Content)
+                {
+                    Text += item.Name + ", ";
+                }
+            }
+            else
+            {
+                Text = "Coffre vide";
+            }
+        }
 
         public override void Interact(Player player)
         {
             base.Interact(player);
+
+            if (Content == null || Distance != 1)
+            {
+                return;
+            }
 
             foreach (var item in _content)
             {
                 player.Inventory.ListInventory.Add(item);
             }
 
-            Window.DrawWindow();
+            Content = null;
         }
 
         #endregion Methods
