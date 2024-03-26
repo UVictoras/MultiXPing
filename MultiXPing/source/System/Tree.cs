@@ -44,6 +44,7 @@ namespace MultiXPing
         public void RemoveChild(NodeObject obj)
         {
             Children.Remove(obj.NodeRef);
+            _childrenCount--;
         }
 
         public void PrintNode(string offset)

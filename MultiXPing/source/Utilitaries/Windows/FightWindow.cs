@@ -70,7 +70,6 @@ namespace MultiXPing
             {
                 CharacterTeam.AddCharacter(mainPlayer.Team.ListTeam[i]);
             }
-            FightingCharacter.AddNode(CharacterTeam);
         }
 
         public override void DrawContent()
@@ -92,7 +91,8 @@ namespace MultiXPing
             }
             else if (node.Obj.Name == "Attacks")
             {
-                // Faut afficher le nom du character
+                _currentChoice = 0;
+                // Afficher le nom de perso contenu dans team, parce que la ca affiche Team
                 _currentNode = FightingCharacter.Root;
             }
             else
@@ -118,7 +118,7 @@ namespace MultiXPing
         }
         public void UpdateChoice(int i)
         {
-            _currentChoice = (((_currentChoice + i) % _currentNode.ChildrenCount) + _currentNode.ChildrenCount) % _currentNode.ChildrenCount;
+            _currentChoice = (((_currentChoice + i) + _currentNode.ChildrenCount)) % _currentNode.ChildrenCount;
         }
 
         #endregion Methods
