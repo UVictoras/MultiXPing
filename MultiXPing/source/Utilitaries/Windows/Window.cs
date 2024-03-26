@@ -112,7 +112,6 @@ namespace MultiXPing
         {
             IsOpen = true;
             Content = text;
-            DrawWindow();
         }
 
          public void DrawWindow()

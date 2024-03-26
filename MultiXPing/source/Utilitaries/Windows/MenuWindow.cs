@@ -92,7 +92,12 @@ namespace MultiXPing
             }
             else
             {
-                node.Obj.Use();                
+                //A modifier 
+                CurrentNode = _arbre.Root.Children[1]
+                if (node.Obj.Use())
+                {
+                    _currentNode.DeleteChildren(_currentChoice);
+                };                
             }
         }
 

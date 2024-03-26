@@ -49,19 +49,15 @@ namespace MultiXPing
             Boost = 5.0f;
             NumberUse = 1;
             Name = "Egg";
+            IsDestroyable = true;
         }
-        public override void Use(ref Hunter hunter)
+        public override bool Use(ref Hunter hunter)
         {
             hunter.BoosterDefense(Boost);
             NumberUse -= 1;
-
+            return true;
         }
 
-        public override void Use()
-        {
-            Console.Write("Egg used");
-
-        }
         #endregion Methods
     }
 }

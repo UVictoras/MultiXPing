@@ -48,11 +48,13 @@ namespace MultiXPing
             Mana = 20;
             NumberUse = 1;
             Name = "Mana Potion";
+            IsDestroyable = true;
         }
-        public override void Use(ref Hunter hunter)
+        public override bool Use(ref Hunter hunter)
         {
             hunter.ManaRegeneration(Mana);
             NumberUse -= 1;
+            return true;
         }
         #endregion Methods
     }

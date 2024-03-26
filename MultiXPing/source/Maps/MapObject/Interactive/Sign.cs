@@ -15,7 +15,6 @@ namespace MultiXPing
         \* ----------------------------------------------------- */
         #region Field
 
-        string _indication;                // Specific text printed on the sign itself
 
         #endregion Field
 
@@ -25,11 +24,6 @@ namespace MultiXPing
         |                                                         |
         \* ----------------------------------------------------- */
         #region Property
-        public string Indication
-        {
-            get => _indication;
-            private set => _indication = value;
-        }
 
         #endregion Property
 
@@ -49,13 +43,22 @@ namespace MultiXPing
         \* ----------------------------------------------------- */
         #region Methods
 
-        public Sign(int x, int y, string message) : base(x, y, message) { }
+        public Sign(int x, int y) : base(x, y) 
+        {
+            Text = "Rien par ici...";
+        }
 
         public override void Interact(Player player)
         {
             base.Interact(player);
 
         }
+
+        public void SetText(string text)
+        {
+            Text = text;
+        }
+
         #endregion Methods
     }
 }

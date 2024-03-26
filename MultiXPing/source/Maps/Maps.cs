@@ -24,6 +24,8 @@ namespace MultiXPing
         private int _width = 0;
         private int _height = 0;
 
+        private List<Sign> _tabSign = new();
+
         #endregion Field
 
         /* ----------------------------------------------------- *\
@@ -33,7 +35,7 @@ namespace MultiXPing
         \* ----------------------------------------------------- */
         #region Property
 
-        public dynamic Tab
+        public List<List<char>> Tab
         {
             get => _tab; 
             set => _tab = value;
@@ -55,6 +57,7 @@ namespace MultiXPing
             get => _height;
             set => _height = value;
         }
+        public List<Sign> TabSign { get => _tabSign; set => _tabSign = value; }
 
         #endregion Property
 
@@ -74,7 +77,7 @@ namespace MultiXPing
         \* ----------------------------------------------------- */
         #region Methods
 
-         
+
         public Maps() {
             InitMap();
             
@@ -126,35 +129,43 @@ namespace MultiXPing
 
         public void InitInteractive(List<Interactive> list, Player player, Window window)
         {
-            int x = 0;
-            int y = 0;
-
-            foreach(char c in Text)
+            for(int i = 0; i < Tab.Count; i++) 
             {
-                if (c == '\r')
+                for(int j = 0; j < Tab[i].Count; j++)
                 {
-                    y++;
-                    x = 0;
-                }
-                else if (c == '\n')
-                {
+                    if (Tab[i][j] == 'C')
+                    {
+                        //x = 53
+                        //y = 15
 
-                }
-                else if (c == 'C')
-                {
-                    Chest chest = new Chest(x, y);
-                    chest.AddItem(new Coffee());
+                        Chest chest = new Chest(j, i);
+                        chest.AddItem(new Coffee());
 
-                    player.onUse += chest.Interact;
-                    chest.PrintText += window.DrawWindowInteractive;
-                    list.Add(chest);
+                        player.onUse += chest.Interact;
+                        chest.PrintText += window.DrawWindowInteractive;
+                        list.Add(chest);
 
-                }
-                else
-                {
-                    x++;
+                    }
+                    else if(Tab[i][j] == 'G')
+                    {
+                        Sign sign  = new Sign(j, i);
+                        player.onUse += sign.Interact;
+                        sign.PrintText += window.DrawWindowInteractive;
+                        list.Add(sign);
+                        TabSign.Add(sign);
+                    }
                 }
             }
+
+            InitSigns();
+
+        }
+
+        public void InitSigns()
+        {
+            //Non générique, il faut set tous les paneaux ici 
+            TabSign[1].SetText("Clairière obscure ->");
+
         }
 
         #endregion Methods

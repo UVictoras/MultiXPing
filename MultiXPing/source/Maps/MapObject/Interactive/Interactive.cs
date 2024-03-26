@@ -67,12 +67,14 @@ namespace MultiXPing
 
         public virtual void Interact(Player player)
         {
-            int xP = player.Position.X;
-            int yP = player.Position.Y;
+            int xP = player.Position.X; // Doit etre 52
+            int yP = player.Position.Y; // Doit etre 15
             int xO = Position.X;
             int yO = Position.Y;
 
-            Distance = Math.Abs((xO - xP)+(yO - yP));
+            double oue = Math.Sqrt(Math.Pow((xO - xP), 2) + Math.Pow((yO - yP), 2));
+
+            Distance = (int)Math.Sqrt(Math.Pow((xO - xP),2) + Math.Pow((yO - yP),2));
 
             if (Distance != 1)
             {
