@@ -237,6 +237,7 @@ namespace MultiXPing
             //Reset
             //Console.Clear();
             Console.SetCursorPosition(0, 0);
+            Console.CursorVisible = false;
             RenderTarget.ResetBuffer();
 
             //Draw map
@@ -257,6 +258,7 @@ namespace MultiXPing
             //Reset
             //Console.Clear();
             Console.SetCursorPosition(0, 0);
+            Console.CursorVisible = false;
             RenderTarget.ResetBuffer();
 
             //Draw map
