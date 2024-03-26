@@ -68,6 +68,11 @@ namespace MultiXPing
             Name = "team";
         }
 
+        public void AddCharacter(Character character)
+        {
+            _team.Add(character);
+            NodeRef.InsertChild(character);
+        }
         #endregion Methods
     }
 }

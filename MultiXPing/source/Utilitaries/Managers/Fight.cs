@@ -65,24 +65,7 @@ namespace MultiXPing.source.Utilitaries.Managers
 
         public void DetermineOrder()
         {
-            List<Character> sortedHunter = (MainPlayer.Team.ListTeam.OrderByDescending(x => x.Speed).ToList());
-            for (int i = 0; i < sortedHunter.Count; i++)
-            {
-                ActionOrder.Add(sortedHunter[i]);
-            }
-
-            for (int i = 0; i < ActionOrder.Count; i++)
-            {
-                if (ActionOrder[i].Speed <= Enemy.Speed)
-                {
-                    ActionOrder.Insert(i,Enemy);
-                }
-                else if (i == ActionOrder.Count - 1)
-                {
-                    ActionOrder.Add(Enemy);
-                    break;
-                }
-            }
+            ActionOrder = (CharacterTeam.ListTeam.OrderByDescending(x => x.Speed).ToList());
         }
 
         #endregion Methods

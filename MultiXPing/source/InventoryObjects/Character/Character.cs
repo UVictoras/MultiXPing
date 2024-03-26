@@ -28,8 +28,6 @@ namespace MultiXPing
         Dictionary<int, Attack> _possibelAttacks;       // List of the attacks the character can learn
         CharactersAttacks _charactersAttacks;
 
-        string _name;                  // Name of the character
-
         #endregion Field
 
         /* ----------------------------------------------------- *\
@@ -114,12 +112,6 @@ namespace MultiXPing
         {
             get => _isAlive;
             set => _isAlive = value;
-        }
-
-        public string Name
-        {
-            get => _name;
-            set => _name = value;
         }
         Dictionary<int, Attack> PossibleAttacks
         {

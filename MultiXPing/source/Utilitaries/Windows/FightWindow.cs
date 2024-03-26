@@ -62,10 +62,13 @@ namespace MultiXPing
             ActionOrder = new List<Character>();
             Turn = 0;
             FightingCharacter = new Tree();
-            CharacterTeam.ListTeam.Add(enemy);
-            
-            // ADD Player;Team a CharacterTeam
-            FightingCharacter.AddNode(mainPlayer.Team);
+            CharacterTeam = new Team();
+            CharacterTeam.AddCharacter(enemy);
+
+            for (int i = 0; i < mainPlayer.Team.ListTeam.Count ; i++)
+            {
+                CharacterTeam.AddCharacter(mainPlayer.Team.ListTeam[i]);
+            }
             FightingCharacter.AddNode(CharacterTeam);
         }
 
