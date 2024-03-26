@@ -1,7 +1,7 @@
 namespace MultiXPing
 {
-	public struct Attack
-	{
+    public struct Attack
+    {
         /* ----------------------------------------------------- *\
         |                                                         |
         |                          Field                          |
@@ -9,11 +9,14 @@ namespace MultiXPing
         \* ----------------------------------------------------- */
         #region Field
 
-        string   _element;		    // Defines the specificity of the attack
-		float	 _accuracy;         // Precision of the attack
-		float	 _criticalRate;     // Critical rate of the attack
-		int		 _damage;           // Amount of damage inflicted by the attack
-		bool	 _isMagic;          // Whether the attack has a magical type or not
+        string _name;
+        string _element;            // Defines the specificity of the attack
+        float _accuracy;         // Precision of the attack
+        int _damage;           // Amount of damage inflicted by the attack
+        int _magicCost;          // Whether the attack has a magical type or not
+        object _function;
+        string _descriptor;
+        string _class;
 
         #endregion Field
 
@@ -25,34 +28,27 @@ namespace MultiXPing
         #region Property
 
         public string Element
-		{
-			get => _element; 
-			set => _element = value;
-		}
+        {
+            get => _element;
+            set => _element = value;
+        }
 
-		public float Accuracy
-		{
-			get => _accuracy;
-			set => _accuracy  = value;
-		}
+        public float Accuracy
+        {
+            get => _accuracy;
+            set => _accuracy = value;
+        }
 
-		public float CriticalRate
-		{
-			get => _criticalRate;
-			set => _criticalRate = value;
-		}
-
-		public int Damage
-		{
-			get => _damage; 
-			set => _damage = value;
-		}
-
-		public bool IsMagic
-		{
-			get => _isMagic; 
-			set => _isMagic = value;
-		}
+        public int Damage
+        {
+            get => _damage;
+            set => _damage = value;
+        }
+        public int MagicCost { get => _magicCost; set => _magicCost = value; }
+        public string Descriptor { get => _descriptor; set => _descriptor = value; }
+        public string Class { get => _class; set => _class = value; }
+        public string Name { get => _name; set => _name = value; }
+        public object Function { get => _function; set => _function = value; }
 
         #endregion Property
 
@@ -74,4 +70,7 @@ namespace MultiXPing
 
         #endregion Methods
     }
+
+    
+
 }

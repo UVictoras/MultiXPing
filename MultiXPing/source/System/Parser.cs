@@ -34,5 +34,27 @@ namespace MultiXPing
             }
             return parsedData;
         }
+
+        public static List<List<string>> CSVParserString(string filePath)
+        {
+            List<List<string>> parsedData = new List<List<string>>();
+            using (StreamReader csv = new StreamReader(filePath))
+            {
+                string line;
+                while ((line = csv.ReadLine()) != null)
+                {
+                    string[] splitLine = line.Split(",");
+                    List<string> floatLine = new List<string>();
+
+                    foreach (string str in splitLine)
+                    {
+                        floatLine.Add(str);
+                    }
+                    parsedData.Add(floatLine);
+                }
+            }
+            return parsedData;
+        }
+
     }
 }
