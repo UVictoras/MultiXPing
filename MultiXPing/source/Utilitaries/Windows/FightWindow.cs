@@ -118,7 +118,7 @@ namespace MultiXPing
         }
         public void UpdateChoice(int i)
         {
-            _currentChoice = (_currentChoice + i) % _currentNode.ChildrenCount;
+            _currentChoice = (((_currentChoice + i) % _currentNode.ChildrenCount) + _currentNode.ChildrenCount) % _currentNode.ChildrenCount;
         }
 
         #endregion Methods
