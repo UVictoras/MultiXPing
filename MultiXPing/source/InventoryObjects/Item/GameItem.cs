@@ -19,7 +19,6 @@ namespace MultiXPing
         string _description;
         int _numberUse;
 
-
         #endregion Field
 
         /* ----------------------------------------------------- *\

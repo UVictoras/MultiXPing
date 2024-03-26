@@ -21,6 +21,8 @@ namespace MultiXPing
         int _currentChoice;
         Node _currentNode;
 
+        Node _tempNode = null;
+
         Tree _arbre;
 
         #endregion Field
@@ -41,6 +43,7 @@ namespace MultiXPing
        
         public Tree Arbre { get => _arbre; set => _arbre = value; }
         public Node CurrentNode { get => _currentNode; set => _currentNode = value; }
+        public Node TempNode { get => _tempNode; set => _tempNode = value; }
 
         #endregion Property
 
@@ -90,14 +93,26 @@ namespace MultiXPing
             {
                 _currentNode = node;
             }
-            else
+            else if (node.Obj.IsUsableOnTarget)
+            {
+                CurrentNode = _arbre.Root.Children[1];
+
+            }
+            else if(TempNode != null)
             {
                 //A modifier 
-                CurrentNode = _arbre.Root.Children[1]
+                CurrentNode = _arbre.Root.Children[1];
                 if (node.Obj.Use())
                 {
-                    _currentNode.DeleteChildren(_currentChoice);
-                };                
+                    if (node.Obj.IsDestroyable)
+                    {
+                        _currentNode.DeleteChildren(_currentChoice);
+                    }
+                    
+                }   
+                
+
+
             }
         }
 

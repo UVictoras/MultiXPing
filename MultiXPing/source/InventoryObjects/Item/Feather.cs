@@ -46,6 +46,7 @@ namespace MultiXPing
             NumberUse = 1;
             Name = "Feather";
             IsDestroyable = true;
+            IsUsableOnTarget = true;
         }
         public override bool Use(ref Hunter hunter)
         {
