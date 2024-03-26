@@ -313,7 +313,7 @@ namespace MultiXPing
                 }
                 if (Fight.IsOpen)
                 {
-                    MainWindow.UpdateChoice(-1);
+                    Fight.UpdateChoice(-1);
                 }
             }
             if (Inputmanager.GetKeyState(ConsoleKey.DownArrow))

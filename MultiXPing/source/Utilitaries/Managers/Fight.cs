@@ -18,7 +18,9 @@ namespace MultiXPing.source.Utilitaries.Managers
         List<Character> _actionOrder;
         Character _characterTurn;
         Player _mainPlayer;
-        Enemy _enemy;
+        Team _characterTeam = new Team();
+        Character _target;
+        Tree _fightingCharacter;
 
         #endregion Field
 
@@ -36,11 +38,9 @@ namespace MultiXPing.source.Utilitaries.Managers
             get => _mainPlayer;
             set => _mainPlayer = value;
         }
-        public Enemy Enemy
-        {
-            get => _enemy;
-            set => _enemy = value;
-        }
+        public Character Target { get => _target; set => _target = value; }
+        public Tree FightingCharacter { get => _fightingCharacter; set => _fightingCharacter = value; }
+        internal Team CharacterTeam { get => _characterTeam; set => _characterTeam = value; }
 
         #endregion Property
 
@@ -65,7 +65,7 @@ namespace MultiXPing.source.Utilitaries.Managers
 
         public void DetermineOrder()
         {
-            List<Hunter> sortedHunter = (MainPlayer.Team.ListTeam.OrderByDescending(x => x.Speed).ToList());
+            List<Character> sortedHunter = (MainPlayer.Team.ListTeam.OrderByDescending(x => x.Speed).ToList());
             for (int i = 0; i < sortedHunter.Count; i++)
             {
                 ActionOrder.Add(sortedHunter[i]);

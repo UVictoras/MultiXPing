@@ -121,10 +121,10 @@ namespace MultiXPing
             get => _name;
             set => _name = value;
         }
-        public Dictionary<int, Attack> PossibleAttacks
+        Dictionary<int, Attack> PossibleAttacks
         {
             get => _possibelAttacks;
-            private set => _possibelAttacks = value;
+            set => _possibelAttacks = value;
         }
         internal CharactersAttacks CharactersAttacks { get => _charactersAttacks; set => _charactersAttacks = value; }
 
@@ -177,6 +177,16 @@ namespace MultiXPing
                 Mana = MaximumMana;
             }
         }
+
+        public void TakeDamage(int damage)
+        {
+            Health -= damage;
+            if (Health < 0) 
+            {
+                Health = 0;
+            }
+        }
+
         public virtual void Death() { }
 
         #endregion Methods

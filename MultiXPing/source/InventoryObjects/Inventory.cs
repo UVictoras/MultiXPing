@@ -65,7 +65,7 @@ namespace MultiXPing
 
         public Inventory()
         {
-            Name = "inventory";
+            Name = "Inventory";
         }
 
         public void AddItem(GameItem obj)

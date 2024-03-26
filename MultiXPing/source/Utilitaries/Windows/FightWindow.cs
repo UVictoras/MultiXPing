@@ -59,9 +59,14 @@ namespace MultiXPing
             Arbre = arbre;
             MainPlayer = mainPlayer;
             CurrentNode = arbre.Root;
-            Enemy = enemy;
             ActionOrder = new List<Character>();
             Turn = 0;
+            FightingCharacter = new Tree();
+            CharacterTeam.ListTeam.Add(enemy);
+            
+            // ADD Player;Team a CharacterTeam
+            FightingCharacter.AddNode(mainPlayer.Team);
+            FightingCharacter.AddNode(CharacterTeam);
         }
 
         public override void DrawContent()
@@ -81,6 +86,11 @@ namespace MultiXPing
             {
                 _currentNode = node;
             }
+            else if (node.Obj.Name == "Attacks")
+            {
+                // Faut afficher le nom du character
+                _currentNode = FightingCharacter.Root;
+            }
             else
             {
                 node.Obj.Use();
@@ -91,15 +101,16 @@ namespace MultiXPing
             if (Turn == 0)
             {
                 DetermineOrder();
+                Turn++;
             }
-            if (Turn != 0)
+            else if (Turn != 0)
             {
                 Arbre.RemoveNode(CharacterTurn.CharactersAttacks);
             }
             CharacterTurn = ActionOrder[Turn % ActionOrder.Count];
             Arbre.AddNode(CharacterTurn.CharactersAttacks);
 
-            Turn += 1;
+            //Turn += 1;
         }
         public void UpdateChoice(int i)
         {
