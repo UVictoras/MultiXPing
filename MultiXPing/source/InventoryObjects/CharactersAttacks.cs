@@ -50,7 +50,11 @@ namespace MultiXPing
         {
             Name = "Attacks";
         }
-
+        public void AddAttack(Attack attack)
+        {
+            _attacks.Add(attack);
+            NodeRef.InsertChild(attack);
+        }
 
         #endregion Methods
     }

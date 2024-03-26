@@ -26,6 +26,7 @@ namespace MultiXPing
         int _level;                 // Current level of progression of the character
         bool _isAlive;               // Current state of the character, true if alive, false if dead
         Dictionary<int, Attack> _possibelAttacks;       // List of the attacks the character can learn
+        Tree _attacks;
         CharactersAttacks _charactersAttacks;
 
         #endregion Field
@@ -40,7 +41,7 @@ namespace MultiXPing
         public int MaximumHealth
         {
             get => _maximumHealth;
-            protected set => _maximumHealth = value;
+            set => _maximumHealth = value;
         }
 
         public int Health
@@ -52,13 +53,13 @@ namespace MultiXPing
         public float PhysicalDamage
         {
             get => _physicalDamage;
-            protected set => _physicalDamage = value;
+            set => _physicalDamage = value;
         }
 
         public float PhysicalDefense
         {
             get => _physicalDefense;
-            protected set => _physicalDefense = value;
+            set => _physicalDefense = value;
         }
 
         public float MagicalDamage
@@ -81,7 +82,7 @@ namespace MultiXPing
         public float Accuracy
         {
             get => _accuracy;
-            protected set => _accuracy = value;
+            set => _accuracy = value;
         }
 
         public int MaximumMana
@@ -119,6 +120,7 @@ namespace MultiXPing
             set => _possibelAttacks = value;
         }
         internal CharactersAttacks CharactersAttacks { get => _charactersAttacks; set => _charactersAttacks = value; }
+        public Tree Attacks { get => _attacks; set => _attacks = value; }
 
         #endregion Property
 
@@ -144,6 +146,7 @@ namespace MultiXPing
         public Character()
         {
             CharactersAttacks = new CharactersAttacks();
+            Attacks = new Tree();
         }
 
         public void InitializeCharacter(string name)
@@ -151,6 +154,13 @@ namespace MultiXPing
             Name = name;
             Level = 1;
             IsAlive = true;
+            Attack charge = new Attack();
+            charge.Name = "Charge";
+            charge.Damage = 10;
+            charge.Accuracy = 90;
+            charge.IsMagic = false;
+            Attacks.AddNode(CharactersAttacks);
+            CharactersAttacks.AddAttack(charge);
         }
 
         public void Healing(int heal)

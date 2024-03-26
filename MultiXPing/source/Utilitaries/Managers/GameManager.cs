@@ -161,6 +161,10 @@ namespace MultiXPing
             Enemy mechant = new Enemy();
             mechant.InitializeCharacter("Mechant");
             mechant.Speed = 25;
+            mechant.PhysicalDamage = 40;
+            mechant.PhysicalDefense = 40;
+            mechant.Accuracy = 100;
+            mechant.MaximumHealth = 100;
 
             CharacterStats Stats = new CharacterStats();
             Stats.InitializeCSVStats(Constants.PROJECTPATH + "MultiXPing\\source\\Data\\InitStats.csv", Constants.PROJECTPATH + "MultiXPing\\source\\Data\\LevelUpMultiplicator.csv");
