@@ -45,11 +45,14 @@ namespace MultiXPing
             Description = "Cette plume permet de réanimer un allié avec la moitier de ses PV";
             NumberUse = 1;
             Name = "Feather";
+            IsDestroyable = true;
+            IsUsableOnTarget = true;
         }
-        public override void Use(ref Hunter hunter)
+        public override bool Use(ref Hunter hunter)
         {
             hunter.Reanimate();
             NumberUse -= 1;
+            return true;
         }
         #endregion Methods
     }

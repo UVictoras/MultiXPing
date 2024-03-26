@@ -81,7 +81,7 @@ namespace MultiXPing
             ColorDic.Add('T', ConsoleColor.Cyan);
             ColorDic.Add('_', ConsoleColor.DarkGreen);
             ColorDic.Add('B', ConsoleColor.DarkRed);
-            ColorDic.Add('F', ConsoleColor.Green);
+            ColorDic.Add('H', ConsoleColor.Green);
             ColorDic.Add('P', ConsoleColor.DarkMagenta);
             ColorDic.Add('M', ConsoleColor.Magenta);
             ColorDic.Add('O', ConsoleColor.DarkBlue);
@@ -139,9 +139,12 @@ namespace MultiXPing
         
         public void DrawPlayer(MapObject entity)
         {
+            //Dessine le player au milieu de l'écran
+
             int x = Constants.WIDTH/2 - entity.Sprite.Width;
             int y = Constants.HEIGHT/2 - entity.Sprite.Height;
             int countX = x;
+            //Pour dessiner le sprite du joueur au milieu
             
             foreach(char c in entity.Sprite.Sprite) 
             {
@@ -166,8 +169,8 @@ namespace MultiXPing
 
         public void DrawMap(Maps map, Player player)
         {
-            int offsetX = player.Position.Y - _height/2;
-            int offsetY = player.Position.X - _width/2;
+            int offsetX = player.Position.Y - _height/2 + 1 ;
+            int offsetY = player.Position.X - _width/2 - 1;
 
             for (int i = 0; i < _height && i < map.Height; i++)
             {

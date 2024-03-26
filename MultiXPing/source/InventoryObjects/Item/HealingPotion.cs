@@ -48,11 +48,14 @@ namespace MultiXPing
             Heal = 20;
             NumberUse = 1;
             Name = "Healing Potion";
+            IsDestroyable = true;
+            IsUsableOnTarget = true;
         }
-        public override void Use(ref Hunter hunter)
+        public override bool Use(ref Hunter hunter)
         {
             hunter.Healing(Heal);
             NumberUse -= 1;
+            return true;
         }
         #endregion Methods
     }

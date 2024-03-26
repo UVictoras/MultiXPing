@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,6 +22,8 @@ namespace MultiXPing
         int _currentChoice;
         Node _currentNode;
 
+        Node _usedNode = null;
+
         Tree _arbre;
 
         #endregion Field
@@ -41,6 +44,7 @@ namespace MultiXPing
        
         public Tree Arbre { get => _arbre; set => _arbre = value; }
         public Node CurrentNode { get => _currentNode; set => _currentNode = value; }
+        public Node UsedNode { get => _usedNode; set => _usedNode = value; }
 
         #endregion Property
 
@@ -70,6 +74,7 @@ namespace MultiXPing
         public void ResetNode()
         {
             _currentNode = _arbre.Root;
+            UsedNode = null;
         }
 
         public override void DrawContent()
@@ -86,18 +91,32 @@ namespace MultiXPing
         {
             Node node = _currentNode.Children[_currentChoice];
 
-            if(node.HasChildren() == true)
+            if (UsedNode != null)
+            {
+                if (node.Obj.Use())
+                {
+                    if (node.Obj.IsDestroyable)
+                    {
+                        _currentNode.DeleteChildren(_currentChoice);
+                    }
+                    Debug.WriteLine("objet used");
+                }
+            }
+            else if (node.HasChildren() == true)
             {
                 _currentNode = node;
             }
-            else
+            else if (node.Obj.IsUsableOnTarget)
             {
-                node.Obj.Use();                
+                CurrentNode = _arbre.Root.Children[1];
+                UsedNode = node;
+
             }
         }
 
         public void UpdateChoice(int i)
         {
+            if(_currentNode.ChildrenCount == 0) { return; };
             _currentChoice = (_currentChoice + i) % _currentNode.ChildrenCount ;
         }
 

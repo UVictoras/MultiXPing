@@ -73,6 +73,13 @@ namespace MultiXPing
             if(ChildrenCount == 0) { return false; }
             return true;
         }
+
+        public void DeleteChildren(int index)
+        {
+            Children[index] = null;
+            Children.RemoveAt(index);
+        }
+
     }
 
     public struct Tree

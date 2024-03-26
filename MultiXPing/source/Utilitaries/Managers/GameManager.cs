@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Linq;
 using System.Net.Http.Headers;
 using System.Text;
@@ -44,6 +45,8 @@ namespace MultiXPing
         Tree _mainMenu;
 
         List<Interactive> _listInteractives = new();
+
+        Random _rand = new Random();
 
         #endregion Field
 
@@ -105,6 +108,7 @@ namespace MultiXPing
         public Tree MainMenu { get => _mainMenu; set => _mainMenu = value; }
         internal List<Interactive> ListInteractives { get => _listInteractives; set => _listInteractives = value; }
         internal Window MainWindow { get => _mainWindow; set => _mainWindow = value; }
+        public Random Rand { get => _rand; set => _rand = value; }
 
         #endregion Property
 
@@ -149,6 +153,8 @@ namespace MultiXPing
             Player.Inventory.AddItem(new Egg());
             Player.Inventory.AddItem(new Coffee());
             Player.Inventory.AddItem(new Glasses());
+
+            
 
             MainWindow = new Window();
 
@@ -197,6 +203,7 @@ namespace MultiXPing
 
         public void UpdateMap()
         {
+            LunchFight();
             Render();
             //MainMenu.PrintTree();
         }
@@ -287,6 +294,18 @@ namespace MultiXPing
                 MainMenuWindow.Select();
             }
 
+        }
+
+        public void LunchFight()
+        {
+            
+            if (Map.Tab[Player.Position.Y][Player.Position.X] == 'H') //Si le joueur est dans une zone d'herbe
+            {
+                if (Rand.Next(100) <= 15) 
+                {
+                    CurrentState = State.FIGHT;
+                }
+            }
         }
 
         #endregion Methods

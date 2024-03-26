@@ -38,7 +38,7 @@ namespace MultiXPing
         |                                                         |
         \* ----------------------------------------------------- */
         #region Methods
-        public abstract void Use(ref Hunter hunter);
+        public abstract bool Use(ref Hunter hunter);
         #endregion Methods
     }
 }
