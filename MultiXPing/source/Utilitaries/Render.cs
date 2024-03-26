@@ -81,7 +81,7 @@ namespace MultiXPing
             ColorDic.Add('T', ConsoleColor.Cyan);
             ColorDic.Add('_', ConsoleColor.DarkGreen);
             ColorDic.Add('B', ConsoleColor.DarkRed);
-            ColorDic.Add('F', ConsoleColor.Green);
+            ColorDic.Add('H', ConsoleColor.Green);
             ColorDic.Add('P', ConsoleColor.DarkMagenta);
             ColorDic.Add('M', ConsoleColor.Magenta);
             ColorDic.Add('O', ConsoleColor.DarkBlue);
