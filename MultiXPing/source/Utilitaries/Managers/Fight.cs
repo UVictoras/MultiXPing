@@ -21,6 +21,7 @@ namespace MultiXPing.source.Utilitaries.Managers
         Team _characterTeam = new Team();
         Character _target;
         Enemy _enemy;
+        Flee _flee = new Flee();
         Tree _fightingCharacter;
 
         #endregion Field
@@ -43,6 +44,8 @@ namespace MultiXPing.source.Utilitaries.Managers
         public Tree FightingCharacter { get => _fightingCharacter; set => _fightingCharacter = value; }
         internal Team CharacterTeam { get => _characterTeam; set => _characterTeam = value; }
         internal Enemy Enemy { get => _enemy; set => _enemy = value; }
+
+        internal Flee Flee { get => _flee; set => _flee = value; }
 
         #endregion Property
 

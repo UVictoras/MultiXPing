@@ -208,9 +208,8 @@ namespace MultiXPing
         {
             while (IsRunning)
             {
-                HandleInput();
                 Update();
-                
+                HandleInput();
             }
         }
 
@@ -241,7 +240,7 @@ namespace MultiXPing
 
         public void UpdateFight()
         {
-            Fight.UpdateFight();
+            Fight.UpdateFight(ref _currentState);
             RenderFight();
         }
 

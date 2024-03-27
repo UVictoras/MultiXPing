@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace MultiXPing
 {
-    internal class CharactersAttacks : NodeObject
+    public class Flee : NodeObject
     {
         /* ----------------------------------------------------- *\
         |                                                         |
@@ -15,8 +14,6 @@ namespace MultiXPing
         |                                                         |
         \* ----------------------------------------------------- */
         #region Field
-
-        List<Attack> _attacks = new List<Attack>();// List of Attack the character has
 
         #endregion Field
 
@@ -26,7 +23,6 @@ namespace MultiXPing
         |                                                         |
         \* ----------------------------------------------------- */
         #region Property
-        public List<Attack> Attacks { get => _attacks; set => _attacks = value; }
 
         #endregion Property
 
@@ -46,15 +42,7 @@ namespace MultiXPing
         \* ----------------------------------------------------- */
         #region Methods
 
-        public CharactersAttacks()
-        {
-            Name = "Attacks";
-        }
-        public void AddAttack(Attack attack)
-        {
-            _attacks.Add(attack);
-            NodeRef.InsertChild(attack);
-        }
+        public Flee() : base() { Name = "Flee"; }
 
         #endregion Methods
     }

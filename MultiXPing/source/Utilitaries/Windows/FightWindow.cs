@@ -12,8 +12,8 @@ namespace MultiXPing
     {
         START = 0,
         FIGHTING = 1,
-        END = 2,
-        FLEE = 3,
+        FLEE = 2,
+        END = 3,
     };
     class FightWindow : Fight
     {
@@ -114,13 +114,16 @@ namespace MultiXPing
                     // Afficher le nom de perso contenu dans team, parce que la ca affiche Team
                     _currentNode = FightingCharacter.Root.Children[0];
                 }
+                else if (node.Obj.Name == "Flee")
+                {
+                    State = FightState.FLEE;
+                }
                 else
                 {
                     node.Obj.Use();
                     Turn++;
                 }
             }
-            
             else
             {
                 // Au tour de l'ennemis, donc y'a du texte à passer 
@@ -129,7 +132,7 @@ namespace MultiXPing
         #endregion Fight
 
 
-        public void UpdateFight()
+        public void UpdateFight(ref MultiXPing.State gameState)
         {
             switch (State)
             {
@@ -139,14 +142,17 @@ namespace MultiXPing
                     DetermineOrder();
                     CharacterTurn = ActionOrder[Turn % ActionOrder.Count];
                     Arbre.AddNode(CharacterTurn.CharactersAttacks);
+                    Arbre.AddNode(Flee);
                     break;
                 case FightState.FIGHTING:
 
                     if (MainPlayer.Team.ListTeam.Contains(CharacterTurn))
                     {
+                        Arbre.RemoveNode(Flee);
                         Arbre.RemoveNode(CharacterTurn.CharactersAttacks);
                         CharacterTurn = ActionOrder[Turn % ActionOrder.Count];
                         Arbre.AddNode(CharacterTurn.CharactersAttacks);
+                        Arbre.AddNode(Flee);
                     }
                     else
                     {
@@ -155,9 +161,11 @@ namespace MultiXPing
 
                     DetermineOrder();
                     break;
-                case FightState.END:
-                    break;
                 case FightState.FLEE:
+                    gameState = MultiXPing.State.MAP;
+                    State = FightState.END;
+                    break;
+                case FightState.END:
                     break;
                 default:
                     break;
