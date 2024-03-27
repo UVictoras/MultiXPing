@@ -119,8 +119,8 @@ namespace MultiXPing
             get => _possibelAttacks;
             set => _possibelAttacks = value;
         }
-        internal CharactersAttacks CharactersAttacks { get => _charactersAttacks; set => _charactersAttacks = value; }
-        public Tree Attacks { get => _attacks; set => _attacks = value; }
+        public CharactersAttacks CharactersAttacks { get => _charactersAttacks; set => _charactersAttacks = value; }
+        public Tree ListAttacks { get => _attacks; set => _attacks = value; }
 
         #endregion Property
 
@@ -145,8 +145,8 @@ namespace MultiXPing
 
         public Character()
         {
+            ListAttacks = new Tree();
             CharactersAttacks = new CharactersAttacks();
-            Attacks = new Tree();
         }
 
         public void InitializeCharacter(string name)
@@ -155,10 +155,7 @@ namespace MultiXPing
             Level = 1;
             IsAlive = true;
             Attack charge = new Attack();
-            charge.Name = "Charge";
-            charge.Damage = 10;
-            charge.Accuracy = 90;
-            Attacks.AddNode(CharactersAttacks);
+            ListAttacks.AddNode(CharactersAttacks);
             CharactersAttacks.AddAttack(charge);
         }
 

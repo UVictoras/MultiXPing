@@ -70,6 +70,7 @@ namespace MultiXPing
             MainPlayer = mainPlayer;
             Enemy = enemy;
             CharacterTeam = new Team();
+            CharacterTurn = new Character();
             ActionOrder = new List<Character>();
             FightingCharacter = new Tree();
         }
@@ -108,16 +109,28 @@ namespace MultiXPing
                 {
                     _currentNode = node;
                 }
-                else if (node.Parent.Name== "Attacks")
+                else if (node.Obj.Name== "Attacks")
                 {
                     _currentChoice = 0;
-                    // Afficher le nom de perso contenu dans team, parce que la ca affiche Team
+                    _currentNode = CharacterTurn.CharactersAttacks.NodeRef;
+                }
+                else if (node.Parent.Name == "Attacks")
+                {
+                    SelectedAttack = (Attack)(node.Obj);
+                    _currentChoice = 0;
                     _currentNode = FightingCharacter.Root.Children[0];
                 }
                 else
                 {
-                    node.Obj.Use();
-                    Turn++;
+                    if (node.Parent.Name != "team")
+                    {
+                        node.Obj.Use();
+                        Turn++;
+                    }
+                    else
+                    {
+                        SelectedAttack.Use();
+                    }
                 }
             }
             

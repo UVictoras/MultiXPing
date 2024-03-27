@@ -17,7 +17,6 @@ namespace MultiXPing
         \* ----------------------------------------------------- */
         #region Field
 
-        string _name;
         string _element;            // Defines the specificity of the attack
         float _accuracy;         // Precision of the attack
         int _damage;           // Amount of damage inflicted by the attack
@@ -75,7 +74,12 @@ namespace MultiXPing
         |                                                         |
         \* ----------------------------------------------------- */
         #region Methods
-        public Attack(){}
+        public Attack()
+        {
+            Name = "Charge";
+            Damage = 10;
+            Accuracy = 10;
+        }
         public void UseAttack(Character attacker, Character target)
         {
             int damage = 0;

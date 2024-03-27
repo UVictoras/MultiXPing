@@ -33,13 +33,25 @@ namespace MultiXPing
             Node noeud = new();
             noeud.Obj = obj;
             noeud.Parent = Obj;
-            if(Obj == null) { throw new NullReferenceException("Parent must be non nullable"); }
 
+            if (obj.NodeRef != null)
+            {
+                if (obj.NodeRef.HasChildren())
+                {
+                    for (int i = 0; i < obj.NodeRef.ChildrenCount; i++)
+                    {
+                        noeud.Children.Add(obj.NodeRef.Children[i]);
+                        noeud.ChildrenCount++;
+                    }
+                }
+            }
+
+            if(Obj == null) { throw new NullReferenceException("Parent must be non nullable"); }
             _childrenCount++;
             Children.Add(noeud);
             obj.SetNode(noeud);
-            
-            
+
+
         }
         public void RemoveChild(NodeObject obj)
         {
