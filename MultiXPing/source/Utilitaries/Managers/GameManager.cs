@@ -238,7 +238,7 @@ namespace MultiXPing
 
         public void UpdateMap()
         {
-            LunchFight();
+            LaunchFight();
             Render();
             //MainMenu.PrintTree();
         }
@@ -378,7 +378,7 @@ namespace MultiXPing
             }
         }
 
-        public void LunchFight()
+        public void LaunchFight()
         {
             
             if (Map.Tab[Player.Position.Y][Player.Position.X] == 'H') //Si le joueur est dans une zone d'herbe
@@ -386,6 +386,7 @@ namespace MultiXPing
                 if (Rand.Next(100) <= 15) 
                 {
                     CurrentState = State.FIGHT;
+                    Fight.Open();
                 }
             }
         }

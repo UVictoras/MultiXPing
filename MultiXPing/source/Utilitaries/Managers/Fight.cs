@@ -19,7 +19,7 @@ namespace MultiXPing.source.Utilitaries.Managers
         Character _characterTurn;
         Player _mainPlayer;
         Team _characterTeam = new Team();
-        Character _target;
+        Attack _selectedAttack;
         Enemy _enemy;
         Tree _fightingCharacter;
 
@@ -39,10 +39,10 @@ namespace MultiXPing.source.Utilitaries.Managers
             get => _mainPlayer;
             set => _mainPlayer = value;
         }
-        public Character Target { get => _target; set => _target = value; }
         public Tree FightingCharacter { get => _fightingCharacter; set => _fightingCharacter = value; }
         internal Team CharacterTeam { get => _characterTeam; set => _characterTeam = value; }
         internal Enemy Enemy { get => _enemy; set => _enemy = value; }
+        public Attack SelectedAttack { get => _selectedAttack; set => _selectedAttack = value; }
 
         #endregion Property
 

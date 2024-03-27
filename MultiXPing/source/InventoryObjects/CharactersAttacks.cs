@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MultiXPing
 {
-    internal class CharactersAttacks : NodeObject
+    public class CharactersAttacks : NodeObject
     {
         /* ----------------------------------------------------- *\
         |                                                         |
@@ -26,7 +26,7 @@ namespace MultiXPing
         |                                                         |
         \* ----------------------------------------------------- */
         #region Property
-        public List<Attack> Attacks { get => Attacks; set => Attacks = value; }
+        public List<Attack> Attacks { get => _attacks; set => _attacks = value; }
 
         #endregion Property
 
