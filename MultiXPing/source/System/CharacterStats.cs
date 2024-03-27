@@ -18,6 +18,8 @@ namespace MultiXPing
         List<float> _support;
         List<float> _supportMultiplicator;
 
+        Dictionary<string, List<float>> _dicStats;
+
         #endregion Field
 
         /* ----------------------------------------------------- *\
@@ -34,6 +36,7 @@ namespace MultiXPing
         public List<float> TankMultiplicator { get => _tankMultiplicator; set => _tankMultiplicator = value; }
         public List<float> SwordsmanMultiplicator { get => _swordsmanMultiplicator; set => _swordsmanMultiplicator = value; }
         public List<float> SupportMultiplicator { get => _supportMultiplicator; set => _supportMultiplicator = value; }
+        public Dictionary<string, List<float>> DicStats { get => _dicStats; set => _dicStats = value; }
         #endregion Property
 
         /* ----------------------------------------------------- *\
@@ -62,6 +65,7 @@ namespace MultiXPing
             _magicianMultiplicator= new List<float>();
             _swordsmanMultiplicator= new List<float>();
             _supportMultiplicator= new List<float>();
+            _dicStats = new Dictionary<string, List<float>>();
         }
         public void InitializeCSVStats(string filepathStats, string filepathMultiplicator )
         {
@@ -98,6 +102,21 @@ namespace MultiXPing
                 SupportMultiplicator.Add(CSVMultiplicator[3][i]);
             }
 
+            InitDico();
+
+        }
+
+        public void InitDico()
+        {
+            DicStats.Add("tank",Tank);
+            DicStats.Add("magician", Magician);
+            DicStats.Add("swordman", Swordsman);
+            DicStats.Add("support", Support);
+            
+            DicStats.Add("tankmultiplicator", TankMultiplicator);
+            DicStats.Add("magicianmultiplicator", MagicianMultiplicator);
+            DicStats.Add("swordmanmultiplicator", SwordsmanMultiplicator);
+            DicStats.Add("supportmultiplicator", SupportMultiplicator);
         }
         #endregion Methods
     }

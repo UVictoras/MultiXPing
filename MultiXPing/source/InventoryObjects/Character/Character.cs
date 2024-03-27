@@ -26,7 +26,6 @@ namespace MultiXPing
         int _level;                 // Current level of progression of the character
         bool _isAlive;               // Current state of the character, true if alive, false if dead
         Dictionary<int, Attack> _possibelAttacks;       // List of the attacks the character can learn
-        Tree _attacks;
         CharactersAttacks _charactersAttacks;
 
         #endregion Field
@@ -120,7 +119,6 @@ namespace MultiXPing
             set => _possibelAttacks = value;
         }
         internal CharactersAttacks CharactersAttacks { get => _charactersAttacks; set => _charactersAttacks = value; }
-        public Tree Attacks { get => _attacks; set => _attacks = value; }
 
         #endregion Property
 
@@ -146,20 +144,58 @@ namespace MultiXPing
         public Character()
         {
             CharactersAttacks = new CharactersAttacks();
-            Attacks = new Tree();
         }
 
-        public void InitializeCharacter(string name)
+        public void InitializeCharacter(string name, string classe, AttackList attList)
         {
             Name = name;
             Level = 1;
             IsAlive = true;
-            Attack charge = new Attack();
-            charge.Name = "Charge";
-            charge.Damage = 10;
-            charge.Accuracy = 90;
-            Attacks.AddNode(CharactersAttacks);
-            CharactersAttacks.AddAttack(charge);
+
+            string type = " ";
+
+            //Ennemies
+
+            if(classe == "tank" || classe == "swordman" || classe == "magician" || classe == "support")
+            {
+
+            }
+            else if(classe == "dog")
+            {
+                //Electric
+                type = "electric";
+            }
+            else if (classe == "snake")
+            {
+                //Water
+                type = "water";
+            }
+            else if (classe == "goblin")
+            {
+                //Plant
+                type = "plant";
+            }
+            else if (classe == "salamender")
+            {
+                type = "fire";
+            }
+            else if (classe == "boss")
+            {
+                type = "fire";
+            }
+            else
+            {
+                throw new Exception("No valid classe argument");
+            }
+
+            List<Attack> attacks = new List<Attack>();
+            attacks = SearchAttacks(attList.ListAttack, classe);
+            foreach (Attack att in attacks)
+            {
+                NodeRef.InsertChild(att);
+                CharactersAttacks.AddAttack((Attack)att);
+            }
+
         }
 
         public void Healing(int heal)
@@ -189,6 +225,36 @@ namespace MultiXPing
         }
 
         public virtual void Death() { }
+
+
+        public List<Attack> SearchAttacks(List<Attack> listAtt, string classFilter = "", string typeFilter = "")
+        {
+            List<Attack> list = new();
+
+            if(typeFilter == "")
+            {
+                for (int i = 0; i < listAtt.Count; i++)
+                {
+                    if (listAtt[i].Class == classFilter)
+                    {
+                        list.Add(listAtt[i]);
+                    }
+                }
+            }else
+            {
+                if (classFilter == "") { throw new NullReferenceException("classFilter and typeFilter must both be non null "); }
+
+                for (int i = 0; i < listAtt.Count; i++)
+                {
+                    if (listAtt[i].Element == typeFilter)
+                    {
+                        list.Add(listAtt[i]);
+                    }
+                }
+            }
+
+            return list;
+        }
 
         #endregion Methods
     }

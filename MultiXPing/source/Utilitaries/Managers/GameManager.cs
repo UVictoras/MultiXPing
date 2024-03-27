@@ -162,23 +162,9 @@ namespace MultiXPing
             MainMenu.AddNode(Player.Inventory);
             MainMenu.AddNode(Player.Team);
 
-            Player.Inventory.AddItem(new Egg());
-            Player.Inventory.AddItem(new Coffee());
-            Player.Inventory.AddItem(new Glasses());
-
-            MainWindow = new MenuWindow(Player, MainMenu);
-            MainWindow.InitContent(new Vector2(0, 0), "MENU");
-
-            Enemy mechant = new Enemy();
-            mechant.InitializeCharacter("Mechant");
-            mechant.Speed = 25;
-            mechant.PhysicalDamage = 40;
-            mechant.PhysicalDefense = 40;
-            mechant.Accuracy = 100;
-            mechant.MaximumHealth = 100;
-
             MainWindow = new Window();
-
+            MainWindow.InitContent(new Vector2(0, 0), " ");
+            
             MainMenuWindow = new MenuWindow(Player, MainMenu);
             MainMenuWindow.InitContent(new Vector2(0, 0), " ");
 
@@ -186,16 +172,34 @@ namespace MultiXPing
 
             CharacterStats Stats = new CharacterStats();
             Stats.InitializeCSVStats(Constants.PROJECTPATH + "MultiXPing\\source\\Data\\InitStats.csv", Constants.PROJECTPATH + "MultiXPing\\source\\Data\\LevelUpMultiplicator.csv");
-            Hunter Romain = new Hunter();
-            Romain.InitializeHunter("Romain", Stats.Support, Stats.SupportMultiplicator);
+            
+            AttackList attackList = new AttackList();
+            attackList.InitAttacks();
 
-            Player.Team.ListTeam.Add(Romain);
+            InitPlayerHeroes(attackList, Stats);
 
-            Fight = new FightWindow(Player, FightMenu, mechant);
-            Fight.InitContent(new Vector2(0, 0), "FIGHT");
+            //Fight = new FightWindow(Player, FightMenu, mechant);
+            //Fight.InitContent(new Vector2(0, 0), "FIGHT");
         }
 
+        public void InitPlayerHeroes(AttackList attlist, CharacterStats charStats)
+        {
+            Hunter tank = new();
+            tank.InitializeHunter("Rayan", "tank", attlist, charStats);
+            Player.Team.AddCharacter(tank);
 
+            Hunter swordman = new();
+            tank.InitializeHunter("Link", "swordman", attlist, charStats);
+            Player.Team.AddCharacter(swordman);
+
+            Hunter magician = new();
+            tank.InitializeHunter("Harry crampté", "magician", attlist, charStats);
+            Player.Team.AddCharacter(magician);
+
+            Hunter support = new();
+            tank.InitializeHunter("Sage", "support", attlist, charStats);
+            Player.Team.AddCharacter(support);
+        }
 
         public void InitPlayer()
         {

@@ -90,5 +90,32 @@ namespace TestsUnitaires
 
         }
 
+        [Test]
+        [TestCase(0,1,1)]
+        [TestCase(0,-1,3)]
+        [TestCase(3,1,0)]
+        public void TestCycleCursors(int init, int sens, int expected)
+        {
+            //Arrange 
+            Player p = new(20,20);
+            Tree t = new();
+
+            t.AddNode(new Inventory());
+            t.AddNode(new Team());
+            t.AddNode(new Inventory());
+            t.AddNode(new Team());
+
+
+            MenuWindow window = new MenuWindow(p,t);
+            window.CurrentChoice = init;
+
+            //Act
+            window.UpdateChoice(sens);
+
+            //Assert
+            Assert.That(expected, Is.EqualTo(window.CurrentChoice));
+        }
+
+
     }
 }

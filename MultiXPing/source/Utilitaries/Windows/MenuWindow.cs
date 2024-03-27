@@ -89,6 +89,12 @@ namespace MultiXPing
 
         public void Select()
         {
+            
+            if(_currentNode.ChildrenCount == 0)
+            {
+                return;
+            }
+
             Node node = _currentNode.Children[_currentChoice];
 
             if (UsedNode != null)
@@ -118,6 +124,7 @@ namespace MultiXPing
         {
             if(_currentNode.ChildrenCount == 0) { return; };
             _currentChoice = (_currentChoice + i) % _currentNode.ChildrenCount ;
+            if (_currentChoice < 0) _currentChoice += _currentNode.ChildrenCount;
         }
 
         #endregion Methods

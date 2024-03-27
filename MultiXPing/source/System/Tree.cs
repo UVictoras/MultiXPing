@@ -39,7 +39,6 @@ namespace MultiXPing
             Children.Add(noeud);
             obj.SetNode(noeud);
             
-            
         }
         public void RemoveChild(NodeObject obj)
         {

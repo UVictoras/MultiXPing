@@ -1,4 +1,5 @@
 using System.Security.Cryptography.X509Certificates;
+using System.Xml.Linq;
 
 namespace MultiXPing
 {
@@ -89,20 +90,22 @@ namespace MultiXPing
             AccuracyBoost = 1.0f;
         }
 
-        public void InitializeHunter(string name, List<float> characterType, List<float> characterMultiplicator)
+        public void InitializeHunter(string name, string classe , AttackList list, CharacterStats stats)
         {
-            InitializeCharacter(name);
-            CharacterMultiplicator = characterMultiplicator;
+            InitializeCharacter(name, classe, list);
+            CharacterMultiplicator = stats.DicStats[classe + "multiplicator"];
 
-            MaximumHealth = (int)characterType[0];
+            List<float> statsList= stats.DicStats[classe];
+
+            MaximumHealth = (int)statsList[0];
             Health = MaximumHealth;
-            MaximumMana = (int)characterType[1];
+            MaximumMana = (int)statsList[1];
             Mana = MaximumMana;
-            PhysicalDamage = characterType[2];
-            PhysicalDefense = characterType[3];
-            MagicalDamage = characterType[4];
-            MagicalDefense = characterType[5];
-            Speed = characterType[6];
+            PhysicalDamage = statsList[2];
+            PhysicalDefense = statsList[3];
+            MagicalDamage = statsList[4];
+            MagicalDefense = statsList[5];
+            Speed = statsList[6];
         }
 
         public override void Death()
@@ -187,6 +190,9 @@ namespace MultiXPing
             Console.WriteLine("Bravo tu a lvlUp, il te faut " + ExperienceRequired + " exp pour lvlUp");
             Console.WriteLine("Tu as " + Experience + " experience");
         }
+
+
+
         #endregion Methods
     }
 }

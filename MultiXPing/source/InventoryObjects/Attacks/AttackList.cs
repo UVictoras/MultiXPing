@@ -17,7 +17,7 @@ namespace MultiXPing
         \* ----------------------------------------------------- */
         #region Field
 
-        private List<Attack> _listAttack = new List<Attack>();
+        private static List<Attack> _listAttack = new List<Attack>();
 
         #endregion Field
 
@@ -29,6 +29,12 @@ namespace MultiXPing
         #region Property
 
         public List<Attack> ListAttack { get => _listAttack; set => _listAttack = value; }
+
+        public Attack this[int key]
+        {
+            get => _listAttack[key];
+            set => _listAttack[key] = value;
+        }
 
         #endregion Property
 
