@@ -119,7 +119,6 @@ namespace MultiXPing
             set => _possibelAttacks = value;
         }
         public CharactersAttacks CharactersAttacks { get => _charactersAttacks; set => _charactersAttacks = value; }
-        public Tree ListAttacks { get => _attacks; set => _attacks = value; }
 
         #endregion Property
 
@@ -144,7 +143,6 @@ namespace MultiXPing
 
         public Character()
         {
-            ListAttacks = new Tree();
             CharactersAttacks = new CharactersAttacks();
         }
 
