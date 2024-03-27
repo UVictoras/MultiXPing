@@ -8,7 +8,7 @@ using System.Xml.Linq;
 
 namespace MultiXPing
 {
-	class Attack: NodeObject
+	public class Attack: NodeObject
 	{
         /* ----------------------------------------------------- *\
         |                                                         |
@@ -79,7 +79,7 @@ namespace MultiXPing
         public void UseAttack(Character attacker, Character target)
         {
             int damage = 0;
-            if (IsMagic)
+            if (MagicCost != 0)
             {
                 damage = (int)(Damage * (attacker.MagicalDamage / target.MagicalDefense));
             }

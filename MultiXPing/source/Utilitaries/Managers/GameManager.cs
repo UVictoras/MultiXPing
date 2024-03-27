@@ -341,37 +341,38 @@ namespace MultiXPing
             }
             if (Inputmanager.GetKeyState(ConsoleKey.UpArrow))
             {
-                if (MainWindow.IsOpen)
+                if (CurrentState == State.MAP)
                 {
-                    MainWindow.UpdateChoice(-1);
+                    MainMenuWindow.UpdateChoice(-1);
                 }
-                if (Fight.IsOpen)
+                if (CurrentState == State.FIGHT)
                 {
                     Fight.UpdateChoice(-1);
                 }
             }
             if (Inputmanager.GetKeyState(ConsoleKey.DownArrow))
             {
-                if (MainWindow.IsOpen)
+                if (CurrentState == State.MAP)
                 {
-                    MainWindow.UpdateChoice(1);
+                    MainMenuWindow.UpdateChoice(1);
                 }
-                if (Fight.IsOpen)
+                if (CurrentState == State.FIGHT)
                 {
                     Fight.UpdateChoice(1);
                 }
             }
             if (Inputmanager.GetKeyState(ConsoleKey.Enter))
             {
-                if (MainWindow.IsOpen)
+                if (CurrentState == State.MAP)
                 {
-                    MainWindow.Select();
+                    MainMenuWindow.Select();
                 }
-                if (Fight.IsOpen)
+                if (CurrentState == State.FIGHT)
                 {
                     Fight.Select();
                 }
             }
+        }
 
         public void LunchFight()
         {

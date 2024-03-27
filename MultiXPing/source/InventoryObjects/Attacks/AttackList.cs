@@ -17,7 +17,7 @@ namespace MultiXPing
         \* ----------------------------------------------------- */
         #region Field
 
-        List<Attack> _listAttack = new List<Attack>();
+        private List<Attack> _listAttack = new List<Attack>();
 
         #endregion Field
 

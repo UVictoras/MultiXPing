@@ -158,7 +158,6 @@ namespace MultiXPing
             charge.Name = "Charge";
             charge.Damage = 10;
             charge.Accuracy = 90;
-            charge.IsMagic = false;
             Attacks.AddNode(CharactersAttacks);
             CharactersAttacks.AddAttack(charge);
         }
