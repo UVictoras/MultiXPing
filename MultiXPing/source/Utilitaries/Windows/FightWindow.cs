@@ -93,9 +93,106 @@ namespace MultiXPing
         public override void DrawContent()
         {
             base.DrawContent();
+            for (int i = 0; i < MainPlayer.Team.ListTeam.Count; ++i)
+            {
+                Console.SetCursorPosition(2, 2 + 4 * i);
+                Console.WriteLine(MainPlayer.Team.ListTeam[i].Name);
+                DrawHealtBar(MainPlayer.Team.ListTeam[i],i);
+                DrawManaBar(MainPlayer.Team.ListTeam[i], i);
+            }
             Console.SetCursorPosition(X + 2, Y + 2);
             Console.Write("Tour de : " + CharacterTurn.Name);
             _currentNode.PrintChildrenOnly(X + 2, Y + 3, CurrentChoice);
+        }
+        public void DrawHealtBar(Character character, int cursorY)
+        {
+            // FAIRE AVEC DES BOUCLE FOR PARCE QUE LA CA FAIT BOCOU
+            Console.SetCursorPosition(3, 3 + 4 * cursorY);
+            if ((character.Health * 100) / character.MaximumHealth >= 90.0f)
+            {
+                Console.WriteLine("Health: ■■■■■■■■■■");
+            }
+            else if ((character.Health * 100) / character.MaximumHealth >= 80.0f)
+            {
+                Console.WriteLine("Health: ■■■■■■■■■");
+            }
+            else if ((character.Health * 100) / character.MaximumHealth >= 70.0f)
+            {
+                Console.WriteLine("Health: ■■■■■■■■");
+            }
+            else if ((character.Health * 100) / character.MaximumHealth >= 60.0f)
+            {
+                Console.WriteLine("Health: ■■■■■■■");
+            }
+            else if ((character.Health * 100) / character.MaximumHealth >= 50.0f)
+            {
+                Console.WriteLine("Health: ■■■■■■");
+            }
+            else if ((character.Health * 100) / character.MaximumHealth >= 40.0f)
+            {
+                Console.WriteLine("Health: ■■■■■");
+            }
+            else if ((character.Health * 100) / character.MaximumHealth >= 30.0f)
+            {
+                Console.WriteLine("Health: ■■■■");
+            }
+            else if ((character.Health * 100) / character.MaximumHealth >= 20.0f)
+            {
+                Console.WriteLine("Health: ■■■");
+            }
+            else if ((character.Health * 100) / character.MaximumHealth >= 10.0f)
+            {
+                Console.WriteLine("Health: ■■");
+            }
+            else if ((character.Health * 100) / character.MaximumHealth > 0.0f)
+            {
+                Console.WriteLine("Health: ■");
+            }
+        }
+        public void DrawManaBar(Character character, int cursorY)
+        {
+            // FAIRE AVEC DES BOUCLE FOR PARCE QUE LA CA FAIT BOCOU
+            Console.SetCursorPosition(3, 4 + 4 * cursorY);
+            if ((character.Mana * 100) / character.MaximumMana >= 90.0f)
+            {
+                Console.WriteLine("Mana: ■■■■■■■■■■");
+            }
+            else if ((character.Mana * 100) / character.MaximumMana >= 80.0f)
+            {
+                Console.WriteLine("Mana: ■■■■■■■■■");
+            }
+            else if ((character.Mana * 100) / character.MaximumMana >= 70.0f)
+            {
+                Console.WriteLine("Mana: ■■■■■■■■");
+            }
+            else if ((character.Mana * 100) / character.MaximumMana >= 60.0f)
+            {
+                Console.WriteLine("Mana: ■■■■■■■");
+            }
+            else if ((character.Mana * 100) / character.MaximumMana >= 50.0f)
+            {
+                Console.WriteLine("Mana: ■■■■■■");
+            }
+            else if ((character.Mana * 100) / character.MaximumMana >= 40.0f)
+            {
+                Console.WriteLine("Mana: ■■■■■");
+            }
+            else if ((character.Mana * 100) / character.MaximumMana >= 30.0f)
+            {
+                Console.WriteLine("Mana: ■■■■");
+            }
+            else if ((character.Mana * 100) / character.MaximumMana >= 20.0f)
+            {
+                Console.WriteLine("Mana: ■■■");
+            }
+            else if ((character.Mana * 100) / character.MaximumMana >= 10.0f)
+            {
+                Console.WriteLine("Mana: ■■");
+            }
+            else if ((character.Mana * 100) / character.MaximumMana > 0.0f)
+            {
+                Console.WriteLine("Mana: ■");
+            }
         }
 
         public void Select()

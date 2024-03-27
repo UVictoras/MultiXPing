@@ -192,15 +192,15 @@ namespace MultiXPing
             Player.Team.AddCharacter(tank);
 
             Hunter swordman = new();
-            tank.InitializeHunter("Link", "swordman", attlist, charStats);
+            swordman.InitializeHunter("Link", "swordman", attlist, charStats);
             Player.Team.AddCharacter(swordman);
 
             Hunter magician = new();
-            tank.InitializeHunter("Harry crampté", "magician", attlist, charStats);
+            magician.InitializeHunter("Harry crampté", "magician", attlist, charStats);
             Player.Team.AddCharacter(magician);
 
             Hunter support = new();
-            tank.InitializeHunter("Sage", "support", attlist, charStats);
+            support.InitializeHunter("Sage", "support", attlist, charStats);
             Player.Team.AddCharacter(support);
         }
 
