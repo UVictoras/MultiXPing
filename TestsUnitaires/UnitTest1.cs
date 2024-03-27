@@ -1,5 +1,6 @@
 
 using MultiXPing;
+using MultiXPing.source.Characters.Attacks;
 
 namespace TestsUnitaires
 {

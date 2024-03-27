@@ -1,5 +1,6 @@
 using System;
 using System.Runtime.CompilerServices;
+using MultiXPing.source.Characters.Attacks;
 
 namespace MultiXPing
 {
@@ -119,7 +120,6 @@ namespace MultiXPing
             set => _possibelAttacks = value;
         }
         public CharactersAttacks CharactersAttacks { get => _charactersAttacks; set => _charactersAttacks = value; }
-        public Tree ListAttacks { get => _attacks; set => _attacks = value; }
 
         #endregion Property
 
@@ -144,7 +144,6 @@ namespace MultiXPing
 
         public Character()
         {
-            ListAttacks = new Tree();
             CharactersAttacks = new CharactersAttacks();
         }
 
@@ -156,13 +155,18 @@ namespace MultiXPing
 
             string type = " ";
 
+            if (classe == "")
+            {
+                classe = name;
+            }
+
             //Ennemies
 
-            if(classe == "tank" || classe == "swordman" || classe == "magician" || classe == "support")
+            if (classe == "tank" || classe == "swordman" || classe == "magician" || classe == "support")
             {
 
             }
-            else if(classe == "dog")
+            else if (classe == "dog")
             {
                 //Electric
                 type = "electric";
@@ -179,6 +183,7 @@ namespace MultiXPing
             }
             else if (classe == "salamender")
             {
+                //Fire
                 type = "fire";
             }
             else if (classe == "boss")
@@ -195,7 +200,7 @@ namespace MultiXPing
             foreach (Attack att in attacks)
             {
                 NodeRef.InsertChild(att);
-                CharactersAttacks.AddAttack((Attack)att);
+                CharactersAttacks.AddAttack(att);
             }
 
         }
@@ -220,7 +225,7 @@ namespace MultiXPing
         public void TakeDamage(int damage)
         {
             Health -= damage;
-            if (Health < 0) 
+            if (Health < 0)
             {
                 Health = 0;
             }
@@ -233,7 +238,7 @@ namespace MultiXPing
         {
             List<Attack> list = new();
 
-            if(typeFilter == "")
+            if (typeFilter == "")
             {
                 for (int i = 0; i < listAtt.Count; i++)
                 {
@@ -242,7 +247,8 @@ namespace MultiXPing
                         list.Add(listAtt[i]);
                     }
                 }
-            }else
+            }
+            else
             {
                 if (classFilter == "") { throw new NullReferenceException("classFilter and typeFilter must both be non null "); }
 

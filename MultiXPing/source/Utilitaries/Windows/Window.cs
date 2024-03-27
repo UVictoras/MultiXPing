@@ -21,10 +21,10 @@ namespace MultiXPing
         string _content = string.Empty;
 
         int _width = Constants.WIDTH / 2;
-        int _height = Constants.HEIGHT / 3 - 2;//-2 pour afficher les bordures blanches en haut et en bas
+        int _height = Constants.HEIGHT / 2 - 2;//-2 pour afficher les bordures blanches en haut et en bas
 
         int _x = 5;
-        int _y = (int)(Constants.HEIGHT * (2f / 3f));
+        int _y = (int)(Constants.HEIGHT * (1f / 2f));
 
         bool _isOpen = false;
 

@@ -8,8 +8,8 @@ using System.Xml.Linq;
 
 namespace MultiXPing
 {
-	public class Attack: NodeObject
-	{
+    public class Attack : NodeObject
+    {
         /* ----------------------------------------------------- *\
         |                                                         |
         |                          Field                          |
@@ -24,6 +24,7 @@ namespace MultiXPing
         object _function;
         string _descriptor;
         string _class;
+        bool _alliesTarget;
 
         #endregion Field
 
@@ -56,6 +57,7 @@ namespace MultiXPing
         public string Class { get => _class; set => _class = value; }
         public string Name { get => _name; set => _name = value; }
         public object Function { get => _function; set => _function = value; }
+        public bool AlliesTarget { get => _alliesTarget; set => _alliesTarget = value; }
 
         #endregion Property
 
@@ -96,6 +98,6 @@ namespace MultiXPing
         #endregion Methods
     }
 
-    
+
 
 }

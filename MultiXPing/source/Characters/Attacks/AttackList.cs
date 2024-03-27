@@ -1,10 +1,14 @@
- 
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.ExceptionServices;
+using System.Text;
+using System.Threading.Tasks;
+using System.Xml.Linq;
 
-public struct GameItem { }
-
-namespace MultiXPing
+namespace MultiXPing.source.Characters.Attacks
 {
-    public class Enemy : Character
+    public class AttackList
     {
         /* ----------------------------------------------------- *\
         |                                                         |
@@ -13,8 +17,7 @@ namespace MultiXPing
         \* ----------------------------------------------------- */
         #region Field
 
-        List<GameItem> _loot = new();              // Item dropped by the enemy
-        int _droppedExperience;          // Amount of experience the enemy gives
+        private static List<Attack> _listAttack = new List<Attack>();
 
         #endregion Field
 
@@ -25,16 +28,12 @@ namespace MultiXPing
         \* ----------------------------------------------------- */
         #region Property
 
-        public List<GameItem> Loot
-        {
-            get => _loot;
-            private set => _loot = value;
-        }
+        public List<Attack> ListAttack { get => _listAttack; set => _listAttack = value; }
 
-        public int DroppedExperience
+        public Attack this[int key]
         {
-            get => _droppedExperience;
-            private set => _droppedExperience = value;
+            get => _listAttack[key];
+            set => _listAttack[key] = value;
         }
 
         #endregion Property
@@ -46,9 +45,6 @@ namespace MultiXPing
         \* ----------------------------------------------------- */
         #region Event
 
-        public override event Action OnDamage;
-        public override event Action OnDeath;
-
         #endregion Event
 
         /* ----------------------------------------------------- *\
@@ -57,27 +53,44 @@ namespace MultiXPing
         |                                                         |
         \* ----------------------------------------------------- */
         #region Methods
-        public Enemy() : base()
+
+        public AttackList()
         {
+
         }
 
-        public void DropItems(ref Player player)
+        public void InitAttacks()
         {
-            for (int i = 0; i < _loot.Count; i++)
+            List<List<string>> list = Parser.CSVParserString(Constants.PROJECTPATH + "MultiXPing\\source\\Data\\Attaques.csv");
+            for (int i = 1; i < list.Count; i++)
             {
-                player.Inventory.ListInventory.Add(_loot[i]);
+                ListAttack.Add(
+                    new Attack
+                    {
+                        Name = list[i][0],
+                        Element = list[i][1],
+                        Damage = int.Parse(list[i][2]),
+                        Accuracy = int.Parse(list[i][3]),
+                        MagicCost = int.Parse(list[i][4]),
+                        Function = null,
+                        Descriptor = list[i][6],
+                        Class = list[i][7],
+                    });
             }
         }
 
-        public void Initialize(string name, AttackList attList)
+        public Attack GetAttackByName(string name)
         {
-            _droppedExperience = 0;
-            InitializeCharacter(name, "ennemy", attList);
-        }
+            foreach (Attack attack in _listAttack)
+            {
+                if (attack.Name == name)
+                {
+                    return attack;
+                }
+            }
 
-        public override void Death()
-        {
-            OnDeath?.Invoke();
+            throw new NullReferenceException("N'est pas cencé ne pas trouver l'attaque");
+
         }
 
         #endregion Methods

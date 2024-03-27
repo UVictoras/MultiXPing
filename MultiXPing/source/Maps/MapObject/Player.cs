@@ -65,6 +65,26 @@ namespace MultiXPing
         }
 
         public void OnUseWindow() => onUse?.Invoke(this);
+
+        public int GetAverageLevel()
+        {
+            if(Team.ListTeam.Count == 0)
+            {
+                return 0;
+            }
+
+            int result = 0;
+
+            for(int i = 0; i < Team.ListTeam.Count; i++) 
+            {
+                result += Team.ListTeam[i].Level;
+            }
+
+            result /= Team.ListTeam.Count;
+
+            return result;
+
+        }
         
         #endregion Methods
     }

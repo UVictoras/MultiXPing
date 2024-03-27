@@ -1,5 +1,6 @@
 using System.Security.Cryptography.X509Certificates;
 using System.Xml.Linq;
+using MultiXPing.source.Characters.Attacks;
 
 namespace MultiXPing
 {
@@ -90,12 +91,12 @@ namespace MultiXPing
             AccuracyBoost = 1.0f;
         }
 
-        public void InitializeHunter(string name, string classe , AttackList list, CharacterStats stats)
+        public void InitializeHunter(string name, string classe, AttackList list, CharacterStats stats)
         {
             InitializeCharacter(name, classe, list);
             CharacterMultiplicator = stats.DicStats[classe + "multiplicator"];
 
-            List<float> statsList= stats.DicStats[classe];
+            List<float> statsList = stats.DicStats[classe];
 
             MaximumHealth = (int)statsList[0];
             Health = MaximumHealth;

@@ -9,8 +9,7 @@ using System.Linq;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
-using MultiXPing;
-using MultiXPing.source.Utilitaries.Managers;
+using MultiXPing.source.Characters.Attacks;
 
 namespace MultiXPing
 {

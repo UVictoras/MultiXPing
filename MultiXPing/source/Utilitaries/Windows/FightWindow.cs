@@ -3,19 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using MultiXPing;
-using MultiXPing.source.Utilitaries.Managers;
 
 namespace MultiXPing
 {
-    public enum FightState
-    {
-        START = 0,
-        FIGHTING = 1,
-        END = 2,
-        FLEE = 3,
-    };
-    class FightWindow : Fight
+
+    class FightWindow : MenuWindow
     {
         /* ----------------------------------------------------- *\
         |                                                         |
@@ -26,9 +18,11 @@ namespace MultiXPing
 
         int _currentChoice;
         Node _currentNode;
-        FightState _state;
+        Player _player;
 
-        //List<List<>> _choices;
+        Attack _currentSpell = null;
+
+        List<NodeObject> _nodes = new List<NodeObject>();
         Tree _arbre;
 
         #endregion Field
@@ -43,7 +37,9 @@ namespace MultiXPing
 
         public Tree Arbre { get => _arbre; set => _arbre = value; }
         public Node CurrentNode { get => _currentNode; set => _currentNode = value; }
-        public FightState State { get => _state; set => _state = value; }
+        public List<NodeObject> Nodes { get => _nodes; set => _nodes = value; }
+        public Player Player { get => _player; set => _player = value; }
+        public Attack CurrentSpell { get => _currentSpell; set => _currentSpell = value; }
 
         #endregion Property
 
@@ -63,40 +59,43 @@ namespace MultiXPing
         \* ----------------------------------------------------- */
         #region Methods
 
-        public FightWindow(Player mainPlayer, Tree arbre, Enemy enemy)
+        public FightWindow(Player mainPlayer, Tree arbre) : base (mainPlayer, arbre)
         {
-            State = FightState.START;
             Arbre = arbre;
-            MainPlayer = mainPlayer;
-            Enemy = enemy;
-            CharacterTeam = new Team();
-            CharacterTurn = new Character();
-            ActionOrder = new List<Character>();
-            FightingCharacter = new Tree();
         }
 
         #region Init
         public void Init()
         {
             CurrentNode = Arbre.Root;
-            Turn = 0;
-            FightingCharacter.AddNode(CharacterTeam);
-            CharacterTeam.AddCharacter(Enemy);
+            Nodes.Add(Player.Team[0]);
+            Nodes.Add(Player.Inventory);
 
-            for (int i = 0; i < MainPlayer.Team.ListTeam.Count; i++)
-            {
-                CharacterTeam.AddCharacter(MainPlayer.Team.ListTeam[i]);
-            }
         }
         #endregion Init
 
         #region Fight
-        public override void DrawContent()
+        public void DrawContent(Character perso)
         {
             base.DrawContent();
             Console.SetCursorPosition(X + 2, Y + 2);
-            Console.Write("Tour de : " + CharacterTurn.Name);
-            _currentNode.PrintChildrenOnly(X + 2, Y + 3, CurrentChoice);
+            Console.Write("Tour de : " + perso.Name);
+            if(CurrentNode.Obj.Name == "Root")
+            {
+                for (int i = 0; i < Nodes.Count; i++)
+                {
+                    Console.SetCursorPosition(X + 2, Y + i + 3);
+                    if (i == CurrentChoice)
+                    {
+                        Console.Write("> ");
+                    }
+                    Console.Write(" - " + Nodes[i].Name);
+                }
+            }
+            else
+            {
+                _currentNode.PrintChildrenOnly(X + 2, Y + 3, CurrentChoice);
+            }
         }
 
         public void Select()
@@ -109,28 +108,29 @@ namespace MultiXPing
                 {
                     _currentNode = node;
                 }
-                else if (node.Obj.Name== "Attacks")
+                else if (CurrentSpell != null)
                 {
-                    _currentChoice = 0;
-                    _currentNode = CharacterTurn.CharactersAttacks.NodeRef;
+                    if(CurrentSpell.AlliesTarget == true)
+                    {
+                        CurrentNode = 
+                    }
+                    else
+                    {
+                        CurrentNode = 
+                    }
                 }
-                else if (node.Parent.Name == "Attacks")
+                else if (node.Obj.IsUsableOnTarget == true)
                 {
-                    SelectedAttack = (Attack)(node.Obj);
+                    CurrentSpell = (Attack)node.Obj;
+                    CurrentNode = 
                     _currentChoice = 0;
+                    // Afficher le nom de perso contenu dans team, parce que la ca affiche Team
                     _currentNode = FightingCharacter.Root.Children[0];
                 }
                 else
                 {
-                    if (node.Parent.Name != "team")
-                    {
-                        node.Obj.Use();
-                        Turn++;
-                    }
-                    else
-                    {
-                        SelectedAttack.Use();
-                    }
+                    node.Obj.Use();
+                    Turn++;
                 }
             }
             
@@ -142,40 +142,7 @@ namespace MultiXPing
         #endregion Fight
 
 
-        public void UpdateFight()
-        {
-            switch (State)
-            {
-                case FightState.START:
-                    Init();
-                    State = FightState.FIGHTING;
-                    DetermineOrder();
-                    CharacterTurn = ActionOrder[Turn % ActionOrder.Count];
-                    Arbre.AddNode(CharacterTurn.CharactersAttacks);
-                    break;
-                case FightState.FIGHTING:
-
-                    if (MainPlayer.Team.ListTeam.Contains(CharacterTurn))
-                    {
-                        Arbre.RemoveNode(CharacterTurn.CharactersAttacks);
-                        CharacterTurn = ActionOrder[Turn % ActionOrder.Count];
-                        Arbre.AddNode(CharacterTurn.CharactersAttacks);
-                    }
-                    else
-                    {
-
-                    }
-
-                    DetermineOrder();
-                    break;
-                case FightState.END:
-                    break;
-                case FightState.FLEE:
-                    break;
-                default:
-                    break;
-            }
-        }
+        
         public void UpdateChoice(int i)
         {
             _currentChoice = (((_currentChoice + i) + _currentNode.ChildrenCount)) % _currentNode.ChildrenCount;
