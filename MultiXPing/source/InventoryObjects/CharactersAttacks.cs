@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MultiXPing
 {
-    public class Team : NodeObject
+    internal class CharactersAttacks : NodeObject
     {
         /* ----------------------------------------------------- *\
         |                                                         |
@@ -16,7 +16,7 @@ namespace MultiXPing
         \* ----------------------------------------------------- */
         #region Field
 
-        List<Character> _team = new List<Character>();// List of hunters the player has in its team
+        List<Attack> _attacks = new List<Attack>();// List of Attack the character has
 
         #endregion Field
 
@@ -26,24 +26,7 @@ namespace MultiXPing
         |                                                         |
         \* ----------------------------------------------------- */
         #region Property
-
-        public List<Character> ListTeam
-        {
-            get => _team;
-            private set => _team = value;
-        }
-
-        public Character this[int index]
-        {
-            get
-            {
-                return _team[index];
-            }
-            set
-            {
-                _team[index] = value;
-            }
-        }
+        public List<Attack> Attacks { get => Attacks; set => Attacks = value; }
 
         #endregion Property
 
@@ -63,16 +46,16 @@ namespace MultiXPing
         \* ----------------------------------------------------- */
         #region Methods
 
-        public Team()
+        public CharactersAttacks()
         {
-            Name = "team";
+            Name = "Attacks";
+        }
+        public void AddAttack(Attack attack)
+        {
+            _attacks.Add(attack);
+            NodeRef.InsertChild(attack);
         }
 
-        public void AddCharacter(Character character)
-        {
-            _team.Add(character);
-            NodeRef.InsertChild(character);
-        }
         #endregion Methods
     }
 }

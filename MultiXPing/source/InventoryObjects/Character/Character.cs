@@ -25,10 +25,9 @@ namespace MultiXPing
         int _experience;            // Current experience obtained by the character
         int _level;                 // Current level of progression of the character
         bool _isAlive;               // Current state of the character, true if alive, false if dead
-        Attack[] _attacks;               // List of the learned attacks
         Dictionary<int, Attack> _possibelAttacks;       // List of the attacks the character can learn
-
-        string _name;                  // Name of the character
+        Tree _attacks;
+        CharactersAttacks _charactersAttacks;
 
         #endregion Field
 
@@ -42,7 +41,7 @@ namespace MultiXPing
         public int MaximumHealth
         {
             get => _maximumHealth;
-            protected set => _maximumHealth = value;
+            set => _maximumHealth = value;
         }
 
         public int Health
@@ -54,13 +53,13 @@ namespace MultiXPing
         public float PhysicalDamage
         {
             get => _physicalDamage;
-            protected set => _physicalDamage = value;
+            set => _physicalDamage = value;
         }
 
         public float PhysicalDefense
         {
             get => _physicalDefense;
-            protected set => _physicalDefense = value;
+            set => _physicalDefense = value;
         }
 
         public float MagicalDamage
@@ -78,12 +77,12 @@ namespace MultiXPing
         public float Speed
         {
             get => _speed;
-            protected set => _speed = value;
+            set => _speed = value;
         }
         public float Accuracy
         {
             get => _accuracy;
-            protected set => _accuracy = value;
+            set => _accuracy = value;
         }
 
         public int MaximumMana
@@ -110,28 +109,18 @@ namespace MultiXPing
             set => _level = value;
         }
 
-        public Attack[] Attacks
-        {
-            get => _attacks;
-            private set => _attacks = value;
-        }
-
         public bool IsAlive
         {
             get => _isAlive;
             set => _isAlive = value;
         }
-
-        public string Name
-        {
-            get => _name;
-            set => _name = value;
-        }
-        public Dictionary<int, Attack> PossibleAttacks
+        Dictionary<int, Attack> PossibleAttacks
         {
             get => _possibelAttacks;
-            private set => _possibelAttacks = value;
+            set => _possibelAttacks = value;
         }
+        internal CharactersAttacks CharactersAttacks { get => _charactersAttacks; set => _charactersAttacks = value; }
+        public Tree Attacks { get => _attacks; set => _attacks = value; }
 
         #endregion Property
 
@@ -156,6 +145,8 @@ namespace MultiXPing
 
         public Character()
         {
+            CharactersAttacks = new CharactersAttacks();
+            Attacks = new Tree();
         }
 
         public void InitializeCharacter(string name)
@@ -163,6 +154,13 @@ namespace MultiXPing
             Name = name;
             Level = 1;
             IsAlive = true;
+            Attack charge = new Attack();
+            charge.Name = "Charge";
+            charge.Damage = 10;
+            charge.Accuracy = 90;
+            charge.IsMagic = false;
+            Attacks.AddNode(CharactersAttacks);
+            CharactersAttacks.AddAttack(charge);
         }
 
         public void Healing(int heal)
@@ -181,6 +179,16 @@ namespace MultiXPing
                 Mana = MaximumMana;
             }
         }
+
+        public void TakeDamage(int damage)
+        {
+            Health -= damage;
+            if (Health < 0) 
+            {
+                Health = 0;
+            }
+        }
+
         public virtual void Death() { }
 
         #endregion Methods

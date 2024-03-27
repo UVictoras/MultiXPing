@@ -1,7 +1,15 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using System.Text;
+using System.Threading.Tasks;
+using System.Xml.Linq;
+
 namespace MultiXPing
 {
-    public struct Attack
-    {
+	class Attack: NodeObject
+	{
         /* ----------------------------------------------------- *\
         |                                                         |
         |                          Field                          |
@@ -67,7 +75,20 @@ namespace MultiXPing
         |                                                         |
         \* ----------------------------------------------------- */
         #region Methods
-
+        public Attack(){}
+        public void UseAttack(Character attacker, Character target)
+        {
+            int damage = 0;
+            if (IsMagic)
+            {
+                damage = (int)(Damage * (attacker.MagicalDamage / target.MagicalDefense));
+            }
+            else
+            {
+                damage = (int)(Damage * (attacker.PhysicalDamage / target.PhysicalDefense));
+            }
+            target.TakeDamage(damage);
+        }
         #endregion Methods
     }
 

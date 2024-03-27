@@ -41,6 +41,11 @@ namespace MultiXPing
             
             
         }
+        public void RemoveChild(NodeObject obj)
+        {
+            Children.Remove(obj.NodeRef);
+            _childrenCount--;
+        }
 
         public void PrintNode(string offset)
         {
@@ -98,6 +103,11 @@ namespace MultiXPing
         public void AddNode(NodeObject obj)
         {
             Root.InsertChild(obj);
+        }
+
+        public void RemoveNode(NodeObject obj)
+        {
+            Root.RemoveChild(obj);
         }
 
         public void PrintTree()

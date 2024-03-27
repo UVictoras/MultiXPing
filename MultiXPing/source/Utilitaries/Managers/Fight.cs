@@ -1,22 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MultiXPing
+namespace MultiXPing.source.Utilitaries.Managers
 {
-    public class Team : NodeObject
+    class Fight: Window
     {
         /* ----------------------------------------------------- *\
-        |                                                         |
-        |                          Field                          |
-        |                                                         |
-        \* ----------------------------------------------------- */
+       |                                                         |
+       |                          Field                          |
+       |                                                         |
+       \* ----------------------------------------------------- */
         #region Field
-
-        List<Character> _team = new List<Character>();// List of hunters the player has in its team
+        int _turn;
+        List<Character> _actionOrder;
+        Character _characterTurn;
+        Player _mainPlayer;
+        Team _characterTeam = new Team();
+        Character _target;
+        Enemy _enemy;
+        Tree _fightingCharacter;
 
         #endregion Field
 
@@ -26,24 +31,18 @@ namespace MultiXPing
         |                                                         |
         \* ----------------------------------------------------- */
         #region Property
-
-        public List<Character> ListTeam
+        public int Turn { get => _turn; set => _turn = value; }
+        public List<Character> ActionOrder { get => _actionOrder; set => _actionOrder = value; }
+        public Character CharacterTurn { get => _characterTurn; set => _characterTurn = value; }
+        public Player MainPlayer
         {
-            get => _team;
-            private set => _team = value;
+            get => _mainPlayer;
+            set => _mainPlayer = value;
         }
-
-        public Character this[int index]
-        {
-            get
-            {
-                return _team[index];
-            }
-            set
-            {
-                _team[index] = value;
-            }
-        }
+        public Character Target { get => _target; set => _target = value; }
+        public Tree FightingCharacter { get => _fightingCharacter; set => _fightingCharacter = value; }
+        internal Team CharacterTeam { get => _characterTeam; set => _characterTeam = value; }
+        internal Enemy Enemy { get => _enemy; set => _enemy = value; }
 
         #endregion Property
 
@@ -62,17 +61,15 @@ namespace MultiXPing
         |                                                         |
         \* ----------------------------------------------------- */
         #region Methods
-
-        public Team()
+        public Fight()
         {
-            Name = "team";
         }
 
-        public void AddCharacter(Character character)
+        public void DetermineOrder()
         {
-            _team.Add(character);
-            NodeRef.InsertChild(character);
+            ActionOrder = CharacterTeam.ListTeam.OrderByDescending(x => x.Speed).ToList();
         }
+
         #endregion Methods
     }
 }

@@ -1,13 +1,16 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
-using MultiXPing;     
+using MultiXPing;
+using MultiXPing.source.Utilitaries.Managers;
 
 namespace MultiXPing
 {
@@ -41,8 +44,10 @@ namespace MultiXPing
         Player _player;
         MenuWindow _mainMenuWindow;
         Window _mainWindow;
+        FightWindow _fight;
 
         Tree _mainMenu;
+        Tree _fightMenu;
 
         List<Interactive> _listInteractives = new();
 
@@ -109,6 +114,8 @@ namespace MultiXPing
         internal List<Interactive> ListInteractives { get => _listInteractives; set => _listInteractives = value; }
         internal Window MainWindow { get => _mainWindow; set => _mainWindow = value; }
         public Random Rand { get => _rand; set => _rand = value; }
+        internal FightWindow Fight { get => _fight; set => _fight = value; }
+        public Tree FightMenu { get => _fightMenu; set => _fightMenu = value; }
 
         #endregion Property
 
@@ -145,6 +152,11 @@ namespace MultiXPing
             RenderTarget = new Render();
             RenderTarget.InitBuffer();
 
+            
+            InitPlayer();
+
+            FightMenu = new Tree();
+            FightMenu.AddNode(Player.Inventory);
 
             MainMenu = new Tree();
             MainMenu.AddNode(Player.Inventory);
@@ -154,7 +166,16 @@ namespace MultiXPing
             Player.Inventory.AddItem(new Coffee());
             Player.Inventory.AddItem(new Glasses());
 
-            
+            MainWindow = new MenuWindow(Player, MainMenu);
+            MainWindow.InitContent(new Vector2(0, 0), "MENU");
+
+            Enemy mechant = new Enemy();
+            mechant.InitializeCharacter("Mechant");
+            mechant.Speed = 25;
+            mechant.PhysicalDamage = 40;
+            mechant.PhysicalDefense = 40;
+            mechant.Accuracy = 100;
+            mechant.MaximumHealth = 100;
 
             MainWindow = new Window();
 
@@ -163,6 +184,15 @@ namespace MultiXPing
 
             Map.InitInteractive(ListInteractives, Player, MainWindow);
 
+            CharacterStats Stats = new CharacterStats();
+            Stats.InitializeCSVStats(Constants.PROJECTPATH + "MultiXPing\\source\\Data\\InitStats.csv", Constants.PROJECTPATH + "MultiXPing\\source\\Data\\LevelUpMultiplicator.csv");
+            Hunter Romain = new Hunter();
+            Romain.InitializeHunter("Romain", Stats.Support, Stats.SupportMultiplicator);
+
+            Player.Team.ListTeam.Add(Romain);
+
+            Fight = new FightWindow(Player, FightMenu, mechant);
+            Fight.InitContent(new Vector2(0, 0), "FIGHT");
         }
 
 
@@ -194,6 +224,7 @@ namespace MultiXPing
                     UpdateMap();
                     break;
                 case State.FIGHT:
+                    UpdateFight();
                     break;
                 case State.PAUSE:
                     break;
@@ -210,7 +241,8 @@ namespace MultiXPing
 
         public void UpdateFight()
         {
-
+            Fight.UpdateFight();
+            RenderFight();
         }
 
         public void UpdatePause()
@@ -245,6 +277,27 @@ namespace MultiXPing
             MainWindow.DrawWindow();
         }
 
+        public void RenderFight() 
+        {
+            //Reset
+            //Console.Clear();
+            Console.SetCursorPosition(0, 0);
+            Console.CursorVisible = false;
+            RenderTarget.ResetBuffer();
+
+            //Draw map
+            //RenderTarget.DrawMap(Map, Player);
+
+            //Draw items
+            //RenderTarget.DrawPlayer(Player);
+
+            //Render
+            RenderTarget.RenderBuffer();
+
+            //Draw la window
+            Fight.DrawWindow();
+        }
+
         public void HandleInput()
         {
             Inputmanager.Update(); // à modifier
@@ -270,6 +323,11 @@ namespace MultiXPing
                 MainMenuWindow.ResetNode();
                 MainMenuWindow.Open();
             }
+            if (Inputmanager.GetKeyState(ConsoleKey.P))
+            {
+                _currentState = State.FIGHT;
+                Fight.Open();
+            }
             if (Inputmanager.GetKeyState(ConsoleKey.E))
             {
                 if (MainWindow.IsOpen)
@@ -283,18 +341,37 @@ namespace MultiXPing
             }
             if (Inputmanager.GetKeyState(ConsoleKey.UpArrow))
             {
-                MainMenuWindow.UpdateChoice(-1);
+                if (MainWindow.IsOpen)
+                {
+                    MainWindow.UpdateChoice(-1);
+                }
+                if (Fight.IsOpen)
+                {
+                    Fight.UpdateChoice(-1);
+                }
             }
             if (Inputmanager.GetKeyState(ConsoleKey.DownArrow))
             {
-                MainMenuWindow.UpdateChoice(1);
+                if (MainWindow.IsOpen)
+                {
+                    MainWindow.UpdateChoice(1);
+                }
+                if (Fight.IsOpen)
+                {
+                    Fight.UpdateChoice(1);
+                }
             }
             if (Inputmanager.GetKeyState(ConsoleKey.Enter))
             {
-                MainMenuWindow.Select();
+                if (MainWindow.IsOpen)
+                {
+                    MainWindow.Select();
+                }
+                if (Fight.IsOpen)
+                {
+                    Fight.Select();
+                }
             }
-
-        }
 
         public void LunchFight()
         {
