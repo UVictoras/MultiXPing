@@ -63,12 +63,11 @@ namespace MultiXPing
         \* ----------------------------------------------------- */
         #region Methods
 
-        public FightWindow(Player mainPlayer, Tree arbre, Enemy enemy)
+        public FightWindow(Player mainPlayer, Tree arbre)
         {
             State = FightState.START;
             Arbre = arbre;
             MainPlayer = mainPlayer;
-            Enemy = enemy;
             CharacterTeam = new Team();
             CharacterTurn = new Character();
             ActionOrder = new List<Character>();
@@ -81,7 +80,7 @@ namespace MultiXPing
             CurrentNode = Arbre.Root;
             Turn = 0;
             FightingCharacter.AddNode(CharacterTeam);
-            CharacterTeam.AddCharacter(Enemy);
+            //CharacterTeam.AddCharacter(Enemy);
 
             for (int i = 0; i < MainPlayer.Team.ListTeam.Count; i++)
             {

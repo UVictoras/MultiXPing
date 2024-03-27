@@ -20,7 +20,7 @@ namespace MultiXPing.source.Utilitaries.Managers
         Player _mainPlayer;
         Team _characterTeam = new Team();
         Attack _selectedAttack;
-        Enemy _enemy;
+        List<Enemy>_enemies = new List<Enemy>();
         Tree _fightingCharacter;
 
         #endregion Field
@@ -41,8 +41,8 @@ namespace MultiXPing.source.Utilitaries.Managers
         }
         public Tree FightingCharacter { get => _fightingCharacter; set => _fightingCharacter = value; }
         internal Team CharacterTeam { get => _characterTeam; set => _characterTeam = value; }
-        internal Enemy Enemy { get => _enemy; set => _enemy = value; }
         public Attack SelectedAttack { get => _selectedAttack; set => _selectedAttack = value; }
+        public List<Enemy> Enemies { get => _enemies; set => _enemies = value; }
 
         #endregion Property
 
@@ -68,6 +68,37 @@ namespace MultiXPing.source.Utilitaries.Managers
         public void DetermineOrder()
         {
             ActionOrder = CharacterTeam.ListTeam.OrderByDescending(x => x.Speed).ToList();
+        }
+        public void GenerateEnemies(EnemyList enemyList) 
+        {
+            Random randomEnemy = new Random();
+            int rand = 0;
+            int spawnGobriel = enemyList.GetEnemyByName("gobriel").SpawnProba;
+            int spawnDanycayou = enemyList.GetEnemyByName("danycayou").SpawnProba;
+            int spawnFlashmcqueen = enemyList.GetEnemyByName("flashmcqueen").SpawnProba;
+            int spawnNayar = enemyList.GetEnemyByName("nayar").SpawnProba;
+
+            for (int i = 0; i < 4; i++) 
+            {
+                rand = randomEnemy.Next(1,100);
+                if (rand <= spawnGobriel)
+                {
+                    Enemies.Add(enemyList.GetEnemyByName("gobriel"));
+                }
+                else if (rand > spawnGobriel && rand <= spawnGobriel + spawnDanycayou)
+                {
+                    Enemies.Add(enemyList.GetEnemyByName("danycayou"));
+                }
+                else if (rand > spawnGobriel + spawnDanycayou && rand <= spawnGobriel + spawnDanycayou + spawnFlashmcqueen)
+                {
+                    Enemies.Add(enemyList.GetEnemyByName("flashmcqueen"));
+                }
+                else if (rand > spawnGobriel + spawnDanycayou + spawnFlashmcqueen)
+                {
+                    Enemies.Add(enemyList.GetEnemyByName("nayar"));
+                }
+
+            }
         }
 
         #endregion Methods

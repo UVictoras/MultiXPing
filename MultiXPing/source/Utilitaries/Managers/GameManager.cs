@@ -175,11 +175,14 @@ namespace MultiXPing
             
             AttackList attackList = new AttackList();
             attackList.InitAttacks();
+            EnemyList enemyList = new EnemyList();
+            enemyList.InitEnemy();
 
             InitPlayerHeroes(attackList, Stats);
 
-            //Fight = new FightWindow(Player, FightMenu, mechant);
-            //Fight.InitContent(new Vector2(0, 0), "FIGHT");
+            Fight = new FightWindow(Player, FightMenu);
+            Fight.InitContent(new Vector2(0, 0), "FIGHT");
+            Fight.GenerateEnemies(enemyList);
         }
 
         public void InitPlayerHeroes(AttackList attlist, CharacterStats charStats)

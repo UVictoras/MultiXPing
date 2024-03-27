@@ -8,7 +8,7 @@ using System.Xml.Linq;
 
 namespace MultiXPing
 {
-    public struct AttackList
+    public struct EnemyList
     {
         /* ----------------------------------------------------- *\
         |                                                         |
@@ -17,7 +17,7 @@ namespace MultiXPing
         \* ----------------------------------------------------- */
         #region Field
 
-        private static List<Attack> _listAttack = new List<Attack>();
+        private static List<Enemy> _listEnemy = new List<Enemy>();
 
         #endregion Field
 
@@ -28,12 +28,12 @@ namespace MultiXPing
         \* ----------------------------------------------------- */
         #region Property
 
-        public List<Attack> ListAttack { get => _listAttack; set => _listAttack = value; }
+        public List<Enemy> ListEnemy { get => _listEnemy; set => _listEnemy = value; }
 
-        public Attack this[int key]
+        public Enemy this[int key]
         {
-            get => _listAttack[key];
-            set => _listAttack[key] = value;
+            get => _listEnemy[key];
+            set => _listEnemy[key] = value;
         }
 
         #endregion Property
@@ -54,42 +54,44 @@ namespace MultiXPing
         \* ----------------------------------------------------- */
         #region Methods
 
-        public AttackList() 
+        public EnemyList()
         {
-            
+
         }
 
-        public void InitAttacks()
+        public void InitEnemy()
         {
-                List<List<string>> list = Parser.CSVParserString(Constants.PROJECTPATH + "MultiXPing\\source\\Data\\Attaques.csv");
-            for(int i = 1; i < list.Count; i++)
+            List<List<string>> list = Parser.CSVParserString(Constants.PROJECTPATH + "MultiXPing\\source\\Data\\EnemyStat.csv");
+            for (int i = 1; i < list.Count; i++)
             {
-                ListAttack.Add(
-                    new Attack
+                ListEnemy.Add(
+                    new Enemy
                     {
                         Name = list[i][0],
-                        Element = list[i][1],
-                        Damage = int.Parse(list[i][2]),
-                        Accuracy = int.Parse(list[i][3]),
-                        MagicCost = int.Parse(list[i][4]),  
-                        Function = null,
-                        Descriptor = list[i][6],
-                        Class = list[i][7],
-            });
+                        MaximumHealth = int.Parse(list[i][1]),
+                        MaximumMana = int.Parse(list[i][2]),
+                        PhysicalDamage = int.Parse(list[i][3]),
+                        PhysicalDefense = int.Parse(list[i][4]),
+                        MagicalDamage = int.Parse(list[i][5]),
+                        MagicalDefense = int.Parse(list[i][6]),
+                        Speed = int.Parse(list[i][7]),
+                        Element = list[i][8],
+                        SpawnProba = int.Parse(list[i][9]),
+                    }) ;
             }
         }
 
-        public Attack GetAttackByName(string name)
+        public Enemy GetEnemyByName(string name)
         {
-            foreach(Attack attack in _listAttack)
+            foreach (Enemy enemy in _listEnemy)
             {
-                if(attack.Name == name)
+                if (enemy.Name == name)
                 {
-                    return attack;
+                    return enemy;
                 }
             }
 
-            throw new NullReferenceException("N'est pas cencé ne pas trouver l'attaque");
+            throw new NullReferenceException("N'est pas cencé ne pas trouver l'ennemie");
 
         }
 
