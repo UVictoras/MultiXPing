@@ -278,8 +278,8 @@ namespace MultiXPing
                     Console.WriteLine(Enemies[i].Name);
                     Console.SetCursorPosition(Constants.WIDTH - 25, 3 + 5 * i);
                     DrawHealtBar(Enemies[i], i);
-                    Console.SetCursorPosition(Constants.WIDTH - 32, 3 + 5 * i);
-                    Enemies[i].DrawSprite(Constants.WIDTH - 32, 3 + 5 * i); ;
+                    Console.SetCursorPosition(Constants.WIDTH - 35, 3 + 5 * i);
+                    Enemies[i].DrawSprite(Constants.WIDTH - 35, 3 + 5 * i); ;
 
                 }
             }

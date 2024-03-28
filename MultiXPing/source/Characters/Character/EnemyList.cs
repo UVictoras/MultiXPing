@@ -80,6 +80,7 @@ namespace MultiXPing
                         Speed = int.Parse(list[i][7]),
                         Element = list[i][8],
                         SpawnProba = int.Parse(list[i][9]),
+                        CharacterSprite = list[i][10],
                     }) ;
 
             }

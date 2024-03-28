@@ -89,26 +89,27 @@ namespace MultiXPing
             DamageBoost = 1.0f;
             SpeedBoost = 1.0f;
             AccuracyBoost = 1.0f;
-            CharacterSprite = "   |\r\n o_T\r\n/| \r\n/ |";
 
         }
 
         public void InitializeHunter(string name, string classe, AttackList list, CharacterStats stats)
         {
             InitializeCharacter(name, classe, list);
-            CharacterMultiplicator = stats.DicStats[classe + "multiplicator"];
+            CharacterMultiplicator = stats.DicMultiplicator[classe + "multiplicator"];
 
-            List<float> statsList = stats.DicStats[classe];
+            List<string> statsList = stats.DicStats[classe];
 
-            MaximumHealth = (int)statsList[0];
+            MaximumHealth = int.Parse(statsList[0]);
             Health = MaximumHealth;
-            MaximumMana = (int)statsList[1];
+            MaximumMana = int.Parse(statsList[1]);
             Mana = MaximumMana;
-            PhysicalDamage = statsList[2];
-            PhysicalDefense = statsList[3];
-            MagicalDamage = statsList[4];
-            MagicalDefense = statsList[5];
-            Speed = statsList[6];
+            PhysicalDamage = float.Parse(statsList[2]);
+            PhysicalDefense = float.Parse(statsList[3]);
+            MagicalDamage = float.Parse(statsList[4]);
+            MagicalDefense = float.Parse(statsList[5]);
+            Speed = float.Parse(statsList[6]);
+            CharacterSprite = statsList[7];
+            CharacterSprite = CharacterSprite.Replace("Q", "\r\n");
         }
 
         public override void Death()

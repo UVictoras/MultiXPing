@@ -1,6 +1,6 @@
-Enemy,HP,Mana,PhysicalDamage,PhysicalDefense,MagicalDamage,MagicalDefense,Speed,Type,SpawnProba,
-gobriel,70,40,35,30,30,25,55,plant,54,
-danycayou,90,10,20,70,15,70,25,fire,28,
-nayar,120,35,45,45,25,35,35,water,8,
-flashmcqueen,70,40,45,20,35,35,60,electric,10,
-enderdragon,120,100,35,50,60,50,40,physical,0,
+Enemy,HP,Mana,PhysicalDamage,PhysicalDefense,MagicalDamage,MagicalDefense,Speed,Type,SpawnProba,Sprite
+gobriel,70,40,35,30,30,25,55,plant,54,() oQ  \-|Q   | \,
+danycayou,90,10,20,70,15,70,25,fire,28,   __Q /O O \Q/______\,
+nayar,120,35,45,45,25,35,35,water,8,(> ()Q |\[]Q   /\,
+flashmcqueen,70,40,45,20,35,35,60,electric,10,   ___Q _/_|_\_Q|0_____0|,
+enderdragon,120,100,35,50,60,50,40,physical,0,   ___Q _/_|_\_Q|0_____0|,
