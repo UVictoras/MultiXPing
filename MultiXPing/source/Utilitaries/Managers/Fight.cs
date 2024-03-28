@@ -26,6 +26,7 @@ namespace MultiXPing
         #region Field
         AttackList _listAttack;
         Random _rand = new Random();
+        EnemyList _enemyList;
 
         int _turn;
 
@@ -36,6 +37,8 @@ namespace MultiXPing
         Attack _selectedAttack;
         List<Enemy> _enemies = new();
         FightState _state;
+        int _totalExp;
+        bool _inFight;
 
         FightWindow _windowCombat;
         Window _window;
@@ -68,6 +71,9 @@ namespace MultiXPing
         public List<Enemy> Enemies { get => _enemies; set => _enemies = value; }
         public Character CurrentFighter { get => ActionOrder[Turn]; }
         public Window Window { get => _window; set => _window = value; }
+        public int TotalExp { get => _totalExp; set => _totalExp = value; }
+        public EnemyList EnemyList { get => _enemyList; set => _enemyList = value; }
+        public bool InFight { get => _inFight; set => _inFight = value; }
 
         #endregion Property
 
@@ -92,18 +98,38 @@ namespace MultiXPing
             WindowCombat = new FightWindow(player, arbre);
             Window = new Window();
             MainPlayer= player;
+            TotalExp = 0;
+            InFight = false;
             
         }
 
         public void InitFight(Player player, EnemyList enemyList)
         {
             InitEnnemies(player, enemyList);
+            EnemyList = enemyList;
             DetermineOrder();
             InitOrderList();
             WindowCombat.Init(Enemies, this);
             Window.InitContent("");
+            for (int i = 0; i < Enemies.Count; i++)
+            {
+                TotalExp += Enemies[i].DroppedExperience * Enemies[i].Level;
+            }
         }
-
+        public void ResetFight()
+        {
+            TotalExp = 0;
+            ActionOrder.Clear();
+            InitEnnemies(MainPlayer,EnemyList);
+            InitOrderList();
+            DetermineOrder();
+            WindowCombat.Reset(Enemies, this);
+            Window.InitContent("");
+            for (int i = 0; i < Enemies.Count; i++)
+            {
+                TotalExp += Enemies[i].DroppedExperience * Enemies[i].Level;
+            }
+        }
         public void InitFightRender()
         {
             Console.Clear();
@@ -136,7 +162,10 @@ namespace MultiXPing
         {
             foreach(Hunter hero in MainPlayer.Team.ListTeam)
             {
-                ActionOrder.Add(hero);
+                if (hero.Health > 0)
+                {
+                    ActionOrder.Add(hero);
+                }
             }
 
             if(Enemies.Count == 0) { throw new Exception("Enemy List must be non null"); }
@@ -154,7 +183,14 @@ namespace MultiXPing
             {
                 case FightState.START:
                     State = FightState.FIGHTING;
+                    InFight = true;
                     //InitFightRender();
+                    // RESET
+                    if (Enemies.Count == 0)
+                    {
+                        ResetFight();
+                    }
+                    
                     break;
                 case FightState.FIGHTING:
                     DetermineOrder();
@@ -162,6 +198,7 @@ namespace MultiXPing
                     RenderFight();
                     break;
                 case FightState.END:
+                    RenderFight();
                     break;
                 case FightState.FLEE:
                     break;
@@ -187,6 +224,12 @@ namespace MultiXPing
 
         public void Update()
         {
+            if (Enemies.Count == 0)
+            {
+                GainExp();
+                State = FightState.END;
+                return;
+            }
             if (MainPlayer.Team.ListTeam.Contains(CurrentFighter))
             {
                 //Draw la window associée au combattant
@@ -209,6 +252,16 @@ namespace MultiXPing
             }
         }
 
+        public void GainExp()
+        {
+            for (int i = 0; i < MainPlayer.Team.ListTeam.Count; i++)
+            {
+                if (MainPlayer.Team.ListTeam[i].Health > 0)
+                {
+                    MainPlayer.Team.ListTeam[i].GainExp(TotalExp);
+                }
+            }
+        }
         public void UpdateCurrentTurn()
         {
             if(ActionOrder.Count == 0) { return; }

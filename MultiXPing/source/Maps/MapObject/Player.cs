@@ -64,6 +64,18 @@ namespace MultiXPing
 
         }
 
+        public bool IsTeamKO()
+        {
+            for (int i = 0; i < Team.ListTeam.Count; i++)
+            {
+                if (Team.ListTeam[i].Health != 0)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
         public void OnUseWindow() => onUse?.Invoke(this);
 
         public int GetAverageLevel()

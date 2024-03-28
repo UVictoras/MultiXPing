@@ -103,7 +103,7 @@ namespace MultiXPing
         public int Experience
         {
             get => _experience;
-            private set => _experience = value;
+            set => _experience = value;
         }
 
         public int Level

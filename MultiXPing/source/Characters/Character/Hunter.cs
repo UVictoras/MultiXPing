@@ -19,6 +19,7 @@ namespace MultiXPing
         float _defenseBoost;            // Percentage of defense the character has
         float _speedBoost;              // Percentage of speed the character has
         float _accuracyBoost;           // Percentage of accuracy the character has
+        bool _hasLevelUp;
         List<float> _characterMultiplicator;
 
         #endregion Field
@@ -62,6 +63,7 @@ namespace MultiXPing
             private set => _accuracyBoost = value;
         }
         public List<float> CharacterMultiplicator { get => _characterMultiplicator; set => _characterMultiplicator = value; }
+        public bool HasLevelUp { get => _hasLevelUp; set => _hasLevelUp = value; }
 
         #endregion Property
 
@@ -89,6 +91,7 @@ namespace MultiXPing
             DamageBoost = 1.0f;
             SpeedBoost = 1.0f;
             AccuracyBoost = 1.0f;
+            HasLevelUp = false;
 
         }
 
@@ -160,7 +163,6 @@ namespace MultiXPing
         public void GainExp(int experience)
         {
             Experience += experience;
-            Console.WriteLine("Tu as: " + Experience + " exp");
             if (Experience >= ExperienceRequired)
             {
                 LevelUp();
@@ -169,6 +171,7 @@ namespace MultiXPing
 
         public void LevelUp()
         {
+            HasLevelUp = true;
             Experience = Experience - ExperienceRequired;
             Level += 1;
             ExperienceRequired = (int)Math.Round(35.0 / 36.0 * Math.Pow(Level, 2) + 125.0 / 12.0 * Level - 25.0 / 18.0); // The function f(x)= 35/36 x² + 125/12 x - 25/18, where x is the level, calculate the new amount of exp required
@@ -190,9 +193,6 @@ namespace MultiXPing
             //    //------------------------//
             //}
 
-            Console.WriteLine("Bravo tu est niveau" + Level);
-            Console.WriteLine("Bravo tu a lvlUp, il te faut " + ExperienceRequired + " exp pour lvlUp");
-            Console.WriteLine("Tu as " + Experience + " experience");
         }
 
 
