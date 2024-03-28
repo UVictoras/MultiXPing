@@ -95,9 +95,9 @@ namespace MultiXPing
             
         }
 
-        public void InitFight(Player player)
+        public void InitFight(Player player, EnemyList enemyList)
         {
-            InitEnnemies(player);
+            InitEnnemies(player, enemyList);
             DetermineOrder();
             InitOrderList();
             WindowCombat.Init(Enemies, this);
@@ -114,15 +114,21 @@ namespace MultiXPing
             ActionOrder = ActionOrder.OrderByDescending(x => x.Speed).ToList();
         }
 
-        public void InitEnnemies(Player player)
+        public void InitEnnemies(Player player, EnemyList enemyList)
         {
             int averageLevel = player.GetAverageLevel();
+            GenerateEnemies(enemyList);
 
             for(int i = 0; i < 4; i++)
             {
-                Enemies.Add(new Enemy());
-                Enemies[i].Initialize(NameMobs[Rand.Next(3)], ListAttack);
-                Enemies[i].Level = averageLevel;
+                if (averageLevel - 3 > 0)
+                {
+                    Enemies[i].Level = Rand.Next(averageLevel - 3, averageLevel + 3);
+                }
+                else
+                {
+                    Enemies[i].Level = Rand.Next(1, averageLevel + 3);
+                }
             }
         }
 
@@ -220,22 +226,27 @@ namespace MultiXPing
 
             for (int i = 0; i < 4; i++) 
             {
+                Enemy temp = new Enemy();
                 rand = randomEnemy.Next(1,100);
                 if (rand <= spawnGobriel)
                 {
-                    Enemies.Add(enemyList.GetEnemyByName("gobriel"));
+                    temp.InitEnemy(enemyList.GetEnemyByName("gobriel"));
+                    Enemies.Add(temp);
                 }
                 else if (rand > spawnGobriel && rand <= spawnGobriel + spawnDanycayou)
                 {
-                    Enemies.Add(enemyList.GetEnemyByName("danycayou"));
+                    temp.InitEnemy(enemyList.GetEnemyByName("danycayou"));
+                    Enemies.Add(temp);
                 }
                 else if (rand > spawnGobriel + spawnDanycayou && rand <= spawnGobriel + spawnDanycayou + spawnFlashmcqueen)
                 {
-                    Enemies.Add(enemyList.GetEnemyByName("flashmcqueen"));
+                    temp.InitEnemy(enemyList.GetEnemyByName("flashmcqueen"));
+                    Enemies.Add(temp);
                 }
                 else if (rand > spawnGobriel + spawnDanycayou + spawnFlashmcqueen)
                 {
-                    Enemies.Add(enemyList.GetEnemyByName("nayar"));
+                    temp.InitEnemy(enemyList.GetEnemyByName("nayar"));
+                    Enemies.Add(temp);
                 }
 
             }

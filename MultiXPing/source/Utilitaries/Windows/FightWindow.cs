@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -103,8 +104,6 @@ namespace MultiXPing
         public override void DrawContent()
         {
             Content += Fight.CurrentFighter.Name;
-            
-
 
             if (Content == string.Empty)
             {
@@ -148,7 +147,6 @@ namespace MultiXPing
             {
                 _currentNode.PrintChildrenOnly(X + 2, Y + 3, CurrentChoice);
             }
-
             Content = "Tour de : ";
 
             }

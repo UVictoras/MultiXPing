@@ -62,7 +62,22 @@ namespace MultiXPing
         #region Methods
         public Enemy() : base()
         {
-            CharacterSprite = "   |\r\n o_T\r\n/| \r\n/ |";
+            CharacterSprite = "|   \r\nT_ o\r\n   |\\ \r\n  | \\ ";
+        }
+
+        public void InitEnemy(Enemy type)
+        {
+            Name = type.Name;
+            MaximumHealth = type.MaximumHealth;
+            Health = type.Health;
+            MaximumMana = type.MaximumMana;
+            Mana = type.Mana;
+            PhysicalDamage = type.PhysicalDamage;
+            PhysicalDefense = type.PhysicalDefense;
+            MagicalDamage = type.MagicalDamage;
+            MagicalDefense = type.MagicalDefense;
+            Speed = type.Speed;
+            Element = type.Element;
         }
 
         public void DropItems(ref Player player)
