@@ -65,7 +65,7 @@ namespace MultiXPing
 
         public Team()
         {
-            Name = "team";
+            Name = "Team";
         }
 
         public void AddCharacter(Character character)

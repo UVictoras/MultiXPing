@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 namespace MultiXPing
 {
 
+
     class FightWindow : MenuWindow
     {
         /* ----------------------------------------------------- *\
@@ -33,6 +34,8 @@ namespace MultiXPing
         Tree _arbre;
         Tree _arbreEnemy;
 
+        private Dictionary<string, ConsoleColor> dicoCouleur = new Dictionary<string, ConsoleColor>();
+
         #endregion Field
 
         /* ----------------------------------------------------- *\
@@ -53,6 +56,7 @@ namespace MultiXPing
         public Fight Fight { get => _fight; set => _fight = value; }
         public GameItem CurrentItem { get => _currentItem; set => _currentItem = value; }
         public int CurrentHero { get => _currentHero; set => _currentHero = value; }
+        public Dictionary<string, ConsoleColor> DicoCouleur { get => dicoCouleur; set => dicoCouleur = value; }
 
 
 
@@ -81,6 +85,13 @@ namespace MultiXPing
             ArbreEnemy.Root.Obj.Name = "Ennemis";
             Player = mainPlayer;
             Content = "Tour de : ";
+
+            DicoCouleur.Add("fire", ConsoleColor.Red);
+            DicoCouleur.Add("physic", ConsoleColor.Gray);
+            DicoCouleur.Add("water", ConsoleColor.Blue);
+            DicoCouleur.Add("electric", ConsoleColor.Yellow);
+            DicoCouleur.Add("plant", ConsoleColor.Green);
+
         }
 
         #region Init
@@ -150,6 +161,11 @@ namespace MultiXPing
             }
             Content = "Tour de : ";
 
+            if(CurrentNode.Obj is Hunter)
+            {
+                PrintAttackStats(((Character)CurrentNode.Obj).Attacks[CurrentChoice]);
+            }
+
             }
            
 
@@ -165,12 +181,33 @@ namespace MultiXPing
             if (CurrentNode.Obj.Name == "Root")
             {
                 node = Nodes[_currentChoice].NodeRef;//Si on est pas dans l'arbre on prend le node à l'indice currentchoice
-            }else
+            }
+            else
             {
                 node = _currentNode.Children[_currentChoice];//On prend l'enfant du currentNode
             }
 
-            if (node.HasChildren() == true)//Navigue dans l'enfant sous-jascent
+            if(CurrentItem != null && node.Obj is Hunter)
+            {
+                //Si il existe un objet en attente d'une cible
+
+                Hunter target = (Hunter)node.Obj;
+
+                if (CurrentItem.Use(Fight.CurrentFighter, target))
+                {
+                    CurrentItem.Use(target); //Ici le node Object est une attack
+                    if (MainPlayer.GetIndexItem(CurrentItem) == -1) { throw new Exception("Current item doesn't exist"); }
+
+                    MainPlayer.Inventory.NodeRef.DeleteChildren(MainPlayer.GetIndexItem(CurrentItem));
+                    Fight.UpdateCurrentTurn();
+                    UpdateHero();
+                    Nodes[0] = Player.Team[CurrentHero];
+                    CurrentItem = null;
+                }
+
+                CurrentChoice = 0;
+            }
+            else if (node.HasChildren() == true )//Navigue dans l'enfant sous-jascent
             {
                 _currentNode = node;
             }
@@ -179,6 +216,8 @@ namespace MultiXPing
                 if(node.Obj is Attack)
                 {
                     CurrentSpell = (Attack)node.Obj;
+
+                    if(CurrentSpell.MagicCost > Fight.CurrentFighter.Mana) { return; }
 
                     if (CurrentSpell.AlliesTarget == true)
                     {
@@ -198,7 +237,7 @@ namespace MultiXPing
                     CurrentItem = (GameItem)node.Obj;
 
                     //Si le sort est un boost, on affiche les alliées éligibles à ce sort
-                    CurrentNode = Arbre.Root.GetChildByName("Inventory");
+                    CurrentNode = Arbre.Root.GetChildByName("Team");
                     CurrentChoice = 0;
 
                 }
@@ -229,26 +268,13 @@ namespace MultiXPing
                     CurrentSpell = null;
 
                 }//Ici le node Object est une attack
-                    
-            }
-            else if (CurrentItem != null)//Si il y a un objet en cours à utiliser
-            {
-                //Si il existe un objet en attente d'une cible
+                CurrentChoice = 0;
 
-                Hunter target = (Hunter)_currentNode.Children[_currentChoice].Obj;
-
-                if (CurrentItem.Use(Fight.CurrentFighter, target))
-                {
-                    CurrentItem.Use(target); //Ici le node Object est une attack
-                    CurrentItem = null;
-                    Fight.UpdateCurrentTurn();
-                    UpdateHero();
-                    Nodes[0] = Player.Team[CurrentHero];
-                }
             }
             else// Si rien on utilise l'objet selectionné
             {
                 node.Obj.Use(null,Fight.CurrentFighter);
+                CurrentChoice = 0;
             }
             
         }
@@ -274,6 +300,29 @@ namespace MultiXPing
         {
             CurrentHero = (CurrentHero + 1) % 4;
             if (CurrentHero < 0) CurrentHero += 4;
+        }
+
+        public void PrintAttackStats(Attack att)
+        {
+            Console.SetCursorPosition(X + Width/2 + 15, Y + 3);
+            Console.Write("Dégats: " + att.Damage);
+            Console.SetCursorPosition(X + Width / 2 + 15 + 25, Y + 3);
+            Console.Write("Précision: " + att.Accuracy);
+
+            Console.SetCursorPosition(X + Width/ 2 + 15, Y + 5);
+            Console.Write("Cout en mana: " + att.Damage);
+            Console.SetCursorPosition(X + Width / 2 + 15 + 25, Y + 5);
+
+            Console.Write("Type: ");
+            Console.ForegroundColor = dicoCouleur[att.Element];
+            Console.Write(att.Element);
+            Console.ForegroundColor = ConsoleColor.White;
+
+            Console.SetCursorPosition(X + Width / 2 + 15, Y + 7);
+            Console.Write("Description: ");
+            Console.SetCursorPosition(X + Width / 2 + 15, Y + 9);
+            Console.Write(att.Descriptor);
+
         }
 
         #endregion Methods

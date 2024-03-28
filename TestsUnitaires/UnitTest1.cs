@@ -1,6 +1,7 @@
 
 using MultiXPing;
 using MultiXPing.source.Characters.Attacks;
+using System.Runtime.ExceptionServices;
 
 namespace TestsUnitaires
 {
@@ -118,5 +119,18 @@ namespace TestsUnitaires
         }
 
 
+
+        [Test]
+        [TestCase(100)]
+        [TestCase(1)]
+        [TestCase(50)]
+        public void TestRandom(int value)
+        {
+            //Arrange 
+            int result =  Rand.GetInstance().Randint(value);
+
+            
+
+        }
     }
 }

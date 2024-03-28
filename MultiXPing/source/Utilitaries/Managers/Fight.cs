@@ -206,6 +206,7 @@ namespace MultiXPing
                 WindowCombat.Close();
                 Window.Open();
 
+
             }
         }
 
@@ -214,6 +215,7 @@ namespace MultiXPing
             if(ActionOrder.Count == 0) { return; }
             Turn = (Turn + 1) % ActionOrder.Count;
             if (Turn < 0) Turn += ActionOrder.Count;
+            GiveManaAll();
         }
 
         public void GenerateEnemies(EnemyList enemyList) 
@@ -329,6 +331,14 @@ namespace MultiXPing
             }
             return attack.Name + " sur " + cible.Name;
 
+        }
+
+        public void GiveManaAll()
+        {
+            for(int i = 0; i < ActionOrder.Count; i++)
+            {
+                ActionOrder[i].ManaRegeneration(3);
+            }
         }
 
         #endregion Methods

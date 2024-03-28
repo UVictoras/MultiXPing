@@ -153,6 +153,7 @@ namespace MultiXPing
 
             MapList.Add(new Maps("Map1"));
             MapList.Add(new Maps("Map2"));
+            
 
             Map = MapList[0];
 
@@ -162,10 +163,9 @@ namespace MultiXPing
             RenderTarget = new Render();
             RenderTarget.InitBuffer();
 
-            InitPlayer();
-
             FightMenu = new Tree();
             FightMenu.AddNode(Player.Inventory);
+            FightMenu.AddNode(Player.Team);
 
             MainMenu = new Tree();
             MainMenu.AddNode(Player.Inventory);
@@ -177,7 +177,10 @@ namespace MultiXPing
             MainMenuWindow = new MenuWindow(Player, MainMenu);
             MainMenuWindow.InitContent(" ");
 
-            Map.InitInteractive(ListInteractives, Player, MainWindow);
+            MapList[0].InitInteractive(ListInteractives, Player, MainWindow);
+            MapList[1].InitInteractive(ListInteractives, Player, MainWindow);
+            MapList[0].TabSign[1].SetText("Grotte Obscure ->");
+            MapList[1].TabSign[0].SetText("Bravo d'etre arrivé jusqu'ici");
 
             CharacterStats Stats = new CharacterStats();
             Stats.InitializeCSVStats(Constants.PROJECTPATH + "MultiXPing\\source\\Data\\InitStats.csv", Constants.PROJECTPATH + "MultiXPing\\source\\Data\\LevelUpMultiplicator.csv");
@@ -191,6 +194,11 @@ namespace MultiXPing
 
             Fight = new Fight(attackList,Player,FightMenu) ;
             Fight.InitFight(Player, enemyList);
+
+            Player.Inventory.AddItem(new Coffee());
+            Player.Inventory.AddItem(new Meat());
+            Player.Inventory.AddItem(new Egg());
+
         }
 
         public void InitPlayerHeroes(AttackList attlist, CharacterStats charStats)

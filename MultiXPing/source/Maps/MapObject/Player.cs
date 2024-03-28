@@ -85,6 +85,17 @@ namespace MultiXPing
             return result;
 
         }
+
+        public int GetIndexItem(GameItem item)
+        {
+            if(Inventory.ListInventory.Count == 0) { return -1; }
+            for(int i = 0; i < Inventory.ListInventory.Count; i++)
+            {
+                if (Inventory[i] == item ) return i;
+            }
+
+            return -1;
+        }
         
         #endregion Methods
     }
