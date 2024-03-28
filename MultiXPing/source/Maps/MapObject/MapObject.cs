@@ -16,7 +16,7 @@ namespace MultiXPing
         \* ----------------------------------------------------- */
         #region Field
 
-        protected Vector2 _pos;           // Object position on the map
+        private Vector2 _pos;           // Object position on the map
         protected PlayerSprite _sprite = new PlayerSprite();
 
         #endregion Field
@@ -31,7 +31,7 @@ namespace MultiXPing
         public Vector2 Position
         {
             get => _pos;
-            protected set => _pos = value;
+            set => _pos = value;
         }
 
         public PlayerSprite Sprite

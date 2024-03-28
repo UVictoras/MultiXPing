@@ -26,6 +26,9 @@ namespace MultiXPing
 
         private List<Sign> _tabSign = new();
 
+        string _id = String.Empty;
+
+
         #endregion Field
 
         /* ----------------------------------------------------- *\
@@ -58,6 +61,7 @@ namespace MultiXPing
             set => _height = value;
         }
         public List<Sign> TabSign { get => _tabSign; set => _tabSign = value; }
+        public string Id { get => _id; set => _id = value; }
 
         #endregion Property
 
@@ -78,14 +82,14 @@ namespace MultiXPing
         #region Methods
 
 
-        public Maps() {
-            InitMap();
-            
+        public Maps(string map){
+            Id = map;
+            InitMap(map);
         }
 
-        public void InitMap()
+        public void InitMap(string map)
         {
-            _text = File.ReadAllText(Constants.PROJECTPATH + "MultiXPing\\source\\Maps\\MapDesign\\Map1.txt");
+            _text = File.ReadAllText(Constants.PROJECTPATH + "MultiXPing\\source\\Maps\\MapDesign\\"+ map +".txt");
             _width = WidthMap();
             _height = HeightMap();
 
