@@ -85,22 +85,21 @@ namespace MultiXPing
             IsUsableOnTarget= true;
         }
 
-        public bool Use(Character attacker, Character target)
+        public override bool Use(Character from, Character to)
         {
             int damage = 0;
             if (MagicCost != 0)
             {
-                damage = (int)(Damage * (attacker.MagicalDamage / target.MagicalDefense));
+                damage = (int)(Damage * (from.MagicalDamage / to.MagicalDefense));
             }
             else
             {
-                damage = (int)(Damage * (attacker.PhysicalDamage / target.PhysicalDefense));
+                damage = (int)(Damage * (from.PhysicalDamage / to.PhysicalDefense));
             }
-            target.TakeDamage(damage);
+            to.TakeDamage(damage);
 
             return true;
         }
-
         #endregion Methods
     }
 

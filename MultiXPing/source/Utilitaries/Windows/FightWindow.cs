@@ -104,6 +104,7 @@ namespace MultiXPing
         public override void DrawContent()
         {
             Content += Fight.CurrentFighter.Name;
+            Nodes[0] = Fight.CurrentFighter;
 
             if (Content == string.Empty)
             {
@@ -210,6 +211,15 @@ namespace MultiXPing
 
                 if (CurrentSpell.Use(Fight.CurrentFighter, target))
                 {
+                    if (target.Health == 0)
+                    {
+                        if (_currentNode.Children[_currentChoice].Obj is Enemy)
+                        {
+                            ArbreEnemy.RemoveNode(target);
+                            Fight.ActionOrder.Remove(target);
+                            Fight.Enemies.Remove((Enemy)target);
+                        }
+                    }
                     Fight.UpdateCurrentTurn();
                     UpdateHero();
                     Nodes[0] = Player.Team[CurrentHero];

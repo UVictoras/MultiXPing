@@ -157,7 +157,7 @@ namespace MultiXPing
                     //InitFightRender();
                     break;
                 case FightState.FIGHTING:
-
+                    DetermineOrder();
                     Update();
                     RenderFight();
                     break;
@@ -202,6 +202,7 @@ namespace MultiXPing
                 string spellUsed = EnnemyAttack();
 
                 Window.InitContent(CurrentFighter.Name + " utilise " + spellUsed);
+                UpdateCurrentTurn();
                 WindowCombat.Close();
                 Window.Open();
 
@@ -287,7 +288,7 @@ namespace MultiXPing
         {
 
             Console.Write("Health: ");
-            for (int i = 0; i < (((character.Health * 100) / character.MaximumHealth) / 10); i++)
+            for (int i = 0; i < (((character.Health * 100) / character.MaximumHealth) / 10) + 1; i++)
             {
                 Console.Write("■");
             }
@@ -295,7 +296,7 @@ namespace MultiXPing
         public void DrawManaBar(Character character, int cursorY)
         {
             Console.Write("Mana: ");
-            for (int i = 0; i < (((character.Mana * 100) / character.MaximumMana) / 10); i++)
+            for (int i = 0; i < (((character.Mana * 100) / character.MaximumMana) / 10) + 1; i++)
             {
                 Console.Write("■");
             }
@@ -309,16 +310,24 @@ namespace MultiXPing
         public string EnnemyAttack()
         {
             if(CurrentFighter is not Enemy) { return "failed"; }
-            int spell = Rand.Next(3);
-            int target = Rand.Next(3);
+            
+            int spell = Rand.Next(CurrentFighter.Attacks.Count);
+            Attack attack = CurrentFighter.Attacks[spell];
+            int target = Rand.Next(MainPlayer.Team.ListTeam.Count);
+            while (MainPlayer.Team[target].Health < 0) 
+            {
+                target = Rand.Next(3);
+            }
             Hunter cible = (Hunter)MainPlayer.Team[target];
-            bool succes = CurrentFighter.Attacks[spell].Use(cible) ;
+            bool succes = CurrentFighter.Attacks[spell].Use(CurrentFighter, cible) ;
 
             if (succes == false) { throw new Exception("Attack didn't work"); }
 
-            UpdateCurrentTurn();
-
-            return CurrentFighter.Attacks[spell].Name + " sur " + cible.Name;
+            if (cible.Health == 0)
+            {
+                ActionOrder.Remove(cible);
+            }
+            return attack.Name + " sur " + cible.Name;
 
         }
 
