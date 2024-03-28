@@ -174,7 +174,7 @@ namespace MultiXPing
             AttackList attackList = new AttackList();
             attackList.InitAttacks();
             EnemyList enemyList = new EnemyList();
-            enemyList.InitEnemy();
+            enemyList.InitEnemy(attackList);
 
             InitPlayerHeroes(attackList, Stats);
 

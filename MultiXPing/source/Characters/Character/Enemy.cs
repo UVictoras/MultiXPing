@@ -78,6 +78,7 @@ namespace MultiXPing
             MagicalDefense = type.MagicalDefense;
             Speed = type.Speed;
             Element = type.Element;
+            Attacks = type.Attacks;
         }
 
         public void DropItems(ref Player player)

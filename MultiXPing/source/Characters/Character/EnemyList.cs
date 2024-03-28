@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MultiXPing.source.Characters.Attacks;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.ExceptionServices;
@@ -59,7 +60,7 @@ namespace MultiXPing
 
         }
 
-        public void InitEnemy()
+        public void InitEnemy(AttackList listAtt)
         {
             List<List<string>> list = Parser.CSVParserString(Constants.PROJECTPATH + "MultiXPing\\source\\Data\\EnemyStat.csv");
             for (int i = 1; i < list.Count; i++)
@@ -80,7 +81,14 @@ namespace MultiXPing
                         Element = list[i][8],
                         SpawnProba = int.Parse(list[i][9]),
                     }) ;
+
             }
+
+            for(int i = 0; i < ListEnemy.Count; i++)
+            {
+                ListEnemy[i].Initialize(ListEnemy[i].Name, listAtt);
+            }
+
         }
 
         public Enemy GetEnemyByName(string name)

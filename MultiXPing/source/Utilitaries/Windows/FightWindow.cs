@@ -154,6 +154,10 @@ namespace MultiXPing
 
         public void Select()
         {
+            if (IsOpen == false)
+            {
+                return;
+            }
             
             Node node;
 
