@@ -183,22 +183,27 @@ namespace MultiXPing
 
             for (int i = 0; i < 4; i++) 
             {
+                Enemy temp = new Enemy();
                 rand = randomEnemy.Next(1,100);
                 if (rand <= spawnGobriel)
                 {
-                    Enemies.Add(enemyList.GetEnemyByName("gobriel"));
+                    temp.InitEnemy(enemyList.GetEnemyByName("gobriel"));
+                    Enemies.Add(temp);
                 }
                 else if (rand > spawnGobriel && rand <= spawnGobriel + spawnDanycayou)
                 {
-                    Enemies.Add(enemyList.GetEnemyByName("danycayou"));
+                    temp.InitEnemy(enemyList.GetEnemyByName("danycayou"));
+                    Enemies.Add(temp);
                 }
                 else if (rand > spawnGobriel + spawnDanycayou && rand <= spawnGobriel + spawnDanycayou + spawnFlashmcqueen)
                 {
-                    Enemies.Add(enemyList.GetEnemyByName("flashmcqueen"));
+                    temp.InitEnemy(enemyList.GetEnemyByName("flashmcqueen"));
+                    Enemies.Add(temp);
                 }
                 else if (rand > spawnGobriel + spawnDanycayou + spawnFlashmcqueen)
                 {
-                    Enemies.Add(enemyList.GetEnemyByName("nayar"));
+                    temp.InitEnemy(enemyList.GetEnemyByName("nayar"));
+                    Enemies.Add(temp);
                 }
 
             }

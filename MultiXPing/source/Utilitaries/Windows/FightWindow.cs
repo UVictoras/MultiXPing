@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -259,6 +260,14 @@ namespace MultiXPing
 
                     if (CurrentSpell.Use(Fight.CurrentFighter, target))
                     {
+                        if (target.Health == 0)
+                        {
+                            if (_currentNode.Children[_currentChoice].Obj.GetType() == typeof(Enemy))
+                            {
+                                Fight.Enemies.Remove(((Enemy)target));
+                                ArbreEnemy.RemoveNode(target);
+                            }
+                        }
                         CurrentNode = Arbre.Root;
                         CurrentSpell = null;
                         Fight.UpdateCurrentTurn();
