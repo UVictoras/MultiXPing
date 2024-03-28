@@ -14,6 +14,8 @@ namespace MultiXPing
 
         List<GameItem> _loot = new();              // Item dropped by the enemy
         int _droppedExperience;          // Amount of experience the enemy gives
+        string _element;
+        int _spawnProba;
 
         #endregion Field
 
@@ -35,6 +37,8 @@ namespace MultiXPing
             get => _droppedExperience;
             private set => _droppedExperience = value;
         }
+        public string Element { get => _element; set => _element = value; }
+        public int SpawnProba { get => _spawnProba; set => _spawnProba = value; }
 
         #endregion Property
 
@@ -58,6 +62,7 @@ namespace MultiXPing
         #region Methods
         public Enemy() : base()
         {
+            CharacterSprite = "|   \r\nT_ o\r\n   |\\ \r\n  | \\ ";
         }
 
         public void DropItems(ref Player player)

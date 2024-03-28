@@ -173,6 +173,8 @@ namespace MultiXPing
             
             AttackList attackList = new AttackList();
             attackList.InitAttacks();
+            EnemyList enemyList = new EnemyList();
+            enemyList.InitEnemy();
 
             InitPlayerHeroes(attackList, Stats);
 
@@ -187,14 +189,17 @@ namespace MultiXPing
             tank.InitializeHunter("Rayan", "tank", attlist, charStats);
 
             Hunter swordman = new();
+            tank.InitializeHunter("Link", "swordman", attlist, charStats);
             Player.Team.AddCharacter(swordman);
             swordman.InitializeHunter("Link", "swordman", attlist, charStats);
 
             Hunter magician = new();
+            tank.InitializeHunter("Harry crampté", "magician", attlist, charStats);
             Player.Team.AddCharacter(magician);
             magician.InitializeHunter("Harry crampté", "magician", attlist, charStats);
 
             Hunter support = new();
+            tank.InitializeHunter("Sage", "support", attlist, charStats);
             Player.Team.AddCharacter(support);
             support.InitializeHunter("Sage", "support", attlist, charStats);
         }

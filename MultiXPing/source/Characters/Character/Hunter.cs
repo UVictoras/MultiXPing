@@ -89,6 +89,7 @@ namespace MultiXPing
             DamageBoost = 1.0f;
             SpeedBoost = 1.0f;
             AccuracyBoost = 1.0f;
+            CharacterSprite = "   |\r\n o_T\r\n/| \r\n/ |";
         }
 
         public void InitializeHunter(string name, string classe, AttackList list, CharacterStats stats)

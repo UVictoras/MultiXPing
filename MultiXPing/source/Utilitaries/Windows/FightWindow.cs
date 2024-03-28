@@ -102,54 +102,59 @@ namespace MultiXPing
         #region Fight
         public override void DrawContent()
         {
-            Content += Fight.CurrentFighter.Name;
-            
-
-
-            if (Content == string.Empty)
+            base.DrawContent();
+            for (int i = 0; i < MainPlayer.Team.ListTeam.Count; ++i)
             {
-                return;
-            }
-
-            //Base.Base
-
-            Console.BackgroundColor = ConsoleColor.Black;
-            Console.SetCursorPosition(X + 1, Y + 1);
-            int countLine = 1;
-
-            foreach (char c in Content)
-            {
-                if (c == '\n')
+                if (MainPlayer.Team.ListTeam[i].Health > 0)
                 {
-                    countLine++;
-                    Console.SetCursorPosition(X + 1, Y + countLine);
-                }
-                else
-                {
-                    Console.Write(c);
+                    Console.SetCursorPosition(3, 2 + 5 * i);
+                    Console.WriteLine(MainPlayer.Team.ListTeam[i].Name);
+                    Console.SetCursorPosition(4, 3 + 5 * i);
+                    DrawHealtBar(MainPlayer.Team.ListTeam[i], i);
+                    Console.SetCursorPosition(4, 4 + 5 * i);
+                    DrawManaBar(MainPlayer.Team.ListTeam[i], i);
+                    Console.SetCursorPosition(25, 3 + 5 * i);
+                    MainPlayer.Team.ListTeam[i].DrawSprite(25, 3 + 5 * i);
                 }
             }
 
-            ////
-
+            for (int i = 0; i < Enemies.Count; ++i)
+            {
+                if (Enemies[i].Health > 0)
+                {
+                    Console.SetCursorPosition(Constants.WIDTH - 25, 2 + 5 * i);
+                    Console.WriteLine(Enemies[i].Name);
+                    Console.SetCursorPosition(Constants.WIDTH - 25, 3 + 5 * i);
+                    DrawHealtBar(Enemies[i], i);
+                    Console.SetCursorPosition(Constants.WIDTH - 32, 3 + 5 * i);
+                    Enemies[i].DrawSprite(Constants.WIDTH - 32, 3 + 5 * i); ;
+                }
+            }
             Console.SetCursorPosition(X + 2, Y + 2);
+            Console.Write("Tour de : " + CharacterTurn.Name);
+            _currentNode.PrintChildrenOnly(X + 2, Y + 3, CurrentChoice);
+        }
+        public void DrawHealtBar(Character character, int cursorY)
+        {
             
-            if(CurrentNode.Obj.Name == "Root")
+            Console.Write("Health: ");
+            for (int i = 0; i < (((character.Health * 100) / character.MaximumHealth) / 10); i++)
             {
-                for (int i = 0; i < Nodes.Count; i++)
-                {
-                    Console.SetCursorPosition(X + 2, Y + i + 3);
-                    if (i == CurrentChoice)
-                    {
-                        Console.Write("> ");
-                    }
-                    Console.Write(" - " + Nodes[i].Name);
-                }
+                Console.Write("■");
             }
-            else
+        }
+        public void DrawManaBar(Character character, int cursorY)
+        {
+            Console.Write("Mana: ");
+            for (int i = 0; i < (((character.Mana * 100) / character.MaximumMana) / 10); i++)
             {
-                _currentNode.PrintChildrenOnly(X + 2, Y + 3, CurrentChoice);
+                Console.Write("■");
             }
+        }
+        public void DrawCharacter(int cusorY)
+        {
+
+        }
 
             Content = "Tour de : ";
 
