@@ -188,8 +188,8 @@ namespace MultiXPing
             if (classe == "tank" || classe == "swordman" || classe == "magician" || classe == "support")
             {
 
+            }
             else if(classe == "flashmcqueen")
-            else if(classe == "dog")
             {
                 //Electric
                 type = "electric";
@@ -199,12 +199,12 @@ namespace MultiXPing
                 //Water
                 type = "water";
             }
-            else if (classe == "gobriel")
+            else if (classe == "danycayou")
             {
                 //Plant
                 type = "plant";
             }
-            else if (classe == "danycayou")
+            else if (classe == "gobriel")
             {
                 //Fire
                 type = "fire";

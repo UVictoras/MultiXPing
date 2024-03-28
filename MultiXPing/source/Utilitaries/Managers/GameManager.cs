@@ -180,6 +180,7 @@ namespace MultiXPing
 
             Fight = new Fight(attackList,Player,FightMenu) ;
             Fight.InitFight(Player);
+            Fight.GenerateEnemies(enemyList);
         }
 
         public void InitPlayerHeroes(AttackList attlist, CharacterStats charStats)
@@ -189,17 +190,17 @@ namespace MultiXPing
             tank.InitializeHunter("Rayan", "tank", attlist, charStats);
 
             Hunter swordman = new();
-            tank.InitializeHunter("Link", "swordman", attlist, charStats);
-            Player.Team.AddCharacter(swordman);
+=========
             swordman.InitializeHunter("Link", "swordman", attlist, charStats);
-
-            Hunter magician = new();
-            tank.InitializeHunter("Harry crampté", "magician", attlist, charStats);
-            Player.Team.AddCharacter(magician);
+>>>>>>>>> Temporary merge branch 2
+            Player.Team.AddCharacter(swordman);
+=========
             magician.InitializeHunter("Harry crampté", "magician", attlist, charStats);
-
-            Hunter support = new();
-            tank.InitializeHunter("Sage", "support", attlist, charStats);
+>>>>>>>>> Temporary merge branch 2
+            Player.Team.AddCharacter(magician);
+=========
+            support.InitializeHunter("Sage", "support", attlist, charStats);
+>>>>>>>>> Temporary merge branch 2
             Player.Team.AddCharacter(support);
             support.InitializeHunter("Sage", "support", attlist, charStats);
         }
