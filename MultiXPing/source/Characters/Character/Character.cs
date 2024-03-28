@@ -29,6 +29,8 @@ namespace MultiXPing
         Dictionary<int, Attack> _possibelAttacks;       // List of the attacks the character can learn
         List<Attack>  _attacks;
 
+        string _characterSprite;
+
 
         #endregion Field
 
@@ -121,6 +123,7 @@ namespace MultiXPing
             set => _possibelAttacks = value;
         }
         public List<Attack> Attacks { get => _attacks; set => _attacks = value; }
+        public string CharacterSprite { get => _characterSprite; set => _characterSprite = value; }
 
         #endregion Property
 
@@ -146,6 +149,25 @@ namespace MultiXPing
         public Character()
         {
             Attacks = new List<Attack>();
+            CharacterSprite = String.Empty;
+        }
+
+        public void DrawSprite(int posX, int posY)
+        {
+            int line = posY;
+            for (int i = 0; i < CharacterSprite.Length; i++)
+            {
+                if (CharacterSprite[i] == '\n')
+                {
+                    Console.WriteLine();
+                    line++;
+                    Console.SetCursorPosition(posX, line);
+                }
+                else
+                {
+                    Console.Write(CharacterSprite[i]);
+                }
+            }
         }
 
         public void InitializeCharacter(string name, string classe, AttackList attList)
