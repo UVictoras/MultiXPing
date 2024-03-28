@@ -52,6 +52,10 @@ namespace MultiXPing
 
         Random _rand = new Random();
 
+        List<Maps> _mapList = new List<Maps>();
+
+        Vector2 _lastPosMainMap;
+
         #endregion Field
 
         /* ----------------------------------------------------- *\
@@ -115,6 +119,9 @@ namespace MultiXPing
         public Random Rand { get => _rand; set => _rand = value; }
         public Tree FightMenu { get => _fightMenu; set => _fightMenu = value; }
         internal Fight Fight { get => _fight; set => _fight = value; }
+        public List<Maps> MapList { get => _mapList; set => _mapList = value; }
+        public Vector2 LastPosMainMap { get => _lastPosMainMap; set => _lastPosMainMap = value; }
+
 
         #endregion Property
 
@@ -140,10 +147,14 @@ namespace MultiXPing
         {
             CurrentState = State.MAP;
             IsRunning = true;
+            LastPosMainMap = new Vector2(Width / 2, Height / 2);
 
             InitPlayer();
 
-            Map = new Maps();
+            MapList.Add(new Maps("Map1"));
+            MapList.Add(new Maps("Map2"));
+
+            Map = MapList[0];
 
             Inputmanager = new InputManager();
             //Inputmanager.Initialize();
@@ -204,6 +215,11 @@ namespace MultiXPing
         public void InitPlayer()
         {
             Player = new Player(Width / 2, Height / 2);
+        }
+
+        public void ResetSpawn()
+        {
+            Player.Position = new Vector2(Width / 2, Height / 2);
         }
 
         #endregion Init
@@ -369,6 +385,32 @@ namespace MultiXPing
                     Fight.WindowCombat.Open();
                 }
             }
+            else if(Map.Tab[Player.Position.Y][Player.Position.X] == '*')
+            {
+                if(Map.Id == MapList[0].Id)
+                {
+                    ChangeMap(1);
+
+                }
+                else
+                {
+                    ChangeMap(0);
+                    ResetSpawn();
+                }
+            }
+        }
+
+        public void ChangeMap(int index)
+        {
+            if(index == 0)
+            {
+                LastPosMainMap = Player.Position;
+            }
+            else
+            {
+                Player.Position = LastPosMainMap;
+            }
+            Map = MapList[index];
         }
 
         #endregion Methods
