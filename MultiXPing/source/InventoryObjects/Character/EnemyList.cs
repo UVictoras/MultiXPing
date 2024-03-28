@@ -69,7 +69,9 @@ namespace MultiXPing
                     {
                         Name = list[i][0],
                         MaximumHealth = int.Parse(list[i][1]),
+                        Health = int.Parse(list[i][1]),
                         MaximumMana = int.Parse(list[i][2]),
+                        Mana = int.Parse(list[i][2]),
                         PhysicalDamage = int.Parse(list[i][3]),
                         PhysicalDefense = int.Parse(list[i][4]),
                         MagicalDamage = int.Parse(list[i][5]),

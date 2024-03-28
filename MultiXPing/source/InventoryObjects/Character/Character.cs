@@ -47,7 +47,7 @@ namespace MultiXPing
         public int Health
         {
             get => _health;
-            protected set => _health = value;
+            set => _health = value;
         }
 
         public float PhysicalDamage
@@ -94,7 +94,7 @@ namespace MultiXPing
         public int Mana
         {
             get => _mana;
-            protected set => _mana = value;
+            set => _mana = value;
         }
 
         public int Experience
