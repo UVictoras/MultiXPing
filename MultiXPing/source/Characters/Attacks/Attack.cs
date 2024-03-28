@@ -18,14 +18,14 @@ namespace MultiXPing
         \* ----------------------------------------------------- */
         #region Field
 
-        string _element;            // Defines the specificity of the attack
-        float _accuracy;         // Precision of the attack
         int _damage;           // Amount of damage inflicted by the attack
         int _magicCost;          // Whether the attack has a magical type or not
-        object _function;
+        float _accuracy;         // Precision of the attack
+        string _element;            // Defines the specificity of the attack
         string _descriptor;
         string _class;
         bool _alliesTarget;
+        object _function;
 
         #endregion Field
 
