@@ -103,8 +103,6 @@ namespace MultiXPing
         public override void DrawContent()
         {
             Content += Fight.CurrentFighter.Name;
-            
-
 
             if (Content == string.Empty)
             {
@@ -148,7 +146,6 @@ namespace MultiXPing
             {
                 _currentNode.PrintChildrenOnly(X + 2, Y + 3, CurrentChoice);
             }
-
             Content = "Tour de : ";
 
 
@@ -158,7 +155,7 @@ namespace MultiXPing
                 if (MainPlayer.Team.ListTeam[i].Health > 0)
                 {
                     Console.SetCursorPosition(3, 2 + 5 * i);
-                    Console.WriteLine(MainPlayer.Team.ListTeam[i].Name);
+                    Console.WriteLine(MainPlayer.Team.ListTeam[i].Name + ": Lv " + MainPlayer.Team.ListTeam[i].Level);
                     Console.SetCursorPosition(4, 3 + 5 * i);
                     DrawHealtBar(MainPlayer.Team.ListTeam[i], i);
                     Console.SetCursorPosition(4, 4 + 5 * i);
@@ -168,22 +165,19 @@ namespace MultiXPing
                 }
             }
 
-            for (int i = 0; i < Fight.Enemies.Count; ++i)
+            for (int j = 0; j < Fight.Enemies.Count; ++j)
             {
-                if (Fight.Enemies[i].Health > 0)
+                if (Fight.Enemies[j].Health > 0)
                 {
-                    Console.SetCursorPosition(Constants.WIDTH - 25, 2 + 5 * i);
-                    Console.WriteLine(Fight.Enemies[i].Name);
-                    Console.SetCursorPosition(Constants.WIDTH - 25, 3 + 5 * i);
-                    DrawHealtBar(Fight.Enemies[i], i);
-                    Console.SetCursorPosition(Constants.WIDTH - 32, 3 + 5 * i);
-                    Fight.Enemies[i].DrawSprite(Constants.WIDTH - 32, 3 + 5 * i); ;
-
+                    Console.SetCursorPosition(Constants.WIDTH - 25, 2 + 5 * j);
+                    Console.WriteLine(Fight.Enemies[j].Name + ": Lv " + Fight.Enemies[j].Level);
+                    Console.SetCursorPosition(Constants.WIDTH - 25, 3 + 5 * j);
+                    DrawHealtBar(Fight.Enemies[j], j);
+                    Console.SetCursorPosition(Constants.WIDTH - 32, 3 + 5 * j);
+                    Fight.Enemies[j].DrawSprite(Constants.WIDTH - 32, 3 + 5 * j);
                 }
             }
-            //Console.SetCursorPosition(X + 2, Y + 2);
-            //Console.Write("Tour de : " + Fight.CurrentFighter.Name);
-            //_currentNode.PrintChildrenOnly(X + 2, Y + 3, CurrentChoice);
+            Console.SetCursorPosition(X + 2, Y + 2);
         }
         public void DrawHealtBar(Character character, int cursorY)
         {
