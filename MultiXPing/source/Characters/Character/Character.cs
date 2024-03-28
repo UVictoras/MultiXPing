@@ -29,6 +29,7 @@ namespace MultiXPing
         Dictionary<int, Attack> _possibelAttacks;       // List of the attacks the character can learn
         List<Attack>  _attacks;
 
+
         #endregion Field
 
         /* ----------------------------------------------------- *\
@@ -47,7 +48,7 @@ namespace MultiXPing
         public int Health
         {
             get => _health;
-            protected set => _health = value;
+            set => _health = value;
         }
 
         public float PhysicalDamage
@@ -65,13 +66,13 @@ namespace MultiXPing
         public float MagicalDamage
         {
             get => _magicalDamage;
-            protected set => _magicalDamage = value;
+            set => _magicalDamage = value;
         }
 
         public float MagicalDefense
         {
             get => _magicalDefense;
-            protected set => _magicalDefense = value;
+            set => _magicalDefense = value;
         }
 
         public float Speed
@@ -88,13 +89,13 @@ namespace MultiXPing
         public int MaximumMana
         {
             get => _maximumMana;
-            protected set => _maximumMana = value;
+            set => _maximumMana = value;
         }
 
         public int Mana
         {
             get => _mana;
-            protected set => _mana = value;
+            set => _mana = value;
         }
 
         public int Experience
@@ -166,29 +167,29 @@ namespace MultiXPing
             {
 
             }
-            else if (classe == "dog")
+            else if(classe == "flashmcqueen")
             {
                 //Electric
                 type = "electric";
             }
-            else if (classe == "snake")
+            else if (classe == "nayar")
             {
                 //Water
                 type = "water";
             }
-            else if (classe == "goblin")
+            else if (classe == "gobriel")
             {
                 //Plant
                 type = "plant";
             }
-            else if (classe == "salamender")
+            else if (classe == "danycayou")
             {
                 //Fire
                 type = "fire";
             }
-            else if (classe == "boss")
+            else if (classe == "enderdragon")
             {
-                type = "fire";
+                type = "physical";
             }
             else
             {
