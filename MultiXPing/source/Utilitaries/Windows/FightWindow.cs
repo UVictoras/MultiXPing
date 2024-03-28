@@ -132,57 +132,7 @@ namespace MultiXPing
 
             ////
 
-            base.DrawContent();
-            for (int i = 0; i < MainPlayer.Team.ListTeam.Count; ++i)
-            {
-                if (MainPlayer.Team.ListTeam[i].Health > 0)
-                {
-                    Console.SetCursorPosition(3, 2 + 4 * i);
-                    Console.WriteLine(MainPlayer.Team.ListTeam[i].Name);
-                    Console.SetCursorPosition(4, 3 + 4 * i);
-                    DrawHealtBar(MainPlayer.Team.ListTeam[i], i);
-                    Console.SetCursorPosition(4, 4 + 4 * i);
-                    DrawManaBar(MainPlayer.Team.ListTeam[i], i);
-                }
-            }
-
-            for (int i = 0; i < Enemies.Count; ++i)
-            {
-                if (Enemies[i].Health > 0)
-                {
-                    Console.SetCursorPosition(Constants.WIDTH - 40, 2 + 4 * i);
-                    Console.WriteLine(Enemies[i].Name);
-                    Console.SetCursorPosition(Constants.WIDTH - 40, 3 + 4 * i);
-                    DrawHealtBar(Enemies[i], i);
-                }
-            }
-            Console.SetCursorPosition(X + 2, Y + 2);
-            Console.Write("Tour de : " + CharacterTurn.Name);
-            _currentNode.PrintChildrenOnly(X + 2, Y + 3, CurrentChoice);
-        }
-        public void DrawHealtBar(Character character, int cursorY)
-        {
-            
-            Console.Write("Health: ");
-            for (int i = 0; i < (((character.Health * 100) / character.MaximumHealth) / 10); i++)
-            {
-                Console.Write("■");
-            }
-        }
-        public void DrawManaBar(Character character, int cursorY)
-        {
-            Console.Write("Mana: ");
-            for (int i = 0; i < (((character.Mana * 100) / character.MaximumMana) / 10); i++)
-            {
-                Console.Write("■");
-            }
-        }
-        public void DrawCharacter(int cusorY)
-        {
-
-        }
-            
-            if(CurrentNode.Obj.Name == "Root")
+            if (CurrentNode.Obj.Name == "Root")
             {
                 for (int i = 0; i < Nodes.Count; i++)
                 {
@@ -201,7 +151,57 @@ namespace MultiXPing
 
             Content = "Tour de : ";
 
+
+
+            for (int i = 0; i < MainPlayer.Team.ListTeam.Count; ++i)
+            {
+                if (MainPlayer.Team.ListTeam[i].Health > 0)
+                {
+                    Console.SetCursorPosition(3, 2 + 4 * i);
+                    Console.WriteLine(MainPlayer.Team.ListTeam[i].Name);
+                    Console.SetCursorPosition(4, 3 + 4 * i);
+                    DrawHealtBar(MainPlayer.Team.ListTeam[i], i);
+                    Console.SetCursorPosition(4, 4 + 4 * i);
+                    DrawManaBar(MainPlayer.Team.ListTeam[i], i);
+                }
+            }
+
+            for (int i = 0; i < Fight.Enemies.Count; ++i)
+            {
+                if (Fight.Enemies[i].Health > 0)
+                {
+                    Console.SetCursorPosition(Constants.WIDTH - 10, 2 + 4 * i);
+                    Console.WriteLine(Fight.Enemies[i].Name);
+                    Console.SetCursorPosition(Constants.WIDTH - 10, 3 + 4 * i);
+                    DrawHealtBar(Fight.Enemies[i], i);
+                }
+            }
+            //Console.SetCursorPosition(X + 2, Y + 2);
+            //Console.Write("Tour de : " + Fight.CurrentFighter.Name);
+            //_currentNode.PrintChildrenOnly(X + 2, Y + 3, CurrentChoice);
         }
+        public void DrawHealtBar(Character character, int cursorY)
+        {
+            
+            Console.Write("Health: ");
+            for (int i = 0; i < (((character.Health * 100) / character.MaximumHealth) / 10); i++)
+            {
+                Console.Write("■");
+            }
+        }
+        public void DrawManaBar(Character character, int cursorY)
+        {
+            Console.Write("Mana: ");
+            for (int i = 0; i < (((character.Mana * 100) / character.MaximumMana) / 10); i++)
+            {
+                Console.Write("■");
+            }
+        }
+
+        public void DrawCharacter(int cusorY)
+        {
+
+        }   
 
         public void Select()
         {

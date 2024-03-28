@@ -40,7 +40,7 @@ namespace MultiXPing
         FightWindow _windowCombat;
 
 
-        string[] _nameMobs = { "dog", "snake", "goblin", "salamender" };
+        string[] _nameMobs = { "nayar", "flashmcqueen", "gobriel", "danycayou" };
 
         #endregion Field
 
@@ -143,7 +143,7 @@ namespace MultiXPing
                     break;
                 case FightState.FIGHTING:
 
-                    if (MainPlayer.Team.ListTeam.Contains(CharacterTurn))
+                    if (MainPlayer.Team.ListTeam.Contains(CurrentFighter))
                     {
                     }
                     else
@@ -165,6 +165,7 @@ namespace MultiXPing
             Turn = (Turn + 1) % ActionOrder.Count;
             if (Turn < 0) Turn += ActionOrder.Count;
         }
+
         public void GenerateEnemies(EnemyList enemyList) 
         {
             Random randomEnemy = new Random();
