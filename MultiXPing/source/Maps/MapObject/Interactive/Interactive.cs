@@ -61,7 +61,7 @@ namespace MultiXPing
         public Interactive(int x,int y, string message = "default") : base(x, y) 
         {
             _window = new Window();
-            _window.InitContent(_pos,message);
+            _window.InitContent(message);
         }
 
 

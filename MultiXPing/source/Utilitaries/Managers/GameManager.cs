@@ -163,10 +163,10 @@ namespace MultiXPing
             MainMenu.AddNode(Player.Team);
 
             MainWindow = new Window();
-            MainWindow.InitContent(new Vector2(0, 0), " ");
+            MainWindow.InitContent(" ");
             
             MainMenuWindow = new MenuWindow(Player, MainMenu);
-            MainMenuWindow.InitContent(new Vector2(0, 0), " ");
+            MainMenuWindow.InitContent(" ");
 
             Map.InitInteractive(ListInteractives, Player, MainWindow);
 
@@ -212,8 +212,8 @@ namespace MultiXPing
         {
             while (IsRunning)
             {
-                HandleInput();
                 Update();
+                HandleInput();
                 
             }
         }
@@ -246,7 +246,6 @@ namespace MultiXPing
         public void UpdateFight()
         {
             Fight.UpdateFight();
-            RenderFight();
         }
 
         public void UpdatePause()
@@ -281,26 +280,7 @@ namespace MultiXPing
             MainWindow.DrawWindow();
         }
 
-        public void RenderFight() 
-        {
-            //Reset
-            //Console.Clear();
-            Console.SetCursorPosition(0, 0);
-            Console.CursorVisible = false;
-            RenderTarget.ResetBuffer();
-
-            //Draw map
-            //RenderTarget.DrawMap(Map, Player);
-
-            //Draw items
-            //RenderTarget.DrawPlayer(Player);
-
-            //Render
-            RenderTarget.RenderBuffer();
-
-            //Draw la window
-            Fight.DrawWindow();
-        }
+        
 
         public void HandleInput()
         {
@@ -325,7 +305,7 @@ namespace MultiXPing
             if (Inputmanager.GetKeyState(ConsoleKey.M))
             {
                 MainMenuWindow.ResetNode();
-                MainMenuWindow.Open();
+                MainMenuWindow.ToggleOpen();
             }
             if (Inputmanager.GetKeyState(ConsoleKey.P))
             {

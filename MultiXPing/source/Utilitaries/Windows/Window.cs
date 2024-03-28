@@ -92,15 +92,20 @@ namespace MultiXPing
         {
         }
 
-        public void InitContent(Vector2 posEntity, string content)
+        public void InitContent(string content)
         {
             Content = content;
         }
 
-        public void Open()
+        public void ToggleOpen()
         {
             if (IsOpen) { IsOpen = false; Content = " "; }
             else { IsOpen = true; }
+        }
+
+        public void Open()
+        {
+            IsOpen = true;
         }
 
         public void Close()
