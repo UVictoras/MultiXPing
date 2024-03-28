@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -81,8 +82,10 @@ namespace MultiXPing
             Name = "Charge";
             Damage = 10;
             Accuracy = 10;
+            IsUsableOnTarget= true;
         }
-        public void UseAttack(Character attacker, Character target)
+
+        public bool Use(Character attacker, Character target)
         {
             int damage = 0;
             if (MagicCost != 0)
@@ -94,7 +97,10 @@ namespace MultiXPing
                 damage = (int)(Damage * (attacker.PhysicalDamage / target.PhysicalDefense));
             }
             target.TakeDamage(damage);
+
+            return true;
         }
+
         #endregion Methods
     }
 

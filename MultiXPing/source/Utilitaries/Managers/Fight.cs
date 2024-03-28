@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 using MultiXPing.source.Characters.Attacks;
@@ -28,12 +29,12 @@ namespace MultiXPing
 
         int _turn;
 
-        List<Character> _actionOrder;
+        List<Character> _actionOrder = new();
         Character _characterTurn;
         Player _mainPlayer;
         Team _characterTeam = new Team();
         Attack _selectedAttack;
-        Tree _enemies;
+        List<Enemy> _enemies = new();
         FightState _state;
 
         FightWindow _windowCombat;
@@ -64,7 +65,8 @@ namespace MultiXPing
         public Random Rand { get => _rand; set => _rand = value; }
         internal FightState State { get => _state; set => _state = value; }
         internal FightWindow WindowCombat { get => _windowCombat; set => _windowCombat = value; }
-        public Tree Enemies { get => _enemies; set => _enemies = value; }
+        public List<Enemy> Enemies { get => _enemies; set => _enemies = value; }
+        public Character CurrentFighter { get => ActionOrder[Turn]; }
 
         #endregion Property
 
@@ -87,17 +89,21 @@ namespace MultiXPing
         {
             ListAttack = listAtt;
             WindowCombat = new FightWindow(player, arbre);
+            MainPlayer= player;
+            
         }
 
         public void InitFight(Player player)
         {
             InitEnnemies(player);
             DetermineOrder();
+            InitOrderList();
+            WindowCombat.Init(Enemies, this);
         }
 
         public void DetermineOrder()
         {
-            ActionOrder = CharacterTeam.ListTeam.OrderByDescending(x => x.Speed).ToList();
+            ActionOrder = ActionOrder.OrderByDescending(x => x.Speed).ToList();
         }
 
         public void InitEnnemies(Player player)
@@ -111,6 +117,23 @@ namespace MultiXPing
                 Enemies[i].Level = averageLevel;
             }
         }
+
+        public void InitOrderList()
+        {
+            foreach(Hunter hero in MainPlayer.Team.ListTeam)
+            {
+                ActionOrder.Add(hero);
+            }
+
+            if(Enemies.Count == 0) { throw new Exception("Enemy List must be non null"); }
+
+            foreach(Enemy enemy in Enemies)
+            {
+                ActionOrder.Add(enemy);
+            }
+
+        }
+
         public void UpdateFight()
         {
             switch (State)
@@ -122,16 +145,10 @@ namespace MultiXPing
 
                     if (MainPlayer.Team.ListTeam.Contains(CharacterTurn))
                     {
-                        Arbre.RemoveNode(CharacterTurn.CharactersAttacks);
-                        CharacterTurn = ActionOrder[Turn % ActionOrder.Count];
-                        Arbre.AddNode(CharacterTurn.CharactersAttacks);
                     }
                     else
                     {
-
                     }
-
-                    DetermineOrder();
                     break;
                 case FightState.END:
                     break;
@@ -140,6 +157,13 @@ namespace MultiXPing
                 default:
                     break;
             }
+        }
+
+        public void UpdateCurrentTurn()
+        {
+            if(ActionOrder.Count == 0) { return; }
+            Turn = (Turn + 1) % ActionOrder.Count;
+            if (Turn < 0) Turn += ActionOrder.Count;
         }
 
         #endregion Methods

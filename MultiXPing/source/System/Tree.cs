@@ -96,6 +96,18 @@ namespace MultiXPing
             Children.RemoveAt(index);
         }
 
+        public Node GetChildByName(string name) {
+            foreach(Node child in Children)
+            {
+                if(child.Obj.Name == name)
+                {
+                    return child;
+                }
+            }
+
+            throw new Exception("Unfinded Node");
+        }
+
     }
 
     public struct Tree
@@ -130,6 +142,7 @@ namespace MultiXPing
                 Root.Children[i].PrintNode("");
             }
         }
+
 
     }
 }

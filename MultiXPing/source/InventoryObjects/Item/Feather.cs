@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using MultiXPing.source.Characters.Character;
 
 namespace MultiXPing
 {
@@ -49,7 +48,7 @@ namespace MultiXPing
             IsDestroyable = true;
             IsUsableOnTarget = true;
         }
-        public override bool Use(ref Hunter hunter)
+        public override bool Use(Hunter hunter)
         {
             hunter.Reanimate();
             NumberUse -= 1;

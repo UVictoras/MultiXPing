@@ -27,7 +27,7 @@ namespace MultiXPing
         int _level;                 // Current level of progression of the character
         bool _isAlive;               // Current state of the character, true if alive, false if dead
         Dictionary<int, Attack> _possibelAttacks;       // List of the attacks the character can learn
-        CharactersAttacks _charactersAttacks;
+        List<Attack>  _attacks;
 
         #endregion Field
 
@@ -119,7 +119,7 @@ namespace MultiXPing
             get => _possibelAttacks;
             set => _possibelAttacks = value;
         }
-        public CharactersAttacks CharactersAttacks { get => _charactersAttacks; set => _charactersAttacks = value; }
+        public List<Attack> Attacks { get => _attacks; set => _attacks = value; }
 
         #endregion Property
 
@@ -144,7 +144,7 @@ namespace MultiXPing
 
         public Character()
         {
-            CharactersAttacks = new CharactersAttacks();
+            Attacks = new List<Attack>();
         }
 
         public void InitializeCharacter(string name, string classe, AttackList attList)
@@ -155,7 +155,7 @@ namespace MultiXPing
 
             string type = " ";
 
-            if (classe == "")
+            if (classe == "enemy")
             {
                 classe = name;
             }
@@ -195,12 +195,10 @@ namespace MultiXPing
                 throw new Exception("No valid classe argument");
             }
 
-            List<Attack> attacks = new List<Attack>();
-            attacks = SearchAttacks(attList.ListAttack, classe);
-            foreach (Attack att in attacks)
+            Attacks = SearchAttacks(4,attList.ListAttack, classe) ;
+            foreach (Attack att in Attacks)
             {
                 NodeRef.InsertChild(att);
-                CharactersAttacks.AddAttack(att);
             }
 
         }
@@ -234,7 +232,7 @@ namespace MultiXPing
         public virtual void Death() { }
 
 
-        public List<Attack> SearchAttacks(List<Attack> listAtt, string classFilter = "", string typeFilter = "")
+        public List<Attack> SearchAttacks(int limit, List<Attack> listAtt, string classFilter = "", string typeFilter = "")
         {
             List<Attack> list = new();
 
@@ -245,6 +243,10 @@ namespace MultiXPing
                     if (listAtt[i].Class == classFilter)
                     {
                         list.Add(listAtt[i]);
+                        if(list.Count == limit)
+                        {
+                            return list;
+                        }
                     }
                 }
             }
@@ -257,6 +259,10 @@ namespace MultiXPing
                     if (listAtt[i].Element == typeFilter)
                     {
                         list.Add(listAtt[i]);
+                        if (list.Count == limit)
+                        {
+                            return list;
+                        }
                     }
                 }
             }

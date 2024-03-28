@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
-using MultiXPing.source.Characters.Character;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace MultiXPing
 {
@@ -39,7 +39,10 @@ namespace MultiXPing
         |                                                         |
         \* ----------------------------------------------------- */
         #region Methods
-        public abstract bool Use(ref Hunter hunter);
+        new public bool Use(Character target)
+        {
+            return true;
+        }
         #endregion Methods
     }
 }

@@ -71,7 +71,7 @@ namespace MultiXPing
         public void Initialize(string name, AttackList attList)
         {
             _droppedExperience = 0;
-            InitializeCharacter(name, "ennemy", attList);
+            InitializeCharacter(name, "enemy", attList);
         }
 
         public override void Death()

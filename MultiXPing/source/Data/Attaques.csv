@@ -1,25 +1,25 @@
 Attack Name,Type,Damage,Accuracy ,Mana Cost,HasFunctionAttach,Descriptor,Hunter
-Frappe,Physic,40,75,0,0,Occasionne des dommages neutres,Tank
-Le MUR,Physic,15,100,0,1,Augmente la défense physique de l'équipe,Tank
-Bouclier épineux,Plant,15,80,20,1,Augmente la défense magique du lanceur,Tank
-Charge Sylvestre,Plant,75,50,50,0,Appelle la forêt pour infliger des dégats,Tank
-Uraken,Physic,60,60,0,0,Le coup de poing le plus rapide du monde,Tank
-Onde de choc aqueuse,Water,20,90,35,1,Envoie une vague violente sur les ennemies,Tank
-Coup de baton,Physic,50,90,0,0,Lance son baton sur les ennemies,Magician
-Aura de feu,Fire,20,100,35,1,Augmente l'attaque magique du lanceur,Magician
-Boule de feu,Fire,60,80,50,0,"Lance une boule de feu, SIUUUUUUUU",Magician
-Tornade ardente,Fire,85,70,85,0,"Crée une tornade de feu, Axel Blaise en serait jaloux",Magician
-Jet de cailloux,Plant,100,10,0,0,"Jette des pierres, aucun Dany n'a été maltraité",Magician
-Coup de foudre,Electric,50,90,50,0,"Zaaap, Electricity !",Magician
-Danse lame,Physic,20,100,0,1,Augmente l'attaque physique du lanceur,Swordman
-Enchainement divin,Physic,75,75,0,0,Shling Shling,Swordman
-Electro-choc,Electric,30,90,30,0,Envoie un coup de jus sur l'adversaire,Swordman
-Je suis le chasseur !,Electric,75,85,55,0,Technique russe qui foudroie les ennemis,Swordman
-Damoclès,Physic,50,90,0,0,Fait tomber son épée sur l'ennemi,Swordman
-Baton,Plant,35,90,35,0,Attaque à coup de baton,Swordman
-Paume currative,Water,70,100,30,1,Soigne l'allié ciblé,Support
-Soins,Water,25,90,10,1,Soigne l'allié ciblé,Support
-Pistolet à O,Water,50,90,30,0,Vous voyez carapuce ? Bah voila,Support
-Calin chaleureux,Fire,35,100,50,1,Augmente l'attaque magique de l'alié ciblé,Support
-Réanimation,Electric,0,100,150,1,On dégage ! Réanime l'allié ciblé,Support
-Encouragement,Physic,15,100,30,1,Augmente l'attaque physique de l'allié ciblé,Support
+Frappe,Physic,40,75,0,0,Occasionne des dommages neutres,tank
+Le MUR,Physic,15,100,0,1,Augmente la défense physique de l'équipe,tank
+Bouclier épineux,Plant,15,80,20,1,Augmente la défense magique du lanceur,tank
+Charge Sylvestre,Plant,75,50,50,0,Appelle la forêt pour infliger des dégats,tank
+Uraken,Physic,60,60,0,0,Le coup de poing le plus rapide du monde,tank
+Onde de choc aqueuse,Water,20,90,35,1,Envoie une vague violente sur les ennemies,tank
+Coup de baton,Physic,50,90,0,0,Lance son baton sur les ennemies,magician
+Aura de feu,Fire,20,100,35,1,Augmente l'attaque magique du lanceur,magician
+Boule de feu,Fire,60,80,50,0,"Lance une boule de feu, SIUUUUUUUU",magician
+Tornade ardente,Fire,85,70,85,0,"Crée une tornade de feu, Axel Blaise en serait jaloux",magician
+Jet de cailloux,Plant,100,10,0,0,"Jette des pierres, aucun Dany n'a été maltraité",magician
+Coup de foudre,Electric,50,90,50,0,"Zaaap, Electricity !",magician
+Danse lame,Physic,20,100,0,1,Augmente l'attaque physique du lanceur,swordman
+Enchainement divin,Physic,75,75,0,0,Shling Shling,swordman
+Electro-choc,Electric,30,90,30,0,Envoie un coup de jus sur l'adversaire,swordman
+Je suis le chasseur !,Electric,75,85,55,0,Technique russe qui foudroie les ennemis,swordman
+Damoclès,Physic,50,90,0,0,Fait tomber son épée sur l'ennemi,swordman
+Baton,Plant,35,90,35,0,Attaque à coup de baton,swordman
+Paume currative,Water,70,100,30,1,Soigne l'allié ciblé,support
+Soins,Water,25,90,10,1,Soigne l'allié ciblé,support
+Pistolet à O,Water,50,90,30,0,Vous voyez carapuce ? Bah voila,support
+Calin chaleureux,Fire,35,100,50,1,Augmente l'attaque magique de l'alié ciblé,support
+Réanimation,Electric,0,100,150,1,On dégage ! Réanime l'allié ciblé,support
+Encouragement,Physic,15,100,30,1,Augmente l'attaque physique de l'allié ciblé,support
