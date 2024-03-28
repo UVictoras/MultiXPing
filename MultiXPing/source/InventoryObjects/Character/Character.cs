@@ -27,6 +27,7 @@ namespace MultiXPing
         bool _isAlive;               // Current state of the character, true if alive, false if dead
         Dictionary<int, Attack> _possibelAttacks;       // List of the attacks the character can learn
         CharactersAttacks _charactersAttacks;
+        string _characterSprite;
 
 
         #endregion Field
@@ -120,6 +121,7 @@ namespace MultiXPing
             set => _possibelAttacks = value;
         }
         public CharactersAttacks CharactersAttacks { get => _charactersAttacks; set => _charactersAttacks = value; }
+        public string CharacterSprite { get => _characterSprite; set => _characterSprite = value; }
 
         #endregion Property
 
@@ -145,6 +147,25 @@ namespace MultiXPing
         public Character()
         {
             CharactersAttacks = new CharactersAttacks();
+            CharacterSprite = string.Empty;
+        }
+
+        public void DrawSprite(int posX, int posY)
+        {
+            int line = posY;
+            for (int i = 0; i < CharacterSprite.Length; i++)
+            {
+                if (CharacterSprite[i] == '\n')
+                {
+                    Console.WriteLine();
+                    line++;
+                    Console.SetCursorPosition(posX, line);
+                }
+                else
+                {
+                    Console.Write(CharacterSprite[i]);
+                }
+            }
         }
 
         public void InitializeCharacter(string name, string classe, AttackList attList)

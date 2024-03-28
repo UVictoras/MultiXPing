@@ -97,12 +97,14 @@ namespace MultiXPing
             {
                 if (MainPlayer.Team.ListTeam[i].Health > 0)
                 {
-                    Console.SetCursorPosition(3, 2 + 4 * i);
+                    Console.SetCursorPosition(3, 2 + 5 * i);
                     Console.WriteLine(MainPlayer.Team.ListTeam[i].Name);
-                    Console.SetCursorPosition(4, 3 + 4 * i);
+                    Console.SetCursorPosition(4, 3 + 5 * i);
                     DrawHealtBar(MainPlayer.Team.ListTeam[i], i);
-                    Console.SetCursorPosition(4, 4 + 4 * i);
+                    Console.SetCursorPosition(4, 4 + 5 * i);
                     DrawManaBar(MainPlayer.Team.ListTeam[i], i);
+                    Console.SetCursorPosition(25, 3 + 5 * i);
+                    MainPlayer.Team.ListTeam[i].DrawSprite(25, 3 + 5 * i);
                 }
             }
 
@@ -110,10 +112,12 @@ namespace MultiXPing
             {
                 if (Enemies[i].Health > 0)
                 {
-                    Console.SetCursorPosition(Constants.WIDTH - 40, 2 + 4 * i);
+                    Console.SetCursorPosition(Constants.WIDTH - 25, 2 + 5 * i);
                     Console.WriteLine(Enemies[i].Name);
-                    Console.SetCursorPosition(Constants.WIDTH - 40, 3 + 4 * i);
+                    Console.SetCursorPosition(Constants.WIDTH - 25, 3 + 5 * i);
                     DrawHealtBar(Enemies[i], i);
+                    Console.SetCursorPosition(Constants.WIDTH - 32, 3 + 5 * i);
+                    Enemies[i].DrawSprite(Constants.WIDTH - 32, 3 + 5 * i); ;
                 }
             }
             Console.SetCursorPosition(X + 2, Y + 2);

@@ -63,6 +63,7 @@ namespace MultiXPing
         #region Methods
         public Enemy() : base()
         {
+            CharacterSprite = "|   \r\nT_ o\r\n   |\\ \r\n  | \\ ";
         }
 
         public void DropItems(ref Player player)
