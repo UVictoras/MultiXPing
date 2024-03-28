@@ -122,7 +122,7 @@ namespace MultiXPing
 
         public void UpdateChoice(int i)
         {
-            if(_currentNode.ChildrenCount == 0) { return; };
+            if(_currentNode.ChildrenCount == 0) { return; }
             _currentChoice = (_currentChoice + i) % _currentNode.ChildrenCount ;
             if (_currentChoice < 0) _currentChoice += _currentNode.ChildrenCount;
         }

@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.ExceptionServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace MultiXPing
 {
-    public class Player : MapObject
+    public struct EnemyList
     {
         /* ----------------------------------------------------- *\
         |                                                         |
@@ -15,10 +17,7 @@ namespace MultiXPing
         \* ----------------------------------------------------- */
         #region Field
 
-        Inventory _inventory = new Inventory();
-        Team _team = new Team();
-
-        Window _menu;
+        private static List<Enemy> _listEnemy = new List<Enemy>();
 
         #endregion Field
 
@@ -29,9 +28,13 @@ namespace MultiXPing
         \* ----------------------------------------------------- */
         #region Property
 
-        
-        public Team Team { get => _team; set => _team = value; }
-        public Inventory Inventory { get => _inventory; set => _inventory = value; }
+        public List<Enemy> ListEnemy { get => _listEnemy; set => _listEnemy = value; }
+
+        public Enemy this[int key]
+        {
+            get => _listEnemy[key];
+            set => _listEnemy[key] = value;
+        }
 
         #endregion Property
 
@@ -42,8 +45,6 @@ namespace MultiXPing
         \* ----------------------------------------------------- */
         #region Event
 
-        public event Action<Player> onUse = null;
-
         #endregion Event
 
         /* ----------------------------------------------------- *\
@@ -52,40 +53,50 @@ namespace MultiXPing
         |                                                         |
         \* ----------------------------------------------------- */
         #region Methods
-        public Player(int x, int y) : base(x,y)
-        {
-            Position = new Vector2(x, y);
-            Sprite = new PlayerSprite();
-            _menu = new Window();
-        }
 
-        public void Update(GameManager gm)
+        public EnemyList()
         {
 
         }
 
-        public void OnUseWindow() => onUse?.Invoke(this);
-
-        public int GetAverageLevel()
+        public void InitEnemy()
         {
-            if(Team.ListTeam.Count == 0)
+            List<List<string>> list = Parser.CSVParserString(Constants.PROJECTPATH + "MultiXPing\\source\\Data\\EnemyStat.csv");
+            for (int i = 1; i < list.Count; i++)
             {
-                return 0;
+                ListEnemy.Add(
+                    new Enemy
+                    {
+                        Name = list[i][0],
+                        MaximumHealth = int.Parse(list[i][1]),
+                        Health = int.Parse(list[i][1]),
+                        MaximumMana = int.Parse(list[i][2]),
+                        Mana = int.Parse(list[i][2]),
+                        PhysicalDamage = int.Parse(list[i][3]),
+                        PhysicalDefense = int.Parse(list[i][4]),
+                        MagicalDamage = int.Parse(list[i][5]),
+                        MagicalDefense = int.Parse(list[i][6]),
+                        Speed = int.Parse(list[i][7]),
+                        Element = list[i][8],
+                        SpawnProba = int.Parse(list[i][9]),
+                    }) ;
+            }
+        }
+
+        public Enemy GetEnemyByName(string name)
+        {
+            foreach (Enemy enemy in _listEnemy)
+            {
+                if (enemy.Name == name)
+                {
+                    return enemy;
+                }
             }
 
-            int result = 0;
-
-            for(int i = 0; i < Team.ListTeam.Count; i++) 
-            {
-                result += Team.ListTeam[i].Level;
-            }
-
-            result /= Team.ListTeam.Count;
-
-            return result;
+            throw new NullReferenceException("N'est pas cencé ne pas trouver l'ennemie");
 
         }
-        
+
         #endregion Methods
     }
 }

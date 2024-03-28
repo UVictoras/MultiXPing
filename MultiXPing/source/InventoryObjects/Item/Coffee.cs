@@ -51,7 +51,7 @@ namespace MultiXPing
             IsDestroyable = true;
             IsUsableOnTarget = true;
         }
-        public override bool Use(ref Hunter hunter)
+        public override bool Use(Hunter hunter)
         {
             hunter.BoosterSpeed(Boost);
             NumberUse -= 1;

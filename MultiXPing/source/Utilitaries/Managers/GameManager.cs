@@ -9,8 +9,7 @@ using System.Linq;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
-using MultiXPing;
-using MultiXPing.source.Utilitaries.Managers;
+using MultiXPing.source.Characters.Attacks;
 
 namespace MultiXPing
 {
@@ -44,7 +43,7 @@ namespace MultiXPing
         Player _player;
         MenuWindow _mainMenuWindow;
         Window _mainWindow;
-        FightWindow _fight;
+        Fight _fight;
 
         Tree _mainMenu;
         Tree _fightMenu;
@@ -114,8 +113,8 @@ namespace MultiXPing
         internal List<Interactive> ListInteractives { get => _listInteractives; set => _listInteractives = value; }
         internal Window MainWindow { get => _mainWindow; set => _mainWindow = value; }
         public Random Rand { get => _rand; set => _rand = value; }
-        internal FightWindow Fight { get => _fight; set => _fight = value; }
         public Tree FightMenu { get => _fightMenu; set => _fightMenu = value; }
+        internal Fight Fight { get => _fight; set => _fight = value; }
 
         #endregion Property
 
@@ -152,7 +151,6 @@ namespace MultiXPing
             RenderTarget = new Render();
             RenderTarget.InitBuffer();
 
-            
             InitPlayer();
 
             FightMenu = new Tree();
@@ -175,30 +173,33 @@ namespace MultiXPing
             
             AttackList attackList = new AttackList();
             attackList.InitAttacks();
+            EnemyList enemyList = new EnemyList();
+            enemyList.InitEnemy();
 
             InitPlayerHeroes(attackList, Stats);
 
-            //Fight = new FightWindow(Player, FightMenu, mechant);
-            //Fight.InitContent(new Vector2(0, 0), "FIGHT");
+            Fight = new Fight(attackList,Player,FightMenu) ;
+            Fight.InitFight(Player);
+            Fight.GenerateEnemies(enemyList);
         }
 
         public void InitPlayerHeroes(AttackList attlist, CharacterStats charStats)
         {
             Hunter tank = new();
-            tank.InitializeHunter("Rayan", "tank", attlist, charStats);
             Player.Team.AddCharacter(tank);
+            tank.InitializeHunter("Rayan", "tank", attlist, charStats);
 
             Hunter swordman = new();
-            tank.InitializeHunter("Link", "swordman", attlist, charStats);
             Player.Team.AddCharacter(swordman);
+            swordman.InitializeHunter("Link", "swordman", attlist, charStats);
 
             Hunter magician = new();
-            tank.InitializeHunter("Harry crampté", "magician", attlist, charStats);
             Player.Team.AddCharacter(magician);
+            magician.InitializeHunter("Harry crampté", "magician", attlist, charStats);
 
             Hunter support = new();
-            tank.InitializeHunter("Sage", "support", attlist, charStats);
             Player.Team.AddCharacter(support);
+            support.InitializeHunter("Sage", "support", attlist, charStats);
         }
 
         public void InitPlayer()
@@ -310,7 +311,7 @@ namespace MultiXPing
             if (Inputmanager.GetKeyState(ConsoleKey.P))
             {
                 _currentState = State.FIGHT;
-                Fight.Open();
+                Fight.WindowCombat.Open();
             }
             if (Inputmanager.GetKeyState(ConsoleKey.E))
             {
@@ -331,7 +332,7 @@ namespace MultiXPing
                 }
                 if (CurrentState == State.FIGHT)
                 {
-                    Fight.UpdateChoice(-1);
+                    Fight.WindowCombat.UpdateChoice(-1);
                 }
             }
             if (Inputmanager.GetKeyState(ConsoleKey.DownArrow))
@@ -342,7 +343,7 @@ namespace MultiXPing
                 }
                 if (CurrentState == State.FIGHT)
                 {
-                    Fight.UpdateChoice(1);
+                    Fight.WindowCombat.UpdateChoice(1);
                 }
             }
             if (Inputmanager.GetKeyState(ConsoleKey.Enter))
@@ -353,7 +354,7 @@ namespace MultiXPing
                 }
                 if (CurrentState == State.FIGHT)
                 {
-                    Fight.Select();
+                    Fight.WindowCombat.Select();
                 }
             }
         }
@@ -366,7 +367,7 @@ namespace MultiXPing
                 if (Rand.Next(100) <= 15) 
                 {
                     CurrentState = State.FIGHT;
-                    Fight.Open();
+                    Fight.WindowCombat.Open();
                 }
             }
         }

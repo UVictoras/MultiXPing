@@ -1,6 +1,5 @@
- 
+using MultiXPing.source.Characters.Attacks;
 
-public struct GameItem { }
 
 namespace MultiXPing
 {
@@ -15,6 +14,8 @@ namespace MultiXPing
 
         List<GameItem> _loot = new();              // Item dropped by the enemy
         int _droppedExperience;          // Amount of experience the enemy gives
+        string _element;
+        int _spawnProba;
 
         #endregion Field
 
@@ -36,6 +37,8 @@ namespace MultiXPing
             get => _droppedExperience;
             private set => _droppedExperience = value;
         }
+        public string Element { get => _element; set => _element = value; }
+        public int SpawnProba { get => _spawnProba; set => _spawnProba = value; }
 
         #endregion Property
 
@@ -59,6 +62,7 @@ namespace MultiXPing
         #region Methods
         public Enemy() : base()
         {
+            CharacterSprite = "   |\r\n o_T\r\n/| \r\n/ |";
         }
 
         public void DropItems(ref Player player)
@@ -72,7 +76,7 @@ namespace MultiXPing
         public void Initialize(string name, AttackList attList)
         {
             _droppedExperience = 0;
-            InitializeCharacter(name, "ennemy", attList);
+            InitializeCharacter(name, "enemy", attList);
         }
 
         public override void Death()

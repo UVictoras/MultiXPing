@@ -6,9 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
-namespace MultiXPing
+namespace MultiXPing.source.Characters.Attacks
 {
-    public class AttackList
+    public struct AttackList
     {
         /* ----------------------------------------------------- *\
         |                                                         |
@@ -54,15 +54,15 @@ namespace MultiXPing
         \* ----------------------------------------------------- */
         #region Methods
 
-        public AttackList() 
+        public AttackList()
         {
-            
+
         }
 
         public void InitAttacks()
         {
-                List<List<string>> list = Parser.CSVParserString(Constants.PROJECTPATH + "MultiXPing\\source\\Data\\Attaques.csv");
-            for(int i = 1; i < list.Count; i++)
+            List<List<string>> list = Parser.CSVParserString(Constants.PROJECTPATH + "MultiXPing\\source\\Data\\Attaques.csv");
+            for (int i = 1; i < list.Count; i++)
             {
                 ListAttack.Add(
                     new Attack
@@ -71,19 +71,19 @@ namespace MultiXPing
                         Element = list[i][1],
                         Damage = int.Parse(list[i][2]),
                         Accuracy = int.Parse(list[i][3]),
-                        MagicCost = int.Parse(list[i][4]),  
+                        MagicCost = int.Parse(list[i][4]),
                         Function = null,
                         Descriptor = list[i][6],
                         Class = list[i][7],
-            });
+                    });
             }
         }
 
         public Attack GetAttackByName(string name)
         {
-            foreach(Attack attack in _listAttack)
+            foreach (Attack attack in _listAttack)
             {
-                if(attack.Name == name)
+                if (attack.Name == name)
                 {
                     return attack;
                 }

@@ -20,10 +20,17 @@ namespace MultiXPing
 
         public void SetNode(Node node)
         {
-            _nodeRef = node;
+            if (_nodeRef == default)
+            {
+                _nodeRef = node;
+            }
         }
 
+        public virtual bool Use(Character from, Character to) { return true; }
+
         public virtual bool Use() { return true; }
+
+        public virtual bool Use(Hunter to) { return true; }
 
     }
 }

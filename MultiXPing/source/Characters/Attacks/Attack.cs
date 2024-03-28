@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -8,8 +9,8 @@ using System.Xml.Linq;
 
 namespace MultiXPing
 {
-	public class Attack: NodeObject
-	{
+    public class Attack : NodeObject
+    {
         /* ----------------------------------------------------- *\
         |                                                         |
         |                          Field                          |
@@ -24,6 +25,7 @@ namespace MultiXPing
         object _function;
         string _descriptor;
         string _class;
+        bool _alliesTarget;
 
         #endregion Field
 
@@ -56,6 +58,7 @@ namespace MultiXPing
         public string Class { get => _class; set => _class = value; }
         public string Name { get => _name; set => _name = value; }
         public object Function { get => _function; set => _function = value; }
+        public bool AlliesTarget { get => _alliesTarget; set => _alliesTarget = value; }
 
         #endregion Property
 
@@ -79,8 +82,10 @@ namespace MultiXPing
             Name = "Charge";
             Damage = 10;
             Accuracy = 10;
+            IsUsableOnTarget= true;
         }
-        public void UseAttack(Character attacker, Character target)
+
+        public bool Use(Character attacker, Character target)
         {
             int damage = 0;
             if (MagicCost != 0)
@@ -92,10 +97,13 @@ namespace MultiXPing
                 damage = (int)(Damage * (attacker.PhysicalDamage / target.PhysicalDefense));
             }
             target.TakeDamage(damage);
+
+            return true;
         }
+
         #endregion Methods
     }
 
-    
+
 
 }

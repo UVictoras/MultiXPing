@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,6 +18,7 @@ namespace MultiXPing
         #region Field
 
         int _currentChoice;
+        int _currentHero = 0;
         Node _currentNode;
         Player _player;
 
@@ -28,6 +30,7 @@ namespace MultiXPing
         List<NodeObject> _nodes = new List<NodeObject>();
 
         Tree _arbre;
+        Tree _arbreEnemy;
 
         #endregion Field
 
@@ -46,7 +49,7 @@ namespace MultiXPing
         public Attack CurrentSpell { get => _currentSpell; set => _currentSpell = value; }
         
         public Tree ArbreEnemy { get => _arbreEnemy; set => _arbreEnemy = value; }
-        internal Fight Fight { get => _fight; set => _fight = value; }
+        public Fight Fight { get => _fight; set => _fight = value; }
         public GameItem CurrentItem { get => _currentItem; set => _currentItem = value; }
         public int CurrentHero { get => _currentHero; set => _currentHero = value; }
 
@@ -80,7 +83,7 @@ namespace MultiXPing
         }
 
         #region Init
-        public void Init()
+        public void Init(List<Enemy> enemyList, Fight fight)
         {
             Fight = fight;
 
@@ -92,6 +95,7 @@ namespace MultiXPing
             {
                 ArbreEnemy.AddNode(enemy);
             }
+
         }
         #endregion Init
 
@@ -255,8 +259,10 @@ namespace MultiXPing
         }
         public void UpdateChoice(int i)
         {
-            _currentChoice = (((_currentChoice + i) + _currentNode.ChildrenCount)) % _currentNode.ChildrenCount;
+            CurrentHero = (CurrentHero + 1) % 4;
+            if (CurrentHero < 0) CurrentHero += 4;
         }
+
 
         #endregion Methods
     }

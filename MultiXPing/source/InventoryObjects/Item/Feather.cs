@@ -48,7 +48,7 @@ namespace MultiXPing
             IsDestroyable = true;
             IsUsableOnTarget = true;
         }
-        public override bool Use(ref Hunter hunter)
+        public override bool Use(Hunter hunter)
         {
             hunter.Reanimate();
             NumberUse -= 1;
