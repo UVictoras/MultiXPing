@@ -176,7 +176,7 @@ namespace MultiXPing
             Level = 1;
             IsAlive = true;
 
-            string type = " ";
+            string type = "";
 
             if (classe == "enemy")
             {
@@ -218,10 +218,13 @@ namespace MultiXPing
                 throw new Exception("No valid classe argument");
             }
 
-            Attacks = SearchAttacks(4,attList.ListAttack, classe) ;
+            Attacks = SearchAttacks(4,attList.ListAttack, classe, type) ;
             foreach (Attack att in Attacks)
             {
-                NodeRef.InsertChild(att);
+                if(type == "")
+                {
+                    NodeRef.InsertChild(att);
+                }
             }
 
         }

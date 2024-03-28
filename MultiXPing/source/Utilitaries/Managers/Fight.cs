@@ -90,15 +90,7 @@ namespace MultiXPing
         {
             ListAttack = listAtt;
             WindowCombat = new FightWindow(player, arbre);
-            MainPlayer= player;
-            
-        }
-
-        public void InitFight(Player player)
-        {
-            ListAttack = listAtt;
-            WindowCombat = new FightWindow(player, arbre);
-            Window = new();
+            Window = new Window();
             MainPlayer= player;
             
         }
@@ -109,6 +101,7 @@ namespace MultiXPing
             DetermineOrder();
             InitOrderList();
             WindowCombat.Init(Enemies, this);
+            Window.InitContent("");
         }
 
         public void InitFightRender()

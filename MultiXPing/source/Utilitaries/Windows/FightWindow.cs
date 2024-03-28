@@ -257,12 +257,12 @@ namespace MultiXPing
                 if (_currentChoice < 0) _currentChoice += _currentNode.ChildrenCount;
             }
         }
-        public void UpdateChoice(int i)
+
+        public void UpdateHero()
         {
             CurrentHero = (CurrentHero + 1) % 4;
             if (CurrentHero < 0) CurrentHero += 4;
         }
-
 
         #endregion Methods
     }
