@@ -246,6 +246,11 @@ namespace MultiXPing
             }
         }
 
+        public void LooseMana(int mana)
+        {
+            Mana -= mana;
+        }
+
         public void TakeDamage(int damage)
         {
             Health -= damage;

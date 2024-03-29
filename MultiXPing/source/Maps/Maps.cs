@@ -8,6 +8,18 @@ using System.Threading.Tasks;
 
 namespace MultiXPing
 {
+
+    public enum Items
+    {
+        EGG = 0,
+        MEAT = 1,
+        FEATHER = 2,
+        GLASSES = 3,
+        HEALING = 4,
+        MANA = 5,
+
+    }
+
     public struct Maps
         {
         /* ----------------------------------------------------- *\
@@ -27,6 +39,8 @@ namespace MultiXPing
         private List<Sign> _tabSign = new();
 
         string _id = String.Empty;
+
+        
 
 
         #endregion Field
@@ -143,14 +157,38 @@ namespace MultiXPing
                         //y = 15
 
                         Chest chest = new Chest(j, i);
-                        chest.AddItem(new Coffee());
+
+                        Items itemrand = (Items)Rand.GetInstance().Randint(5);
+
+                        switch (itemrand)
+                        {
+                            case Items.EGG:
+                                chest.AddItem(new Egg());
+                                break;
+                            case Items.MEAT:
+                                chest.AddItem(new Meat());
+                                break;
+                            case Items.GLASSES:
+                                chest.AddItem(new Glasses());
+                                break;
+                            case Items.MANA:
+                                chest.AddItem(new ManaPotion());
+                                break;
+                            case Items.FEATHER:
+                                chest.AddItem(new Feather());
+                                break;
+                            case Items.HEALING:
+                                chest.AddItem(new HealingPotion());
+                                break;
+
+                        }
 
                         player.onUse += chest.Interact;
                         chest.PrintText += window.DrawWindowInteractive;
                         list.Add(chest);
 
                     }
-                    else if(Tab[i][j] == 'G')
+                    else if(Tab[i][j] == 'M')
                     {
                         Sign sign  = new Sign(j, i);
                         player.onUse += sign.Interact;
@@ -168,7 +206,7 @@ namespace MultiXPing
         public void InitSigns()
         {
             //Non générique, il faut set tous les paneaux ici 
-            TabSign[1].SetText("Clairière obscure ->");
+            
 
         }
 

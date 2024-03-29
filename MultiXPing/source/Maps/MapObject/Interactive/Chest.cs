@@ -76,7 +76,7 @@ namespace MultiXPing
         public void AddItem(GameItem item)
         {
             Content.Add(item);
-            Text += ", " + item.Name;
+            Text += " " + item.Name;
         }
 
         #endregion Methods

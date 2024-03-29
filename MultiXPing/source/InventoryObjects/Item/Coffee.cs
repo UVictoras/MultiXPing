@@ -55,6 +55,7 @@ namespace MultiXPing
         {
             hunter.BoosterSpeed(Boost);
             NumberUse -= 1;
+
             return true;
         }
         #endregion Methods

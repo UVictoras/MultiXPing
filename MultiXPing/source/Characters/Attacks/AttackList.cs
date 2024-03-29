@@ -93,6 +93,14 @@ namespace MultiXPing.source.Characters.Attacks
 
         }
 
+        public void InitAttack()
+        {
+            GetAttackByName("Paume Currative").BindFunction();
+            GetAttackByName("Soins").BindFunction();
+        }
+
+        
+
         #endregion Methods
     }
 }

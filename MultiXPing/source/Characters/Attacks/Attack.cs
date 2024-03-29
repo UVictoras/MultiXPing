@@ -18,6 +18,8 @@ namespace MultiXPing
         \* ----------------------------------------------------- */
         #region Field
 
+
+
         string _element;            // Defines the specificity of the attack
         float _accuracy;         // Precision of the attack
         int _damage;           // Amount of damage inflicted by the attack
@@ -26,6 +28,8 @@ namespace MultiXPing
         string _descriptor;
         string _class;
         bool _alliesTarget;
+
+        Hunter _parameters;
 
         #endregion Field
 
@@ -59,6 +63,7 @@ namespace MultiXPing
         public string Name { get => _name; set => _name = value; }
         public object Function { get => _function; set => _function = value; }
         public bool AlliesTarget { get => _alliesTarget; set => _alliesTarget = value; }
+        public Hunter Parameters { get => _parameters; set => _parameters = value; }
 
         #endregion Property
 
@@ -87,19 +92,56 @@ namespace MultiXPing
 
         public override bool Use(Character from, Character to)
         {
-            int damage = 0;
-            if (MagicCost != 0)
+            if (from is Hunter)
             {
-                damage = (int)(Damage * (from.MagicalDamage / to.MagicalDefense));
+                if (from.Mana < MagicCost) { return false; }
+            }
+
+            if (!AlliesTarget)
+            {
+
+                int damage = 0;
+                if (MagicCost != 0)
+                {
+                    damage = (int)(Damage * (from.MagicalDamage / to.MagicalDefense));
+                }
+                else
+                {
+                    damage = (int)(Damage * (from.PhysicalDamage / to.PhysicalDefense));
+                }
+
+                from.LooseMana(MagicCost);
+
+                int taux = Rand.GetInstance().Randint(100);
+                if (taux >= Accuracy)
+                {
+                    return true;
+                }
+
+                to.TakeDamage(damage);
+
             }
             else
             {
-                damage = (int)(Damage * (from.PhysicalDamage / to.PhysicalDefense));
+                to.Healing(Damage);
+
+                from.LooseMana(MagicCost);
+
+                int taux = Rand.GetInstance().Randint(100);
+                if (taux >= Accuracy)
+                {
+                    return true;
+                }
             }
-            to.TakeDamage(damage);
 
             return true;
         }
+
+        public void BindFunction()
+        {
+            AlliesTarget = true;
+        }
+
         #endregion Methods
     }
 

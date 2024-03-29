@@ -43,6 +43,8 @@ namespace MultiXPing
         FightWindow _windowCombat;
         Window _window;
 
+        GameManager _gamemanager;
+
         string[] _nameMobs = { "nayar", "flashmcqueen", "gobriel", "danycayou" };
 
         #endregion Field
@@ -74,6 +76,7 @@ namespace MultiXPing
         public int TotalExp { get => _totalExp; set => _totalExp = value; }
         public EnemyList EnemyList { get => _enemyList; set => _enemyList = value; }
         public bool InFight { get => _inFight; set => _inFight = value; }
+        public GameManager Gamemanager { get => _gamemanager; set => _gamemanager = value; }
 
         #endregion Property
 
@@ -92,15 +95,15 @@ namespace MultiXPing
         |                                                         |
         \* ----------------------------------------------------- */
         #region Methods
-        public Fight(AttackList listAtt, Player player, Tree arbre)
+        public Fight(AttackList listAtt, Player player, Tree arbre, GameManager gamemanager)
         {
             ListAttack = listAtt;
             WindowCombat = new FightWindow(player, arbre);
             Window = new Window();
-            MainPlayer= player;
+            MainPlayer = player;
             TotalExp = 0;
             InFight = false;
-            
+            Gamemanager = gamemanager;
         }
 
         public void InitFight(Player player, EnemyList enemyList)
@@ -249,6 +252,7 @@ namespace MultiXPing
                 WindowCombat.Close();
                 Window.Open();
 
+
             }
         }
 
@@ -267,6 +271,7 @@ namespace MultiXPing
             if(ActionOrder.Count == 0) { return; }
             Turn = (Turn + 1) % ActionOrder.Count;
             if (Turn < 0) Turn += ActionOrder.Count;
+            GiveManaAll();
         }
 
         public void GenerateEnemies(EnemyList enemyList) 
@@ -383,6 +388,14 @@ namespace MultiXPing
             }
             return attack.Name + " sur " + cible.Name;
 
+        }
+
+        public void GiveManaAll()
+        {
+            for(int i = 0; i < ActionOrder.Count; i++)
+            {
+                ActionOrder[i].ManaRegeneration(3);
+            }
         }
 
         #endregion Methods

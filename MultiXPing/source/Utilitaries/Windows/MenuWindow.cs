@@ -95,7 +95,7 @@ namespace MultiXPing
                 return;
             }
 
-            Node node = _currentNode.Children[_currentChoice];
+            Node node = _currentNode.Children[_currentChoice].Obj.NodeRef;
 
             if (UsedNode != null)
             {

@@ -7,10 +7,10 @@ Uraken,physic,60,60,0,0,Le coup de poing le plus rapide du monde,tank
 Onde de choc aqueuse,water,20,90,35,1,Envoie une vague violente sur les ennemies,tank
 Coup de baton,physic,50,90,0,0,Lance son baton sur les ennemies,magician
 Aura de feu,fire,20,100,35,1,Augmente l'attaque magique du lanceur,magician
-Boule de feu,fire,60,80,50,0,"Lance une boule de feu, SIUUUUUUUU",magician
-Tornade ardente,fire,85,70,85,0,"Crée une tornade de feu, Axel Blaise en serait jaloux",magician
-Jet de cailloux,plant,100,10,0,0,"Jette des pierres, aucun Dany n'a été maltraité",magician
-Coup de foudre,electric,50,90,50,0,"Zaaap, Electricity !",magician
+Boule de feu,fire,60,80,50,0,Lance une boule de feu SIUUUUUUUU,magician
+Tornade ardente,fire,85,70,85,0,Crée une tornade de feu Axel Blaise en serait jaloux,magician
+Jet de cailloux,plant,100,10,0,0,Jette des pierres aucun Dany n'a été maltraité,magician
+Coup de foudre,electric,50,90,50,0,Zaaap Electricity !,magician
 Danse lame,physic,20,100,0,1,Augmente l'attaque physique du lanceur,swordman
 Enchainement divin,physic,75,75,0,0,Shling Shling,swordman
 Electro-choc,electric,30,90,30,0,Envoie un coup de jus sur l'adversaire,swordman
@@ -18,7 +18,7 @@ Je suis le chasseur !,electric,75,85,55,0,Technique russe qui foudroie les ennem
 Damoclès,physic,50,90,0,0,Fait tomber son épée sur l'ennemi,swordman
 Baton,plant,35,90,35,0,Attaque à coup de baton,swordman
 Paume currative,water,70,100,30,1,Soigne l'allié ciblé,support
-Soins,water,25,90,10,1,Soigne l'allié ciblé,support
+Soins,physic,25,90,0,1,Soigne l'allié ciblé,support
 Pistolet à O,water,50,90,30,0,Vous voyez carapuce ? Bah voila,support
 Calin chaleureux,fire,35,100,50,1,Augmente l'attaque magique de l'alié ciblé,support
 Réanimation,electric,0,100,150,1,On dégage ! Réanime l'allié ciblé,support
