@@ -372,7 +372,7 @@ namespace MultiXPing
             int spell = Rand.Next(CurrentFighter.Attacks.Count);
             Attack attack = CurrentFighter.Attacks[spell];
             int target = Rand.Next(MainPlayer.Team.ListTeam.Count);
-            while (MainPlayer.Team[target].Health < 0) 
+            while (MainPlayer.Team.ListTeam[target].Health == 0) 
             {
                 target = Rand.Next(3);
             }
