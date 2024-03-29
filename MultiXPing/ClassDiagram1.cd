@@ -1,0 +1,326 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="MultiXPing.FightWindow" Collapsed="true">
+    <Position X="23.75" Y="14" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>SBAhABgQgAAIFAAIAAgACBgAAABAAkiAAAACQUQgAAA=</HashCode>
+      <FileName>source\Utilitaries\Windows\FightWindow.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MultiXPing.MenuWindow" Collapsed="true">
+    <Position X="23.75" Y="12.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>SAABAAAAAAAAAAAoAAAAAAAAAABAAAiAAAAIQEEAQIA=</HashCode>
+      <FileName>source\Utilitaries\Windows\MenuWindow.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MultiXPing.Window" Collapsed="true">
+    <Position X="23.75" Y="11.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>YAAAiAAIBgSAIAABAAAAAEAAABAQAAAgAAAAAgGAYAA=</HashCode>
+      <FileName>source\Utilitaries\Windows\Window.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MultiXPing.Fight" Collapsed="true">
+    <Position X="60.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>wBQIACAACwIAYQBhggICDEBBKgGgEQAABAgojIEA1CQ=</HashCode>
+      <FileName>source\Utilitaries\Managers\Fight.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MultiXPing.GameManager" Collapsed="true">
+    <Position X="62" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>pB4AABiIBBCIAAAgIYAHWmEQKBAAAAAAEFmAIQCAABA=</HashCode>
+      <FileName>source\Utilitaries\Managers\GameManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MultiXPing.InputManager" Collapsed="true">
+    <Position X="56.75" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEQQAEAAAAAAAAAAAAAAAAAAAAACAAAABAAAAAAAAAA=</HashCode>
+      <FileName>source\Utilitaries\Managers\InputManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MultiXPing.Rand" Collapsed="true">
+    <Position X="56.75" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAABAAABAAAQAAAAQAAAAE=</HashCode>
+      <FileName>source\Utilitaries\Rand.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MultiXPing.Render" Collapsed="true">
+    <Position X="58.5" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAIAgBAiAAgAAAQAAAEAAgFAAAAAAAAAAACABQAA=</HashCode>
+      <FileName>source\Utilitaries\Render.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MultiXPing.Character" Collapsed="true">
+    <Position X="28.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>wwACDAAAAEkAAAACEAAJCYgFAACAAAgpBaAErAEgQAA=</HashCode>
+      <FileName>source\Characters\Character\Character.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MultiXPing.Enemy" Collapsed="true">
+    <Position X="27.25" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACABAAAAQAAAAhAAIAAACAAAAAkAiAACAAQAAA=</HashCode>
+      <FileName>source\Characters\Character\Enemy.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MultiXPing.Hunter" Collapsed="true">
+    <Position X="29.5" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAgAAAAYAAAAEAGAAAIBAADJAAAAIRgAAIBgAEBYAA=</HashCode>
+      <FileName>source\Characters\Character\Hunter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MultiXPing.Attack" Collapsed="true">
+    <Position X="54.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAADABECEAAEABEoIBAYAAAAEAAABAIAEAAAAABA=</HashCode>
+      <FileName>source\Characters\Attacks\Attack.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MultiXPing.Coffee" Collapsed="true">
+    <Position X="34" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAAAAAAAAAAAAAAAAAAAQAAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>source\InventoryObjects\Item\Coffee.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MultiXPing.Egg" Collapsed="true">
+    <Position X="38.5" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAAAAAAAAAAAAAAAAAAAQAAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>source\InventoryObjects\Item\Egg.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MultiXPing.Feather" Collapsed="true">
+    <Position X="40.75" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>source\InventoryObjects\Item\Feather.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MultiXPing.GameItem" Collapsed="true">
+    <Position X="40.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACBAAAAAAgAAAEAABAAAAAAAAEAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>source\InventoryObjects\Item\GameItem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MultiXPing.Glasses" Collapsed="true">
+    <Position X="43" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAAAAAAAAAAAAAAAAAAAQAAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>source\InventoryObjects\Item\Glasses.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MultiXPing.HealingPotion" Collapsed="true">
+    <Position X="45.25" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAACAAAAAAAAAAAAEAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>source\InventoryObjects\Item\HealingPotion.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MultiXPing.ManaPotion" Collapsed="true">
+    <Position X="47.5" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAIAAAAAA=</HashCode>
+      <FileName>source\InventoryObjects\Item\ManaPotion.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MultiXPing.Meat" Collapsed="true">
+    <Position X="36.25" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAAAAAAAAAAAAAAAAAAAQAAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>source\InventoryObjects\Item\Meat.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MultiXPing.CharactersAttacks" Collapsed="true">
+    <Position X="25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAABAAAABAAAAAAAACAAAAAAAAA=</HashCode>
+      <FileName>source\InventoryObjects\CharactersAttacks.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MultiXPing.Inventory" Collapsed="true">
+    <Position X="31.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAAAAAAAACAAAAAAAgAAAAAAAAAAAAAAAAAI=</HashCode>
+      <FileName>source\InventoryObjects\Inventory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MultiXPing.NodeObject" Collapsed="true">
+    <Position X="39.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIIAAAAAABAAAAAAAAIAQAAAAEAQAEAQAAAIAAAAA=</HashCode>
+      <FileName>source\InventoryObjects\NodeObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MultiXPing.Root" Collapsed="true">
+    <Position X="49.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>source\InventoryObjects\Root.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MultiXPing.Team" Collapsed="true">
+    <Position X="52" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAAAAAABICAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>source\InventoryObjects\Team.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MultiXPing.Boss" Collapsed="true">
+    <Position X="28.5" Y="10" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>source\Maps\MapObject\Interactive\Boss.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MultiXPing.Chest" Collapsed="true">
+    <Position X="24" Y="10" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAABAAAAAAAAoAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>source\Maps\MapObject\Interactive\Chest.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MultiXPing.Interactive" Collapsed="true">
+    <Position X="26.25" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAAAgAAAAAAAAAAAAAAIEAAAEBIAAAACAAAAAA=</HashCode>
+      <FileName>source\Maps\MapObject\Interactive\Interactive.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MultiXPing.Sign" Collapsed="true">
+    <Position X="26.25" Y="10" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAIAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>source\Maps\MapObject\Interactive\Sign.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MultiXPing.MapObject" Collapsed="true">
+    <Position X="28.5" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIAAAAQgAAAAAAAAAAAAAAAQAAEAAAAAAAA=</HashCode>
+      <FileName>source\Maps\MapObject\MapObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MultiXPing.Obstacle" Collapsed="true">
+    <Position X="30.75" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>source\Maps\MapObject\Obstacle.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MultiXPing.Player" Collapsed="true">
+    <Position X="33" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAgAAAICAAAAAAEAAAAAAAABAAACAEAAAAiAAAAE=</HashCode>
+      <FileName>source\Maps\MapObject\Player.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MultiXPing.Parser" Collapsed="true">
+    <Position X="60.25" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>source\System\Parser.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MultiXPing.Node" Collapsed="true">
+    <Position X="58.5" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAARAAAAgAgAgAAAECAEQBAQAAoAQAAAAAAAAAAAAAA=</HashCode>
+      <FileName>source\System\Tree.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MultiXPing.Constants" Collapsed="true">
+    <Position X="58.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAAAQAAAAAAAAAAABAAAA=</HashCode>
+      <FileName>source\Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MultiXPing.Program" Collapsed="true">
+    <Position X="62" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIABAAAAAA=</HashCode>
+      <FileName>source\Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MultiXPing.source.Characters.Attacks.AttackFunctions" Collapsed="true">
+    <Position X="56.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>source\Characters\Attacks\AttacksFunctions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="MultiXPing.EnemyList" Collapsed="true">
+    <Position X="60.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAEEAACAAAAAAAAAAAAEAAAAAAAAAQAAA=</HashCode>
+      <FileName>source\Characters\Character\EnemyList.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="MultiXPing.Maps" Collapsed="true">
+    <Position X="62" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAACAAAgDACgEAgAAABACEAAABBAAAAIAAAACAAAIAA=</HashCode>
+      <FileName>source\Maps\Maps.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="MultiXPing.CharacterStats" Collapsed="true">
+    <Position X="58.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CARAIIAAAAEAAgIAAAAAABgAEEAAADgAAEAMACgAEIA=</HashCode>
+      <FileName>source\System\CharacterStats.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="MultiXPing.Tree" Collapsed="true">
+    <Position X="58.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAIQACEAAAAAAAAAAAAAAAAAAAAAAAAIAAA=</HashCode>
+      <FileName>source\System\Tree.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="MultiXPing.Vector2" Collapsed="true">
+    <Position X="60.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAYAA=</HashCode>
+      <FileName>source\System\Vector.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="MultiXPing.PlayerSprite" Collapsed="true">
+    <Position X="56.75" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAFACAAAAAAAAAAEAAABAAAAAQAAEAgAAAAAA=</HashCode>
+      <FileName>source\Sprites\Sprite.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="MultiXPing.source.Characters.Attacks.AttackList" Collapsed="true">
+    <Position X="56.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABBCAAAAAAAAEAAAAAAAgABAAAAAAA=</HashCode>
+      <FileName>source\Characters\Attacks\AttackList.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Enum Name="MultiXPing.State" Collapsed="true">
+    <Position X="58.5" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIBAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAA=</HashCode>
+      <FileName>source\Utilitaries\Managers\GameManager.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="MultiXPing.Items" Collapsed="true">
+    <Position X="56.75" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQIEAAAAAAQAAgACAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>source\Maps\Maps.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
