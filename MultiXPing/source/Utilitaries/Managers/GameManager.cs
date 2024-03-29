@@ -68,7 +68,7 @@ namespace MultiXPing
         public State CurrentState
         {
             get => _currentState;
-            private set => _currentState = value;
+            set => _currentState = value;
         }
         public int Width
         {
@@ -153,7 +153,6 @@ namespace MultiXPing
 
             MapList.Add(new Maps("Map1"));
             MapList.Add(new Maps("Map2"));
-            
 
             Map = MapList[0];
 
@@ -192,7 +191,7 @@ namespace MultiXPing
 
             InitPlayerHeroes(attackList, Stats);
 
-            Fight = new Fight(attackList,Player,FightMenu) ;
+            Fight = new Fight(attackList,Player,FightMenu,this) ;
             Fight.InitFight(Player, enemyList);
 
             Player.Inventory.AddItem(new Coffee());

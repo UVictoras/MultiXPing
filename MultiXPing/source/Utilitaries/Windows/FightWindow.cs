@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Runtime.Serialization;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -59,7 +60,7 @@ namespace MultiXPing
         public int CurrentHero { get => _currentHero; set => _currentHero = value; }
         public Dictionary<string, ConsoleColor> DicoCouleur { get => dicoCouleur; set => dicoCouleur = value; }
 
-
+        public int CurrentHunter { get => _currentHunter; set => _currentHunter = value; }
 
         #endregion Property
 
@@ -186,6 +187,14 @@ namespace MultiXPing
                     _currentNode.PrintChildrenOnly(X + 2, Y + 3, CurrentChoice);
                 }
                 Content = "Tour de : ";
+
+
+                if (CurrentNode.Obj is Hunter)
+                {
+                    PrintAttackStats(Fight.CurrentFighter.Attacks[CurrentChoice]);
+
+                }
+
             }
 
             if (Fight.State == Fight.FightState.END)
@@ -209,6 +218,12 @@ namespace MultiXPing
                     Console.WriteLine(MainPlayer.Team.ListTeam[CurrentHunter].Name + " a gagné "+Fight.TotalExp+" d'experience !");
                 }
                 CurrentHunter++;
+
+                if(CurrentHunter == 3)
+                {
+                    Fight.Gamemanager.CurrentState = State.MAP;
+                }
+
             }
 
         }
