@@ -81,6 +81,7 @@ namespace MultiXPing
                         Element = list[i][8],
                         SpawnProba = int.Parse(list[i][9]),
                         CharacterSprite = list[i][10],
+                        DroppedExperience = int.Parse(list[i][11]),
                     }) ;
 
             }

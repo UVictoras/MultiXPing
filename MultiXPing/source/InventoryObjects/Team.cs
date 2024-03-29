@@ -16,7 +16,7 @@ namespace MultiXPing
         \* ----------------------------------------------------- */
         #region Field
 
-        List<Character> _team = new List<Character>();// List of hunters the player has in its team
+        List<Hunter> _team = new List<Hunter>();// List of hunters the player has in its team
 
         #endregion Field
 
@@ -27,13 +27,13 @@ namespace MultiXPing
         \* ----------------------------------------------------- */
         #region Property
 
-        public List<Character> ListTeam
+        public List<Hunter> ListTeam
         {
             get => _team;
             private set => _team = value;
         }
 
-        public Character this[int index]
+        public Hunter this[int index]
         {
             get
             {
@@ -68,7 +68,7 @@ namespace MultiXPing
             Name = "Team";
         }
 
-        public void AddCharacter(Character character)
+        public void AddCharacter(Hunter character)
         {
             _team.Add(character);
             NodeRef.InsertChild(character);

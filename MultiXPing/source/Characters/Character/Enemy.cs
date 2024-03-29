@@ -35,7 +35,7 @@ namespace MultiXPing
         public int DroppedExperience
         {
             get => _droppedExperience;
-            private set => _droppedExperience = value;
+            set => _droppedExperience = value;
         }
         public string Element { get => _element; set => _element = value; }
         public int SpawnProba { get => _spawnProba; set => _spawnProba = value; }
@@ -81,6 +81,7 @@ namespace MultiXPing
             CharacterSprite = type.CharacterSprite;
             CharacterSprite = CharacterSprite.Replace("\r\n", Environment.NewLine);
             CharacterSprite = CharacterSprite.Replace("Q", "\r\n");
+            DroppedExperience = type.DroppedExperience;
         }
 
         public void DropItems(ref Player player)
@@ -93,7 +94,6 @@ namespace MultiXPing
 
         public void Initialize(string name, AttackList attList)
         {
-            _droppedExperience = 0;
             InitializeCharacter(name, "enemy", attList);
         }
 

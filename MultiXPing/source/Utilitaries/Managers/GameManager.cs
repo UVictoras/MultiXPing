@@ -253,6 +253,10 @@ namespace MultiXPing
                     break;
                 case State.FIGHT:
                     UpdateFight();
+                    if (Fight.InFight == false)
+                    {
+                        _currentState = State.MAP;
+                    }
                     break;
                 case State.PAUSE:
                     break;

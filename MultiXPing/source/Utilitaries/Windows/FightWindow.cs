@@ -21,6 +21,7 @@ namespace MultiXPing
 
         int _currentChoice;
         int _currentHero = 0;
+        int _currentHunter = 0;
         Node _currentNode;
         Player _player;
 
@@ -109,6 +110,26 @@ namespace MultiXPing
             }
 
         }
+
+        public void Reset(List<Enemy> enemyList, Fight fight)
+        {
+            Fight = fight;
+            CurrentChoice = 0;
+            CurrentHero = 0;
+            CurrentHunter = 0;
+            CurrentSpell = null;
+            CurrentItem = null;
+            ArbreEnemy = new Tree();
+            ArbreEnemy.Root.Obj.Name = "Ennemis";
+            CurrentNode = Arbre.Root;
+            Nodes.Add(Player.Team[CurrentHero]);
+            Nodes.Add(Player.Inventory);
+            foreach (Enemy enemy in enemyList)
+            {
+                ArbreEnemy.AddNode(enemy);
+            }
+            Content = "Tour de : ";
+        }
         #endregion Init
 
         #region Fight
@@ -116,6 +137,11 @@ namespace MultiXPing
         {
             Content += Fight.CurrentFighter.Name;
             Nodes[0] = Fight.CurrentFighter;
+
+            if (Fight.State == Fight.FightState.END)
+            {
+                Content = "Vous avez Gagné !";
+            }
 
             if (Content == string.Empty)
             {
@@ -140,33 +166,52 @@ namespace MultiXPing
                     Console.Write(c);
                 }
             }
-
             ////
-
-            if (CurrentNode.Obj.Name == "Root")
+            if (Fight.State == Fight.FightState.FIGHTING)
             {
-                for (int i = 0; i < Nodes.Count; i++)
+                if (CurrentNode.Obj.Name == "Root")
                 {
-                    Console.SetCursorPosition(X + 2, Y + i + 3);
-                    if (i == CurrentChoice)
+                    for (int i = 0; i < Nodes.Count; i++)
                     {
-                        Console.Write("> ");
+                        Console.SetCursorPosition(X + 2, Y + i + 3);
+                        if (i == CurrentChoice)
+                        {
+                            Console.Write("> ");
+                        }
+                        Console.Write(" - " + Nodes[i].Name);
                     }
-                    Console.Write(" - " + Nodes[i].Name);
                 }
-            }
-            else
-            {
-                _currentNode.PrintChildrenOnly(X + 2, Y + 3, CurrentChoice);
-            }
-            Content = "Tour de : ";
-
-            if(CurrentNode.Obj is Hunter)
-            {
-                PrintAttackStats(((Character)CurrentNode.Obj).Attacks[CurrentChoice]);
+                else
+                {
+                    _currentNode.PrintChildrenOnly(X + 2, Y + 3, CurrentChoice);
+                }
+                Content = "Tour de : ";
             }
 
+            if (Fight.State == Fight.FightState.END)
+            {
+                if (CurrentHunter >= MainPlayer.Team.ListTeam.Count)
+                {
+                    Fight.State = Fight.FightState.START;
+                    IsOpen = false;
+                    Fight.InFight = false;
+                    return;
+                }
+                if (MainPlayer.Team.ListTeam[CurrentHunter].HasLevelUp && MainPlayer.Team.ListTeam[CurrentHunter].Health > 0)
+                {
+                    Console.SetCursorPosition(X + 2, Y + 3);
+                    Console.WriteLine(MainPlayer.Team.ListTeam[CurrentHunter].Name + " a gagné un niveau !");
+                    MainPlayer.Team.ListTeam[CurrentHunter].HasLevelUp = false;
+                }
+                else if (MainPlayer.Team.ListTeam[CurrentHunter].Health > 0)
+                {
+                    Console.SetCursorPosition(X + 2, Y + 3);
+                    Console.WriteLine(MainPlayer.Team.ListTeam[CurrentHunter].Name + " a gagné "+Fight.TotalExp+" d'experience !");
+                }
+                CurrentHunter++;
             }
+
+        }
            
 
         public void Select()
@@ -240,32 +285,32 @@ namespace MultiXPing
                     CurrentNode = Arbre.Root.GetChildByName("Team");
                     CurrentChoice = 0;
 
-                }
-            }
-            else if(CurrentSpell != null)//Si il y a un spell en reserve à utiliser
-            {
-                //Si il existe un spell en attente d'une cible
-
-                Character target = (Character)_currentNode.Children[_currentChoice].Obj;
-
-                if (CurrentSpell.Use(Fight.CurrentFighter, target))
-                {
-                    if (target.Health == 0)
-                    {
-                        if (_currentNode.Children[_currentChoice].Obj is Enemy)
-                        {
-                            ArbreEnemy.RemoveNode(target);
-                            Fight.ActionOrder.Remove(target);
-                            Fight.Enemies.Remove((Enemy)target);
-                        }
                     }
-                    Fight.UpdateCurrentTurn();
-                    UpdateHero();
-                    Nodes[0] = Player.Team[CurrentHero];
+                }
+                else if (CurrentSpell != null)//Si il y a un spell en reserve à utiliser
+                {
+                    //Si il existe un spell en attente d'une cible
 
-                    //Reset
-                    CurrentNode = Arbre.Root;
-                    CurrentSpell = null;
+                    Character target = (Character)_currentNode.Children[_currentChoice].Obj;
+
+                    if (CurrentSpell.Use(Fight.CurrentFighter, target))
+                    {
+                        if (target.Health == 0)
+                        {
+                            if (_currentNode.Children[_currentChoice].Obj is Enemy)
+                            {
+                                ArbreEnemy.RemoveNode(target);
+                                Fight.ActionOrder.Remove(target);
+                                Fight.Enemies.Remove((Enemy)target);
+                            }
+                        }
+                        Fight.UpdateCurrentTurn();
+                        UpdateHero();
+                        Nodes[0] = Player.Team[CurrentHero];
+
+                        //Reset
+                        CurrentNode = Arbre.Root;
+                        CurrentSpell = null;
 
                 }//Ici le node Object est une attack
                 CurrentChoice = 0;
@@ -276,7 +321,6 @@ namespace MultiXPing
                 node.Obj.Use(null,Fight.CurrentFighter);
                 CurrentChoice = 0;
             }
-            
         }
         #endregion Fight
         
