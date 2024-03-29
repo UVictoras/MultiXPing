@@ -379,6 +379,7 @@ namespace MultiXPing
             if (cible.Health == 0)
             {
                 ActionOrder.Remove(cible);
+                UpdateCurrentTurn();
             }
             return attack.Name + " sur " + cible.Name;
 

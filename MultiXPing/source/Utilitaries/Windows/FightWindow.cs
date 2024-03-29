@@ -271,6 +271,7 @@ namespace MultiXPing
                                 ArbreEnemy.RemoveNode(target);
                                 Fight.ActionOrder.Remove(target);
                                 Fight.Enemies.Remove((Enemy)target);
+                                Fight.UpdateCurrentTurn();
                             }
                         }
                         Fight.UpdateCurrentTurn();
